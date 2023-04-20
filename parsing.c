@@ -12,6 +12,10 @@
 
 #include "includes/miniRT.h"
 
+int init_rt(t_mlx mlx){
+
+}
+
 int read_rt(char *file)
 {
 	int	fd;
@@ -28,13 +32,14 @@ int read_rt(char *file)
 	while (1)
 	{
 		buff = get_next_line(fd);
-		if (*buff == '\n')
-			continue;
 		if (!buff)
 			break;
+        if (*buff == '\n')
+            continue ;
 		infos[i] = ft_split(buff, ' ');
 		i++;
 	}
+    infos[i] = NULL;
 	for(int k = 0; infos[k]; k++)
 		for (int l = 0; infos[k][l]; l++)
 			printf("%s \n", infos[k][l]);

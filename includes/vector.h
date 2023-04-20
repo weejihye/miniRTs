@@ -29,8 +29,14 @@ typedef struct s_light
 {
 	t_point	light;
 	double	ratio;
-	t_rgb	light_rgb;
+	t_rgb	rgb;
 }	t_light;
+
+typedef struct s_ambi
+{
+	double	ratio;
+	t_rgb	rgb;
+}	t_ambient;
 
 t_vec	vec(double x, double y, double z);
 double	v_len(t_vec v);

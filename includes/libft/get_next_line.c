@@ -51,15 +51,9 @@ static char	*ft_get_result(char *save)
 		return (NULL);
 	i = 0;
 	while (save[i] && save[i] != '\n')
-	{
-		temp[i] = save[i];
-		i++;
-	}
+		temp[i] = save[i++];
 	if (save[i] == '\n')
-	{
-		temp[i] = save[i];
-		i++;
-	}
+		temp[i] = save[i++];
 	temp[i] = '\0';
 	return (temp);
 }
