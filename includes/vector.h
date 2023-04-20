@@ -1,20 +1,7 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   vector.h                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/06 22:57:04 by jwee              #+#    #+#             */
-/*   Updated: 2023/04/19 18:29:51 by jwee             ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef VECTOR_H
 # define VECTOR_H
 
 # include "miniRT.h"
-
 
 typedef struct s_vector
 {
@@ -23,7 +10,12 @@ typedef struct s_vector
 	double	z;
 }	t_vec;
 
-typedef t_vec t_rgb;
+typedef struct s_rgb
+{
+	char	r;
+	char	g;
+	char	b;
+}	t_rgb;
 typedef t_vec t_point;
 
 typedef struct s_ray
