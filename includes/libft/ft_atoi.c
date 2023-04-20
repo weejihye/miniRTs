@@ -6,19 +6,11 @@
 /*   By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 20:40:19 by jwee              #+#    #+#             */
-/*   Updated: 2022/07/20 19:55:53 by jwee             ###   ########.fr       */
+/*   Updated: 2023/04/20 16:31:26 by jwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-static int	ft_isspace(int c)
-{
-	if ((c >= 9 && c <= 13) || c == 32)
-		return (1);
-	else
-		return (0);
-}
 
 static int	ft_check_minmax(unsigned long long num)
 {

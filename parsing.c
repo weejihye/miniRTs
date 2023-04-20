@@ -6,17 +6,13 @@
 /*   By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 23:35:52 by jwee              #+#    #+#             */
-/*   Updated: 2023/04/20 02:48:24 by jwee             ###   ########.fr       */
+/*   Updated: 2023/04/20 16:28:34 by jwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/miniRT.h"
 
-int init_rt(t_mlx mlx){
-
-}
-
-int read_rt(char *file)
+int	read_rt(char *file)
 {
 	int	fd;
 	char *buff;
@@ -33,17 +29,17 @@ int read_rt(char *file)
 	{
 		buff = get_next_line(fd);
 		if (!buff)
-			break;
-        if (*buff == '\n')
-            continue ;
-		infos[i] = ft_split(buff, ' ');
+			break ;
+		if (*buff == '\n')
+			continue ;
+		infos[i] = ft_split_spaces(buff);
 		i++;
 	}
-    infos[i] = NULL;
+	infos[i] = NULL;
 	for(int k = 0; infos[k]; k++)
 		for (int l = 0; infos[k][l]; l++)
 			printf("%s \n", infos[k][l]);
-	return 0;
+	return (0);
 }
 
 int main(int argc, char *argv[])

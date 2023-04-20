@@ -54,10 +54,9 @@ typedef struct s_mlx
 	t_img	img;
 }	t_mlx;
 
-typedef struct t_info
+typedef struct s_info
 {
 	t_cam	*cam_ptr;
-
-};
+}	t_info;
 
 #endif

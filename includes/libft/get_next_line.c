@@ -6,7 +6,7 @@
 /*   By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 21:18:58 by jwee              #+#    #+#             */
-/*   Updated: 2022/10/02 14:48:44 by jwee             ###   ########.fr       */
+/*   Updated: 2023/04/20 16:29:51 by jwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,15 @@ static char	*ft_get_result(char *save)
 		return (NULL);
 	i = 0;
 	while (save[i] && save[i] != '\n')
-		temp[i] = save[i++];
+	{
+		temp[i] = save[i];
+		i++;
+	}
 	if (save[i] == '\n')
-		temp[i] = save[i++];
+	{
+		temp[i] = save[i];
+		i++;
+	}
 	temp[i] = '\0';
 	return (temp);
 }
