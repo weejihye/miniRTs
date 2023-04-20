@@ -1,6 +1,6 @@
 #ifndef VECTOR_H
 # define VECTOR_H
-
+# define _USE_MATH_DEFINES
 # include "miniRT.h"
 
 typedef struct s_vector

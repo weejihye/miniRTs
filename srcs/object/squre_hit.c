@@ -1,41 +1,14 @@
 #define _USE_MATH_DEFINES
-#include <math.h>
-#include <stdio.h>
-typedef struct	s_point_3d
-{
-	int	x;
-	int	y;
-	int	z;
-}	t_point_3d;
+#include "objects.h"
 
-typedef struct	s_vector
+t_vec	get_contact_sphere(t_sp sphere, t_vec vec)
 {
-	double	x;
-	double	y;
-	double	z;
-}	t_vector;
-
-typedef struct	s_sphere
-{
-	t_vector	point;
-	double		r;
-}	t_sphere;
-
-int	squre_hit(t_sphere sphere, t_vector vec)
-{
-	t_vector	point;
-
-	point.x = (sphere.point.x + sphere.point.y / vec.y + sphere.point.z / vec.z) / (1 + pow(vec.x / vec.y, 2) + pow(vec.x /vec.z, 2));
-}
-
-t_vector	get_contact_sphere(t_sphere sphere, t_vector vec)
-{
-	t_vector point;
+	t_vec point;
 	double	den;
 	int		zero_count;
 	double	len;
-	t_vector	*point_contact;
-	t_vector	temp[2];
+	t_vec	*point_contact;
+	t_vec	temp[2];
 
 	zero_count = 0;
 	if (vec.x == 0)
@@ -79,41 +52,4 @@ t_vector	get_contact_sphere(t_sphere sphere, t_vector vec)
 		if (get_len_origin(temp[0]))
 	}
 	return ();
-}
-
-double	get_len_origin(t_vector point)
-{
-	const t_vector	origin = {0, 0, 0};
-	return (get_len(point, origin));
-}
-
-double		get_len(t_vector point1, t_vector point2)
-{
-	return (sqrt(pow(point1.x - point2.x, 2) 
-			+ pow(point1.y - point2.y, 2)
-			+ pow(point1.z - point2.z, 2)));
-}
-
-t_vector	get_sum(t_vector vec1, t_vector vec2)
-{
-	vec1.x = vec1.x + vec2.x;
-	vec1.y = vec1.y + vec2.y;
-	vec1.z = vec1.z + vec2.z;
-	return (vec1);
-}
-
-t_vector	get_minus(t_vector vec1, t_vector vec2)
-{
-	vec1.x = vec1.x - vec2.x;
-	vec1.y = vec1.y - vec2.y;
-	vec1.z = vec1.z - vec2.z;
-	return (vec1);
-}
-
-t_vector	get_multiply(t_vector vec, double n)
-{
-	vec.x = vec.x * n;
-	vec.y = vec.y * n;
-	vec.z = vec.z * n;
-	return (vec);
 }
