@@ -6,17 +6,16 @@
 /*   By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 22:28:13 by jwee              #+#    #+#             */
-/*   Updated: 2022/09/27 22:39:04 by jwee             ###   ########.fr       */
+/*   Updated: 2023/04/20 19:18:00 by jwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strcmp(const char *s, char c)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	while (*s)
-	{
-		if (*s != c)
-			return (-1);
-		s++;
-	}
-	return (0);
+	int	i;
+
+	i = 0;
+	while (s1[i] == s2[i])
+		i++;
+	return (s1[i] - s2[i]);
 }

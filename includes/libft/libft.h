@@ -6,7 +6,7 @@
 /*   By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 17:18:56 by jwee              #+#    #+#             */
-/*   Updated: 2023/04/20 16:25:42 by jwee             ###   ########.fr       */
+/*   Updated: 2023/04/20 19:17:55 by jwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_list
 char	*get_next_line(int fd);
 char	*ft_strjoin(char *save, char *buff);
 int		ft_strrcmp(const char *s1, const char *s2);
-int		ft_strcmp(const char *s, char c);
+int		ft_strcmp(const char *s1, const char *s2);
 int		ft_atoi(const char *str);
 void	ft_bzero(void *s, size_t len);
 void	*ft_calloc(size_t count, size_t size);
