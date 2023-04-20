@@ -1,10 +1,11 @@
 {
 	"files.associations": {
 		"miniRT.h": "c",
-		"vector.h" : "c",
-		"objects.h" : "c",
-		"camera.h" : "c",
-		"libft.h" : "c",
-		"mlx.h" : "c"
+		"vector.h": "c",
+		"objects.h": "c",
+		"camera.h": "c",
+		"libft.h": "c",
+		"mlx.h": "c",
+		"ratio": "c"
 	}
 }
