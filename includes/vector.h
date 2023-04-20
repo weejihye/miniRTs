@@ -16,6 +16,7 @@ typedef struct s_rgb
 	char	g;
 	char	b;
 }	t_rgb;
+
 typedef t_vec t_point;
 
 typedef struct s_ray
