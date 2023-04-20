@@ -17,13 +17,20 @@ typedef struct s_rgb
 	char	b;
 }	t_rgb;
 
-typedef t_vec t_point;
+typedef t_vec	t_point;
 
 typedef struct s_ray
 {
-	t_point *ori;
-	t_vec *dir;
+	t_point	*ori;
+	t_vec	*dir;
 }	t_ray;
+
+typedef struct s_light
+{
+	t_point	light;
+	double	ratio;
+	t_rgb	light_rgb;
+}	t_light;
 
 t_vec	vec(double x, double y, double z);
 double	v_len(t_vec v);
