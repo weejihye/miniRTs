@@ -19,7 +19,6 @@ t_point	get_contact_sphere(t_sp s, t_vec v)
 	else
 		point = get_contact_sphere_2(s, v);
 	len = point_len(s.center, point);
-	printf("%f %f %f\n", point.x, point.y, point.z);
 	if (len > s.r)
 	{
 		point.x = NAN;

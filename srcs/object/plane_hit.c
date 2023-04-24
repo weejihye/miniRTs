@@ -12,12 +12,12 @@ t_vec	get_contant_plain(t_plane plane, t_vec vector)
 	double	a;
 	t_vec	point;
 
-	if (hit_plane(plane, vector))
+	if (!hit_plane(plane, vector))
 	{
 		point.x = NAN;
 		return (point);
 	}
-	a = v_dot(plane.point, vector)
+	a = v_dot(plane.vec, plane.point)
 		/ v_dot(plane.vec, vector);
 	point.x = vector.x * a;
 	point.y = vector.y * a;
