@@ -5,7 +5,7 @@
 static t_point	get_contact_sphere_01(t_sp s, t_vec v);
 static t_point	get_contact_sphere_2(t_sp s, t_vec v);
 
-t_point	get_contact_sphere(t_sp s, t_vec v)
+t_point	sphere_hit(t_sp s, t_vec v)
 {
 	t_point	point;
 	int		zero_count;
