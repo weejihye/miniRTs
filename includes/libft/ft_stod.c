@@ -1,6 +1,6 @@
-#include "includes/miniRT.h"
+#include "libft.h"
 
-double	str_to_double(const char *str, double res, int sign)
+double	ft_stod(const char *str, double res, int sign)
 {
 	double	frac;
 

@@ -6,14 +6,14 @@
 /*   By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 17:58:43 by jwee              #+#    #+#             */
-/*   Updated: 2023/04/20 16:27:15 by jwee             ###   ########.fr       */
+/*   Updated: 2023/04/24 16:31:03 by jwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
 
-int	word_count(const char *src)
+int	word_count_space(const char *src)
 {
 	int	wc;
 	int	i;
@@ -34,7 +34,7 @@ int	word_count(const char *src)
 	return (wc);
 }
 
-char	**free_all(char **result, int i)
+char	**free_all_space(char **result, int i)
 {
 	int	j;
 
@@ -44,7 +44,7 @@ char	**free_all(char **result, int i)
 	return (NULL);
 }
 
-char	**split(char **result, const char *src, int wc)
+char	**split_space(char **result, const char *src, int wc)
 {
 	int		start;
 	int		i;
@@ -67,7 +67,7 @@ char	**split(char **result, const char *src, int wc)
 			i++;
 		result[j++] = ft_substr(src, start, i - start);
 		if (!result[j - 1])
-			return (free_all(result, j - 1));
+			return (free_all_space(result, j - 1));
 	}
 	return (result);
 }
@@ -80,7 +80,7 @@ char	**ft_split_spaces(const char *src)
 	if (!src)
 		return (NULL);
 	result = NULL;
-	wc = word_count(src);
-	result = split(result, src, wc);
+	wc = word_count_space(src);
+	result = split_space(result, src, wc);
 	return (result);
 }

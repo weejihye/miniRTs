@@ -6,7 +6,7 @@
 /*   By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 17:18:56 by jwee              #+#    #+#             */
-/*   Updated: 2023/04/20 19:17:55 by jwee             ###   ########.fr       */
+/*   Updated: 2023/04/24 21:50:42 by jwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <string.h>
 
 # define BUFFER_SIZE 1024
+# define DOUBLE_MIN -1.8e308;
+# define DOUBLE_MAX 1.8e308;
 
 typedef struct s_list
 {
@@ -75,4 +77,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 int		ft_isspace(char c);
 char	**ft_split_spaces(const char *src);
+int		ft_atoi_valid(const char *s);
+int		ft_isdouble(double n);
+double	ft_stod(const char *str, double res, int sign);
 #endif

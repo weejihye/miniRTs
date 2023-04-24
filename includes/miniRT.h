@@ -56,12 +56,11 @@ typedef struct s_mlx
 
 typedef struct s_info
 {
-	t_cam		*cam_ptr;
+	t_cam		*cam;
 	t_ambient	*ambient_ptr;
 	t_light		*light_ptr;
 }	t_info;
 
-double	str_to_double(const char *str, double res, int sign);
 int		parsing(t_info *info, char *file);
 
 #endif
