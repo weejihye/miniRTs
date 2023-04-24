@@ -1,7 +1,7 @@
 #ifndef VECTOR_H
 # define VECTOR_H
 # define _USE_MATH_DEFINES
-# include "miniRT.h"
+# include <math.h>
 
 typedef struct s_vector
 {
@@ -45,9 +45,16 @@ t_vec	v_add(t_vec v1, t_vec v2);
 t_vec	v_sub(t_vec v1, t_vec v2);
 t_vec	v_mlt(double a, t_vec v);
 t_vec	v_div(double a, t_vec v);
+
 double	v_dot(t_vec v1, t_vec v2);
 t_vec	v_cro(t_vec v1, t_vec v2);
+
 int		coloring(int t, int r, int g, int b);
 int		color(int t, t_rgb rgb);
+
+double	point_len(t_vec point1, t_vec point2);
+double	point_len_origin(t_vec point);
+
+double	get_radian(double seta);
 
 #endif

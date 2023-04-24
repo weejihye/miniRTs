@@ -18,7 +18,8 @@ t_point	get_contact_sphere(t_sp s, t_vec v)
 		point = get_contact_sphere_01(s, v);
 	else
 		point = get_contact_sphere_2(s, v);
-	len = get_len(s.center, point);
+	len = point_len(s.center, point);
+	printf("%f %f %f\n", point.x, point.y, point.z);
 	if (len > s.r)
 	{
 		point.x = NAN;
@@ -33,8 +34,8 @@ t_point	get_contact_sphere(t_sp s, t_vec v)
 	if (len < s.r)
 	{
 		temp[1] = v_sub(point, s.center);
-		temp[0] = v_add(temp[1], v_mlt(len, v));
-		temp[1] = v_add(temp[1], v_mlt(len * -1, v));
+		temp[0] = v_add(temp[1], v_mlt(sqrt(pow(s.r, 2) - pow(len, 2)), v));
+		temp[1] = v_add(temp[1], v_mlt(sqrt(pow(s.r, 2) - pow(len, 2)) * -1, v));
 		if (temp[0].x < 0 != v.x < 0 && temp[1].x < 0 != v.x < 0)
 		{
 			point.x = NAN;
@@ -44,8 +45,8 @@ t_point	get_contact_sphere(t_sp s, t_vec v)
 			return (temp[1]);
 		if (temp[1].x < 0 != v.x < 0)
 			return (temp[0]);
-		temp_len[0] = get_len_origin(temp[0]);
-		temp_len[1] = get_len_origin(temp[1]);
+		temp_len[0] = point_len_origin(temp[0]);
+		temp_len[1] = point_len_origin(temp[1]);
 		if (temp_len[0] < temp_len[1])
 			return (temp[0]);
 		else
@@ -57,24 +58,12 @@ t_point	get_contact_sphere(t_sp s, t_vec v)
 static t_point	get_contact_sphere_01(t_sp s, t_vec v)
 {
 	t_point		point;
-	double		den;
 	double		ratio;
-	const t_vec	v_pow = {pow(v.x, 2), pow(v.y, 2), pow(v.z, 2)};
 
-	den = (v_pow.x * v_pow.y + v_pow.y * v_pow.z + v_pow.z * v_pow.x);
-	point.x = (s.center.x * v_pow.y * v_pow.z + s.center.y
-			* v.y * v_pow.z + s.center.z * v_pow.y * v.z) / den;
-	if (v.x != 0)
-	{
-		ratio = point.x / v.x;
-		point.y = v.y * ratio;
-		point.y = v.z * ratio;
-	}
-	else
-	{
-		point.y = 0;
-		point.z = 0;
-	}
+	ratio = v_dot(s.center, v) / point_len_origin(v);
+	point.x = v.x * ratio;
+	point.y = v.y * ratio;
+	point.z = v.z * ratio;
 	return (point);
 }
 
