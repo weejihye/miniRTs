@@ -27,7 +27,7 @@ typedef struct s_ray
 
 typedef struct s_light
 {
-	t_point	light;
+	t_point	origin;
 	double	ratio;
 	t_rgb	rgb;
 }	t_light;

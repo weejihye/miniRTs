@@ -22,6 +22,7 @@
 # include "vector.h"
 # include "camera.h"
 # include "libft/libft.h"
+# include "objects.h"
 
 # define RATIO (double)(16.0 / 9.0)
 
@@ -58,9 +59,11 @@ typedef struct s_info
 {
 	t_cam		*cam;
 	t_ambient	*ambient;
-	t_light		*light_ptr;
+	t_light		*light;
+	t_sp		*sphere;
+	t_plane		*plane;
+	t_cyl		*cylinder;
 }	t_info;
-
 
 //[parsing] main
 int		parsing(t_info *info, char *file);
@@ -69,12 +72,17 @@ int		read_rt(int fd, char ****infos);
 //[parsing] init_info
 int		init_camera(t_info *info, char **infos);
 int		init_ambient(t_info *info, char **infos);
+int		init_light(t_info *info, char **infos);
 
 //[parsing] syntax check
-int		vec_syntax_check(char *info);
+char	**vec_syntax_check(char *info);
 int		double_syntax_check(char *str);
 
 //[parsing] utils
 int		print_error(char *str);
+int		str_to_vec(t_vec *vec, char *str);
+int		str_to_rgb(t_rgb *rgb, char *str);
+int		free_double_ptr(char **str);
+int		free_triple_ptr(char ***str);
 
 #endif

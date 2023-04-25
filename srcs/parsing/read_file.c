@@ -11,6 +11,15 @@ static void	get_infos(char **temp, char ****infos, int i)
 		(*infos)[i] = ft_split_spaces(temp[i]);
 }
 
+static void	free_temp(char **temp)
+{
+	int	i;
+
+	i = 0;
+	while (temp[i])
+		free(temp[i++]);
+}
+
 int	read_rt(int fd, char ****infos)
 {
 	char	*buff;
@@ -33,5 +42,6 @@ int	read_rt(int fd, char ****infos)
 		temp[i - 1][ft_strchr(buff, '\n') - 1] = 0;
 	}
 	get_infos(temp, infos, i);
+	free_temp(temp);
 	return (0);
 }
