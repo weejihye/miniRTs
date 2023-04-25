@@ -32,7 +32,7 @@ typedef struct s_light
 	t_rgb	rgb;
 }	t_light;
 
-typedef struct s_ambi
+typedef struct s_ambient
 {
 	double	ratio;
 	t_rgb	rgb;

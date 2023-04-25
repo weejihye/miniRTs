@@ -57,10 +57,24 @@ typedef struct s_mlx
 typedef struct s_info
 {
 	t_cam		*cam;
-	t_ambient	*ambient_ptr;
+	t_ambient	*ambient;
 	t_light		*light_ptr;
 }	t_info;
 
+
+//[parsing] main
 int		parsing(t_info *info, char *file);
+int		read_rt(int fd, char ****infos);
+
+//[parsing] init_info
+int		init_camera(t_info *info, char **infos);
+int		init_ambient(t_info *info, char **infos);
+
+//[parsing] syntax check
+int		vec_syntax_check(char *info);
+int		double_syntax_check(char *str);
+
+//[parsing] utils
+int		print_error(char *str);
 
 #endif

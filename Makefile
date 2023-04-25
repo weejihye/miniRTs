@@ -6,7 +6,7 @@
 #    By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/10 21:10:11 by jwee              #+#    #+#              #
-#    Updated: 2023/04/24 21:50:09 by jwee             ###   ########.fr        #
+#    Updated: 2023/04/25 15:08:06 by jwee             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,9 +17,9 @@ CC=cc
 CFLAG= -g #-Wall -Werror -Wextra
 MLXFLAG=-lmlx -framework OpenGl -framework AppKit -Lmlx
 LIB=-Lincludes/libft -lft
-INC=-I./
+INC=-I./includes
 
-SRCS= srcs/main/parsing.c includes/libft/ft_split.c
+SRCS= srcs/parsing/parsing.c srcs/parsing/init_ambient.c srcs/parsing/init_camera.c srcs/parsing/parsing_utils.c srcs/parsing/read_file.c srcs/parsing/syntax_check.c
 OBJS=$(SRCS:.c=.o)
 
 SRCS_BONUS=includes/libft/ft_split.c
