@@ -6,7 +6,7 @@
 /*   By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 16:01:07 by jwee              #+#    #+#             */
-/*   Updated: 2022/07/20 19:12:30 by jwee             ###   ########.fr       */
+/*   Updated: 2023/04/24 16:29:20 by jwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ char	*ft_strtrim(char const *s1, char const *set)
 	char	*temp;
 	int		start;
 	int		end;
-	int		i;
 
 	end = ft_strlen(s1) - 1;
 	start = 0;
@@ -28,7 +27,6 @@ char	*ft_strtrim(char const *s1, char const *set)
 	temp = (char *)malloc(sizeof(char) * (end - start + 2));
 	if (!temp)
 		return (NULL);
-	i = 0;
 	ft_strlcpy(temp, s1 + start, end - start + 2);
 	temp[end - start + 1] = '\0';
 	return (temp);

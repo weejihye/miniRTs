@@ -6,7 +6,7 @@
 #    By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/10 21:10:11 by jwee              #+#    #+#              #
-#    Updated: 2023/04/20 16:41:47 by jwee             ###   ########.fr        #
+#    Updated: 2023/04/24 21:50:09 by jwee             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ MLXFLAG=-lmlx -framework OpenGl -framework AppKit -Lmlx
 LIB=-Lincludes/libft -lft
 INC=-I./
 
-SRCS= srcs/main/parsing.c
+SRCS= srcs/main/parsing.c includes/libft/ft_split.c
 OBJS=$(SRCS:.c=.o)
 
 SRCS_BONUS=includes/libft/ft_split.c

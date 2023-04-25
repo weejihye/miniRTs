@@ -6,7 +6,7 @@
 /*   By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 16:01:35 by jwee              #+#    #+#             */
-/*   Updated: 2022/07/20 19:12:02 by jwee             ###   ########.fr       */
+/*   Updated: 2023/04/24 16:29:11 by jwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,9 @@ static char	*ft_falsestart(void)
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	size_t	i;
-	size_t	j;
 	char	*temp;
 
 	i = 0;
-	j = 0;
 	if (ft_strlen(s) <= start)
 		return (ft_falsestart());
 	if (ft_strlen(s) - start < len)
