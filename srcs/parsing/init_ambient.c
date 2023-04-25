@@ -18,6 +18,6 @@ int	init_ambient(t_info *info, char **infos)
 	if (!ft_isdouble(info->ambient->rgb.r) || !ft_isdouble(info->ambient->rgb.g)
 		|| !ft_isdouble(info->ambient->rgb.b) || !ft_isdouble(info->ambient->ratio))
 		return (print_error("out of range\n"));
-	printf("%c %c %c %f\n", info->ambient->rgb.r, info->ambient->rgb.g, info->ambient->rgb.b, info->ambient->ratio);
+	printf("%d %d %d %f\n", info->ambient->rgb.r, info->ambient->rgb.g, info->ambient->rgb.b, info->ambient->ratio);
 	return (0);
 }

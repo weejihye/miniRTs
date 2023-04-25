@@ -12,9 +12,9 @@ typedef struct s_vector
 
 typedef struct s_rgb
 {
-	char	r;
-	char	g;
-	char	b;
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
 }	t_rgb;
 
 typedef t_vec	t_point;

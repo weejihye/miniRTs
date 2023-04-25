@@ -5,7 +5,7 @@ int	double_syntax_check(char *str)
 	int	dot_count;
 
 	if (*str != '-' && *str != '+' && !ft_isdigit(*str))
-		return (0);
+		return (1);
 	while (*(++str))
 	{
 		if (*str == '.')
@@ -15,9 +15,9 @@ int	double_syntax_check(char *str)
 			continue ;
 		}
 		if (!ft_isdigit(*str))
-			return (0);
+			return (1);
 	}
-	return (1);
+	return (0);
 }
 
 int	vec_syntax_check(char *info)

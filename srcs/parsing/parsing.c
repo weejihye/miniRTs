@@ -6,20 +6,21 @@
 /*   By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 23:35:52 by jwee              #+#    #+#             */
-/*   Updated: 2023/04/25 15:06:27 by jwee             ###   ########.fr       */
+/*   Updated: 2023/04/25 15:21:59 by jwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/miniRT.h"
+#include "miniRT.h"
 
 int	init_info(t_info *info, char ***infos)
 {
 	while (*infos)
 	{
-		if (ft_strcmp(**infos, "C"))
+		if (!ft_strcmp(**infos, "C"))
 			init_camera(info, *infos);
-		else if (ft_strcmp(**infos, "A"))
+		else if (!ft_strcmp(**infos, "A"))
 			init_ambient(info, *infos);
+        infos++;
 	}
 	return (0);
 }
