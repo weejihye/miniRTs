@@ -21,10 +21,9 @@ int	double_syntax_check(char *str)
 	return (0);
 }
 
-char	**rgb_syntax_check(char *info)
+static char	**rgb_syntax_check(char *info)
 {
 	char	**temp;
-	int		dot_count;
 	int		i;
 
 	i = 0;
@@ -46,17 +45,14 @@ char	**rgb_syntax_check(char *info)
 	return (temp);
 }
 
-char	**vec_syntax_check(char *info)
+static char	**vec_syntax_check(char *info)
 {
 	char	**temp;
-	int		dot_count;
 	int		i;
 
 	i = 0;
 	temp = ft_split(info, ',');
-	if (!temp)
-		return (NULL);
-	if (!temp[0] || !temp[1] || !temp[2] || temp[3])
+	if (!temp || !temp[0] || !temp[1] || !temp[2] || temp[3])
 	{
 		free_double_ptr(temp);
 		return (NULL);

@@ -42,14 +42,15 @@ int	init_ambient(t_info *info, char **infos)
 int	init_camera(t_info *info, char **infos)
 {
 	if (!infos[1] || !infos[2] || !infos[3] || infos[4])
-		return (print_error("camera number of properties is invalid\n"));
+		return (print_error("init_camera : number of properties is invalid\n"));
 	info->cam = malloc(sizeof(t_cam));
 	if (!info->cam)
-		return (print_error("cam structure malloc fail\n"));
+		return (print_error("init_camera : structure malloc fail\n"));
 	info->cam->fov = ft_atoi_valid(infos[3]);
 	if (str_to_vec(&info->cam->origin, infos[1])
 		|| str_to_vec(&info->cam->axis, infos[2])
-		|| (info->cam->fov < 0 || info->cam->fov > 180))
+		|| (info->cam->fov < 0 || info->cam->fov > 180)
+		|| check_normalized_vec(info->cam->axis))
 	{
 		free(info->cam);
 		return (print_error("init_camera : fail to input value"));

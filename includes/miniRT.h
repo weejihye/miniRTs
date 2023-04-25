@@ -73,16 +73,19 @@ int		read_rt(int fd, char ****infos);
 int		init_camera(t_info *info, char **infos);
 int		init_ambient(t_info *info, char **infos);
 int		init_light(t_info *info, char **infos);
+int		init_sphere(t_info *info, char **infos);
+int		init_plane(t_info *info, char **infos);
+int		init_cylinder(t_info *info, char **inf);
 
 //[parsing] syntax check
-char	**vec_syntax_check(char *info);
 int		double_syntax_check(char *str);
+int		str_to_vec(t_vec *vec, char *str);
+int		str_to_rgb(t_rgb *rgb, char *str);
 
 //[parsing] utils
 int		print_error(char *str);
-int		str_to_vec(t_vec *vec, char *str);
-int		str_to_rgb(t_rgb *rgb, char *str);
 int		free_double_ptr(char **str);
 int		free_triple_ptr(char ***str);
+int		check_normalized_vec(t_vec vec);
 
 #endif
