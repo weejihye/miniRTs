@@ -7,7 +7,7 @@ int	hit_plane_check(t_plane plane, t_vec vector)
 	return (0);
 }
 
-t_vec	hit_plain(t_plane plane, t_vec vector)
+t_vec	hit_plane(t_plane plane, t_vec vector)
 {
 	double	a;
 	t_vec	point;
@@ -23,4 +23,9 @@ t_vec	hit_plain(t_plane plane, t_vec vector)
 	point.y = vector.y * a;
 	point.z = vector.z * a;
 	return (point);
+}
+
+double	plane_angle(t_plane plane, t_vec vec)
+{
+	return (M_PI_2 - v_angle(plane.vec, vec));
 }

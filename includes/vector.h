@@ -49,6 +49,7 @@ t_vec	v_div(double a, t_vec v);
 double	v_dot(t_vec v1, t_vec v2);
 t_vec	v_cro(t_vec v1, t_vec v2);
 int		v_cmp(t_vec v1, t_vec v2);
+double	v_angle(t_vec v1, t_vec v2);
 
 int		coloring(int t, int r, int g, int b);
 int		color(int t, t_rgb rgb);

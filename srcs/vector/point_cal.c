@@ -8,7 +8,7 @@ double	get_radian(double seta)
 
 double	point_len(t_point point1, t_point point2)
 {
-	return (sqrt(pow(point1.x - point2.x, 2) 
+	return (sqrt(pow(point1.x - point2.x, 2)
 			+ pow(point1.y - point2.y, 2)
 			+ pow(point1.z - point2.z, 2)));
 }
