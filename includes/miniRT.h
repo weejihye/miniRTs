@@ -63,7 +63,10 @@ typedef struct s_info
 	t_sp		*sphere;
 	t_plane		*plane;
 	t_cyl		*cylinder;
+	t_obj		*obj;
 }	t_info;
+
+
 
 //[parsing] main
 int		parsing(t_info *info, char *file);

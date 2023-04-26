@@ -4,14 +4,31 @@
 # include "miniRT.h"
 # include "vector.h"
 
-typedef struct	s_sphere
+enum e_type
+{
+	OB_SP,
+	OB_CYL,
+	OB_PL,
+	OB_CAM,
+	OB_AMB,
+	OB_LGT,
+};
+
+typedef struct s_objects
+{
+	enum e_type			type;
+	void				*objptr;
+	struct s_objects	*next;
+}	t_obj;
+
+typedef struct s_sphere
 {
 	double	r;
 	t_point	center;
 	t_rgb	rgb;
 }	t_sp;
 
-typedef struct	s_plane
+typedef struct s_plane
 {
 	t_point	center;
 	t_vec	vec;
