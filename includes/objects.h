@@ -17,7 +17,7 @@ enum e_type
 typedef struct s_objects
 {
 	enum e_type			type;
-	void				*objptr;
+	void				*p_obj;
 	struct s_objects	*next;
 }	t_obj;
 

@@ -57,16 +57,8 @@ typedef struct s_mlx
 
 typedef struct s_info
 {
-	t_cam		*cam;
-	t_ambient	*ambient;
-	t_light		*light;
-	t_sp		*sphere;
-	t_plane		*plane;
-	t_cyl		*cylinder;
-	t_obj		*obj;
+	t_obj		*objs;
 }	t_info;
-
-
 
 //[parsing] main
 int		parsing(t_info *info, char *file);
@@ -90,5 +82,8 @@ int		print_error(char *str);
 int		free_double_ptr(char **str);
 int		free_triple_ptr(char ***str);
 int		check_normalized_vec(t_vec vec);
+
+//[parsing] list_utils
+void	*ft_lstnew_obj(t_obj **objs, void *content, int type);
 
 #endif
