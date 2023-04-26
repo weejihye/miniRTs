@@ -3,6 +3,7 @@
 
 # include "miniRT.h"
 # include "vector.h"
+# include <stdio.h> //
 
 enum e_type
 {
@@ -14,11 +15,11 @@ enum e_type
 	OB_LGT,
 };
 
-typedef struct s_objects
+typedef struct s_object
 {
 	enum e_type			type;
 	void				*p_obj;
-	struct s_objects	*next;
+	struct s_object		*next;
 }	t_obj;
 
 typedef struct s_sphere
