@@ -55,22 +55,17 @@ typedef struct s_mlx
 	t_img	img;
 }	t_mlx;
 
-typedef struct s_info
-{
-	t_obj		*objs;
-}	t_info;
-
 //[parsing] main
-int		parsing(t_info *info, char *file);
+int		parsing(t_obj **objs, char *file);
 int		read_rt(int fd, char ****infos);
 
 //[parsing] init_info
-int		init_camera(t_info *info, char **infos);
-int		init_ambient(t_info *info, char **infos);
-int		init_light(t_info *info, char **infos);
-int		init_sphere(t_info *info, char **infos);
-int		init_plane(t_info *info, char **infos);
-int		init_cylinder(t_info *info, char **inf);
+int		init_camera(t_obj **objs, char **infos);
+int		init_ambient(t_obj **objs, char **infos);
+int		init_light(t_obj **objs, char **infos);
+int		init_sphere(t_obj **objs, char **infos);
+int		init_plane(t_obj **objs, char **infos);
+int		init_cylinder(t_obj **objs, char **inf);
 
 //[parsing] syntax check
 int		double_syntax_check(char *str);
