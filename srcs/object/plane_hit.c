@@ -17,7 +17,7 @@ t_vec	hit_plane(t_plane plane, t_vec vector)
 		point.x = NAN;
 		return (point);
 	}
-	a = v_dot(plane.vec, plane.center)
+	a = v_dot(plane.vec, plane.c)
 		/ v_dot(plane.vec, vector);
 	point.x = vector.x * a;
 	point.y = vector.y * a;
@@ -28,4 +28,14 @@ t_vec	hit_plane(t_plane plane, t_vec vector)
 double	plane_angle(t_plane plane, t_vec vec)
 {
 	return (M_PI_2 - v_angle(plane.vec, vec));
+}
+
+t_plane	new_plane(t_point center, t_rgb rgb, t_vec vec)
+{
+	t_plane	p;
+
+	p.c = center;
+	p.rgb = rgb;
+	p.vec = vec;
+	return (p);
 }

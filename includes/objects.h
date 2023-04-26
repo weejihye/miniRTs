@@ -24,20 +24,20 @@ typedef struct s_objects
 typedef struct s_sphere
 {
 	double	r;
-	t_point	center;
+	t_point	c;
 	t_rgb	rgb;
 }	t_sp;
 
 typedef struct s_plane
 {
-	t_point	center;
+	t_point	c;
 	t_vec	vec;
 	t_rgb	rgb;
 }	t_plane;
 
 typedef struct s_cylinder
 {
-	t_point	center;
+	t_point	c;
 	t_vec	vec;
 	t_rgb	rgb;
 	double	r;
@@ -55,4 +55,5 @@ double	cyl_angle(t_cyl cyl, t_vec v, t_point p);
 int		check_ahead(t_vec v, t_vec *temp);
 void	check_front(t_vec v, t_vec *temp);
 
+t_plane	new_plane(t_point center, t_rgb rgb, t_vec vec);
 #endif

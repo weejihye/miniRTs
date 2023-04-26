@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: pji <pji@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 23:35:52 by jwee              #+#    #+#             */
-/*   Updated: 2023/04/26 01:30:16 by jwee             ###   ########.fr       */
+/*   Updated: 2023/04/26 13:30:08 by pji              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ int main(int argc, char *argv[])
 	printf("camera : %f %f %f %f %f %f %d\n", info.cam->origin.x, info.cam->origin.y, info.cam->origin.z, info.cam->axis.x, info.cam->axis.y, info.cam->axis.z, info.cam->fov);
 	printf("ambient : %f %d %d %d\n", info.ambient->ratio, info.ambient->rgb.r, info.ambient->rgb.g, info.ambient->rgb.b);
 	printf("light : %f %f %f %f %d %d %d\n", info.light->origin.x, info.light->origin.y, info.light->origin.z, info.light->ratio, info.light->rgb.r, info.light->rgb.g, info.light->rgb.b);
-	printf("sphere : %f %f %f %f %d %d %d\n", info.sphere->center.x, info.sphere->center.y, info.sphere->center.z, info.sphere->r, info.sphere->rgb.r, info.sphere->rgb.g, info.sphere->rgb.b);
-	printf("plane : %f %f %f %f %f %f %d %d %d\n", info.plane->center.x, info.plane->center.y, info.plane->center.z, info.plane->vec.x, info.plane->vec.y, info.plane->vec.z, info.plane->rgb.r, info.plane->rgb.g, info.plane->rgb.b);
-	printf("plane : %f %f %f %f %f %f %f %f %d %d %d\n", info.cylinder->center.x, info.cylinder->center.y, info.cylinder->center.z, info.cylinder->vec.x, info.cylinder->vec.y, info.cylinder->vec.z, info.cylinder->r, info.cylinder->h, info.cylinder->rgb.r, info.cylinder->rgb.g, info.cylinder->rgb.b);
+	printf("sphere : %f %f %f %f %d %d %d\n", info.sphere->c.x, info.sphere->c.y, info.sphere->c.z, info.sphere->r, info.sphere->rgb.r, info.sphere->rgb.g, info.sphere->rgb.b);
+	printf("plane : %f %f %f %f %f %f %d %d %d\n", info.plane->c.x, info.plane->c.y, info.plane->c.z, info.plane->vec.x, info.plane->vec.y, info.plane->vec.z, info.plane->rgb.r, info.plane->rgb.g, info.plane->rgb.b);
+	printf("plane : %f %f %f %f %f %f %f %f %d %d %d\n", info.cylinder->c.x, info.cylinder->c.y, info.cylinder->c.z, info.cylinder->vec.x, info.cylinder->vec.y, info.cylinder->vec.z, info.cylinder->r, info.cylinder->h, info.cylinder->rgb.r, info.cylinder->rgb.g, info.cylinder->rgb.b);
 	system("leaks miniRT");
 	return (0);
 }
