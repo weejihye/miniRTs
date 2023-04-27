@@ -45,6 +45,7 @@ int	init_ambient(t_obj **objs, char **infos)
 
 int	init_camera(t_obj **objs, char **infos)
 {
+	t_obj	*objs;
 	t_cam	*cam;
 
 	if (!infos[1] || !infos[2] || !infos[3] || infos[4])
