@@ -1,66 +1,76 @@
 #include "miniRT.h"
 
-int	init_light(t_obj **objs, char **infos)
+int	init_light(t_obj **objs, char **infos, int *count)
 {
 	t_light	*light;
 
-	if (!infos[1] || !infos[2] || !infos[3] || infos[4])
+	if ((*count & 4) || !infos[1] || !infos[2] || !infos[3] || infos[4])
 		return (print_error("init_light : number of properties is invalid\n"));
 	if (double_syntax_check(infos[2]))
 		return (print_error("init_light : double check error\n"));
 	if (!ft_lstnew_obj(objs, malloc(sizeof(t_light)), OB_LGT))
-		return (1);
+		return (print_error("init_light : camera object add fail\n"));
 	light = (t_light *)((*objs)->p_obj);
 	light->ratio = ft_stod(infos[2], 0.0, 1);
 	if (!ft_isdouble(light->ratio)
 		|| str_to_rgb(&light->rgb, infos[3])
 		|| str_to_vec(&light->origin, infos[1]))
-	{
-		free(light);
-		return (print_error("init_light : out of range\n"));
-	}
+		return (1);
+	*count += 4;
 	return (0);
 }
 
-int	init_ambient(t_obj **objs, char **infos)
+int	init_amb(t_obj **objs, char **infos, int *count)
 {
 	t_ambient	*amb;
 
-	if (!infos[1] || !infos[2] || infos[3])
+	if ((*count & 2) || !infos[1] || !infos[2] || infos[3])
 		return (print_error("init_ambient : number of properties is invalid\n"));
 	if (double_syntax_check(infos[1]))
 		return (print_error("init_ambient : double check error\n"));
 	if (!ft_lstnew_obj(objs, malloc(sizeof(t_ambient)), OB_AMB))
-		return (1);
+		return (print_error("init_ambient : camera object add fail\n"));
 	amb = (t_ambient *)((*objs)->p_obj);
 	amb->ratio = ft_stod(infos[1], 0.0, 1);
 	if (!ft_isdouble(amb->ratio)
 		|| str_to_rgb(&amb->rgb, infos[2]))
-	{
-		free(amb);
-		return (print_error("init_ambient : out of range\n"));
-	}
+		return (1);
+	*count += 2;
 	return (0);
 }
 
-int	init_camera(t_obj **objs, char **infos)
+static void	init_monitor(t_obj *obj)
 {
-	t_obj	*objs;
+	t_cam		*cam;
+	const t_vec	y = {0, 1, 0};
+	t_vec view_center;
+
+	cam = obj->p_obj;
+	cam->horizon = v_nor(v_cro(y, cam->axis));
+	cam->vertical = v_nor(v_cro(cam->axis, cam->horizon));
+	cam->width = 16 * SIZE;
+	cam->height = 9 * SIZE;
+	cam->focal_length = (cam->width / 2) / tan(cam->fov);
+	view_center = v_mlt(cam->focal_length, cam->axis);
+	cam->corner = v_sub(v_sub(v_sub(vec(0, 0, 0), v_mlt(1/2 ,cam->horizon)), v_mlt(1/2, cam->vertical)), vec(0, 0, cam->focal_length));
+}
+
+int	init_camera(t_obj **objs, char **infos, int *count)
+{
 	t_cam	*cam;
 
-	if (!infos[1] || !infos[2] || !infos[3] || infos[4])
+	if ((*count & 1) || !infos[1] || !infos[2] || !infos[3] || infos[4])
 		return (print_error("init_camera : number of properties is invalid\n"));
 	if (!ft_lstnew_obj(objs, malloc(sizeof(t_cam)), OB_CAM))
-		return (1);
+		return (print_error("init_camera : camera object add fail\n"));
 	cam = (t_cam *)((*objs)->p_obj);
-	cam->fov = ft_atoi_valid(infos[3]);
+	cam->fov = get_radian(ft_atoi_valid(infos[3]));
 	if (str_to_vec(&cam->origin, infos[1])
 		|| str_to_vec(&cam->axis, infos[2])
 		|| (cam->fov < 0 || cam->fov > 180)
 		|| check_normalized_vec(cam->axis))
-	{
-		free(cam);
-		return (print_error("init_camera : fail to input value"));
-	}
+		return (1);
+	init_monitor(*objs);
+	*count += 1;
 	return (0);
 }

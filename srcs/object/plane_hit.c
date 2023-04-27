@@ -20,7 +20,7 @@ t_vec	hit_plane(t_plane plane, t_vec vector)
 		return (point);
 	}
 	point = v_mlt(v_dot(plane.vec, plane.c)
-		/ v_dot(plane.vec, vector), vector);
+			/ v_dot(plane.vec, vector), vector);
 	check_front(vector, &point);
 	return (point);
 }

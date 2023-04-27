@@ -6,7 +6,7 @@
 #    By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/10 21:10:11 by jwee              #+#    #+#              #
-#    Updated: 2023/04/26 14:03:52 by jwee             ###   ########.fr        #
+#    Updated: 2023/04/27 23:19:30 by jwee             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ INC=-I./includes
 SRCS=	srcs/parsing/parsing.c srcs/parsing/init_camera.c \
 		srcs/parsing/parsing_utils.c srcs/parsing/read_file.c \
 		srcs/parsing/syntax_check.c srcs/parsing/init_objects.c \
-		srcs/parsing/list_utils.c
+		srcs/parsing/list_utils.c srcs/vector/vector_cal.c srcs/vector/point_cal.c \
+		srcs/vector/vector_pro.c
 OBJS=$(SRCS:.c=.o)
 
 SRCS_BONUS=includes/libft/ft_split.c

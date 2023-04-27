@@ -1,4 +1,4 @@
-#include "../../includes/vector.h"
+#include "vector.h"
 
 double	v_len(t_vec v)
 {

@@ -41,7 +41,10 @@ int	read_rt(int fd, char ****infos)
 		temp[i++] = buff;
 		temp[i - 1][ft_strchr(buff, '\n') - 1] = 0;
 	}
+	if (!temp[0])
+		return (1);
 	get_infos(temp, infos, i);
 	free_temp(temp);
+	close(fd);
 	return (0);
 }

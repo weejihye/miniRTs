@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   init_objects.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/26 00:30:31 by jwee              #+#    #+#             */
-/*   Updated: 2023/04/26 15:36:42 by jwee             ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "miniRT.h"
 
 int	init_plane(t_obj **objs, char **infos)
@@ -25,11 +13,7 @@ int	init_plane(t_obj **objs, char **infos)
 		|| str_to_rgb(&pl->rgb, infos[3])
 		|| str_to_vec(&pl->vec, infos[2])
 		|| check_normalized_vec(pl->vec))
-	{
-		free(pl);
-		pl = NULL;
-		return (print_error("init_plane : out of range\n"));
-	}
+		return (remove_first_node(objs));
 	return (0);
 }
 
@@ -48,10 +32,7 @@ int	init_sphere(t_obj **objs, char **infos)
 	if (!ft_isdouble(sp->r)
 		|| str_to_rgb(&sp->rgb, infos[3])
 		|| str_to_vec(&sp->c, infos[1]))
-	{
-		free(sp);
-		return (print_error("init_sphere : out of range\n"));
-	}
+		return (remove_first_node(objs));
 	return (0);
 }
 
@@ -73,9 +54,6 @@ int	init_cylinder(t_obj **objs, char **inf)
 		|| str_to_vec(&cyl->c, inf[1])
 		|| str_to_vec(&cyl->vec, inf[2])
 		|| check_normalized_vec(cyl->vec))
-	{
-		free(cyl);
-		return (print_error("init_cylinder : out of range\n"));
-	}
+		return (remove_first_node(objs));
 	return (0);
 }

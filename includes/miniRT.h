@@ -24,10 +24,10 @@
 # include "libft/libft.h"
 # include "objects.h"
 
-# define RATIO (double)(16.0 / 9.0)
+# define SIZE 50
 
 # define X_EVENT_KEY_PRESS	   2
-# define X_EVENT_KEY_release	 3
+# define X_EVENT_KEY_RELEASE	 3
 # define X_EVENT_KEY_EXIT		17
 
 # define KEY_ESC		 53
@@ -60,9 +60,9 @@ int		parsing(t_obj **objs, char *file);
 int		read_rt(int fd, char ****infos);
 
 //[parsing] init_info
-int		init_camera(t_obj **objs, char **infos);
-int		init_ambient(t_obj **objs, char **infos);
-int		init_light(t_obj **objs, char **infos);
+int		init_camera(t_obj **objs, char **infos, int *count);
+int		init_amb(t_obj **objs, char **infos, int *count);
+int		init_light(t_obj **objs, char **infos, int *count);
 int		init_sphere(t_obj **objs, char **infos);
 int		init_plane(t_obj **objs, char **infos);
 int		init_cylinder(t_obj **objs, char **inf);
@@ -80,5 +80,10 @@ int		check_normalized_vec(t_vec vec);
 
 //[parsing] list_utils
 void	*ft_lstnew_obj(t_obj **objs, void *content, int type);
+void	*find_obj(t_obj *objs, int type);
+int		remove_first_node(t_obj **objs);
+int		remove_list(t_obj **objs);
+
+int		coloring(int t, int r, int g, int b);
 
 #endif

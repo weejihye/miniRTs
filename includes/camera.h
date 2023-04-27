@@ -6,7 +6,7 @@
 /*   By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 23:02:54 by jwee              #+#    #+#             */
-/*   Updated: 2023/04/27 14:55:22 by jwee             ###   ########.fr       */
+/*   Updated: 2023/04/27 21:07:52 by jwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct s_cam
 	int		height;
 	int		width;
 	double	focal_length;
-	int		fov;
+	double	fov;
 	t_vec	horizon;
 	t_vec	vertical;
 	t_point	corner;

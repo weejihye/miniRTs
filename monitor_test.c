@@ -35,11 +35,11 @@ int	main()
 	cyl.c = vec(10, 0, 0);
 	cyl.h = 6;
 	cyl.r = 3;
-	cyl.vec = v_nor(vec(10, 18, 9));
+	cyl.vec = v_nor(vec(0, 1, 0));
 
 	t_sp	sphere;
 	sphere.c = vec(10, 0, 0);
-	sphere.r = 5;
+	sphere.r = 3;
 
 	t_monitor	moniter;
 	moniter.w = 16 * SIZE;
@@ -57,10 +57,10 @@ int	main()
 		{
 			if (0)
 				;
-			// else if (!isnan(sphere_hit(sphere, moniter_dot(p, moniter, v)).x))
-			// 	printf("■■■");
-			else if (!isnan(hit_cylinder(cyl, moniter_dot(p, moniter, v)).x))
-				printf("■■ ");
+			else if (!isnan(sphere_hit(sphere, moniter_dot(p, moniter, v)).x))
+				printf("■■■");
+			// else if (!isnan(hit_cylinder(cyl, moniter_dot(p, moniter, v)).x))
+			// 	printf("■■ ");
 			// else if (!isnan(hit_plane(plane,  moniter_dot(p, moniter, v)).x))
 			// 	printf("■  ");
 			else

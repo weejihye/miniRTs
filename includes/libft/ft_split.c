@@ -6,7 +6,7 @@
 /*   By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 17:58:43 by jwee              #+#    #+#             */
-/*   Updated: 2023/04/20 02:28:52 by jwee             ###   ########.fr       */
+/*   Updated: 2023/04/27 23:57:56 by jwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	**free_all(char **result, int i)
 	return (NULL);
 }
 
-char	**split(char **result, const char *src, char c, int wc)
+static char	**split_word(char **result, const char *src, char c, int wc)
 {
 	int		start;
 	int		i;
@@ -81,6 +81,6 @@ char	**ft_split(const char *src, char c)
 		return (NULL);
 	result = NULL;
 	wc = word_count(src, c);
-	result = split(result, src, c, wc);
+	result = split_word(result, src, c, wc);
 	return (result);
 }
