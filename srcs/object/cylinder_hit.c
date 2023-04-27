@@ -1,89 +1,109 @@
 #include "objects.h"
 
+int		cyl_plane(t_point dot[2], t_cyl cyl, t_vec v);
+t_point	cyl_2(t_point dot[2], t_cyl cyl, t_vec v, t_vec qe);
+
 t_point	hit_cylinder(t_cyl cyl, t_vec v)
 {
-	double	a;
-	double	b;
-	double	c;
-	t_vec	w;
+	t_vec	qe;
 	t_point	dot[2];
-	t_plane	plane;
-	int n;
+	int		n;
+	double	t;
 
-	a = v_dot(v, v) - pow(v_dot(v, cyl.vec), 2);
-	b = 2 * (v_dot(v, cyl.c) - v_dot(v, cyl.vec) * v_dot(cyl.c, cyl.vec));
-	c = v_dot(cyl.c, cyl.c) - pow(v_dot(cyl.c, cyl.vec), 2) - pow(cyl.r, 2);
-	printf("a : %.20f b : %.20f c : %.20f\n", a, b, c);
-	c = pow(b, 2) - 4 * a * c;
-	if (c < 0)
+	if (v_cmp(cyl.vec, v) == 1)
 	{
-		printf("c < 0\n");
-		dot[0].x = NAN;
-		return (dot[0]);
+		if (cyl_plane(dot, cyl, v) == 0)
+			return ((t_point){NAN, NAN, NAN});
+		else
+			return (check_ahead(v, dot));
 	}
-	if (c == 0)
+	qe.x = v_dot(v, v) - pow(v_dot(v, cyl.vec), 2);
+	qe.y = 2 * (v_dot(v, cyl.c) - v_dot(v, cyl.vec) * v_dot(cyl.c, cyl.vec));
+	qe.z = v_dot(cyl.c, cyl.c) - pow(v_dot(cyl.c, cyl.vec), 2) - pow(cyl.r, 2);
+	t = pow(qe.y, 2) - 4 * qe.x * qe.z;
+	if (t < 0)
+		return ((t_point){NAN, NAN, NAN});
+	if (t == 0)
 	{
-		if (v_cmp(cyl.vec ,v) == 1)
-			c = 1;
-		printf("c == 0\n");
-		dot[0] = v_mlt((-1) * b / 2 / a, v);
+		dot[0] = v_mlt((-1) * qe.y / 2 / qe.x, v);
 		check_front(v, &(dot[0]));
 		return (dot[0]);
 	}
-	if (c > 0)
-	{
-		printf("c > 0\n");
-		n = 0;
-		plane.c = v_sub(cyl.c, v_mlt(-1 * cyl.h / 2, cyl.vec));
-		plane.vec = cyl.vec;
-		dot[n] = hit_plane(plane, v);
-		if (point_len(plane.c, dot[n]) <= cyl.r)
-			++n;
-		plane.c = v_sub(cyl.c, v_mlt(cyl.h / 2, cyl.vec));
-		dot[n] = hit_plane(plane, v);
-		if (point_len(plane.c, dot[n]) <= cyl.r)
-			++n;
-		if (n != 2)
-		{
-			dot[n] = v_mlt((-1 * b + sqrt(c)) / (2 * a) * (-1), v);
-			if (v_dot(v_sub(dot[n], cyl.c), cyl.vec) >= 0 || v_dot(v_sub(dot[n], cyl.c), cyl.vec) <= 1)
-				++n;
-		}
-		if (n != 2)
-		{
-			dot[n] = v_mlt((-1 * b - sqrt(c)) / (2 * a) * (-1), v);
-			if (v_dot(v_sub(dot[n], cyl.c), cyl.vec) >= 0 || v_dot(v_sub(dot[n], cyl.c), cyl.vec) <= 1)
-				++n;
-		}
-		printf("n : %d\n", n);
-	}
-	if (check_ahead(v, dot))
-		return (dot[1]);
-	else
-		return (dot[0]);
+	if (t > 0)
+		return (cyl_2(dot, cyl, v, qe));
+	return ((t_point){NAN, NAN, NAN});
 }
+
+int	cyl_plane(t_point dot[2], t_cyl cyl, t_vec v)
+{
+	t_plane plane;
+	int		n;
+
+	n = 0;
+	plane.c = v_sub(cyl.c, v_mlt(-1 * cyl.h / 2, cyl.vec));
+	plane.vec = cyl.vec;
+	dot[n] = hit_plane(plane, v);
+	if (!isnan(dot[n].x) && point_len(plane.c, dot[n]) <= cyl.r)
+		++n;
+	plane.c = v_sub(cyl.c, v_mlt(cyl.h / 2, cyl.vec));
+	dot[n] = hit_plane(plane, v);
+	if (!isnan(dot[n].x) && point_len(plane.c, dot[n]) <= cyl.r)
+		++n;
+	return (n);
+}
+
+t_point	cyl_2(t_point dot[2], t_cyl cyl, t_vec v, t_vec qe)
+{
+	double	t;
+	int		n;
+	n = cyl_plane(dot, cyl, v);
+	if (n != 2)
+	{
+		dot[n] = v_mlt((-1 * qe.y + sqrt(qe.z)) / (2 * qe.x) * (-1), v);
+		if (!isnan(dot[n].x))
+		{
+			t = v_dot(v_sub(dot[n], cyl.c), cyl.vec);
+			n += (t >= cyl.h / 2 * -1 && t <= cyl.h / 2);
+		}
+	}
+	if (n != 2)
+	{
+		dot[n] = v_mlt((-1 * qe.y - sqrt(qe.z)) / (2 * qe.x) * (-1), v);
+		if (!isnan(dot[n].x))
+		{
+			t = v_dot(v_sub(dot[n], cyl.c), cyl.vec);
+			n += (t >= cyl.h / 2 * -1 && t <= cyl.h / 2);
+		}
+	}
+	if (n == 0)
+		return ((t_point){NAN, NAN, NAN});
+	else if (n == 2)
+		return (check_ahead(v, dot));
+	else
+	{
+		check_front(v, &(dot[0]));
+		return (dot[0]);
+	}
+}
+
 
 double	cyl_angle(t_cyl cyl, t_vec v, t_point p)
 {
 	t_point	w;
+	double	t;
 
 	w = v_add(cyl.c, v_mlt(cyl.h / 2, cyl.vec));
-	if (!(cyl.vec.x * (w.x - cyl.c.x)
-			+ cyl.vec.y * (w.y - cyl.c.y)
-			+ cyl.vec.z * (w.z - cyl.c.z)))
+	printf("%f\n", v_dot(cyl.vec, v_sub(p, w)));
+	if (!v_dot(cyl.vec, v_sub(p, w)))
 		return (M_PI_2 - v_angle(cyl.vec, v));
 	w = v_sub(cyl.c, v_mlt(cyl.h / 2, cyl.vec));
-	if (!(cyl.vec.x * (w.x - cyl.c.x)
-			+ cyl.vec.y * (w.y - cyl.c.y)
-			+ cyl.vec.z * (w.z - cyl.c.z)))
+	printf("%f\n", v_dot(cyl.vec, v_sub(p, w)));
+	if (!v_dot(cyl.vec, v_sub(p, w)))
 		return (M_PI_2 - v_angle(cyl.vec, v));
-	w.x = cyl.vec.x * v_dot(p, cyl.vec)
-		+ cyl.c.x * (pow(cyl.vec.y, 2) + pow(cyl.vec.z, 2))
-		- cyl.vec.x * cyl.vec.y * cyl.c.y
-		- cyl.vec.x * cyl.vec.z * cyl.c.z
-		/ (pow(cyl.vec.x, 2) + pow(cyl.vec.y, 2) + pow(cyl.vec.z, 2));
-	w.y = cyl.vec.y * (w.x - cyl.c.x) / cyl.vec.x;
-	w.z = cyl.vec.z * (w.x - cyl.c.x) / cyl.vec.x;
+	t = v_dot(cyl.vec, v_sub(p, cyl.c)) / v_dot(cyl.vec, cyl.vec);
+	printf("%f\n", t);
+	w = v_add(v_mlt(t, cyl.vec), cyl.c);
 	printf("%f %f %f\n", w.x, w.y, w.z);
+	printf("%f\n", point_len(w, p));
 	return (w.x);
 }

@@ -12,6 +12,8 @@ t_vec	hit_plane(t_plane plane, t_vec vector)
 	double	a;
 	t_vec	point;
 
+	if (v_dot(plane.vec, plane.c) == 0)
+		return ((t_point){0, 0, 0});
 	if (!hit_plane_check(plane, vector))
 	{
 		point.x = NAN;
@@ -22,6 +24,7 @@ t_vec	hit_plane(t_plane plane, t_vec vector)
 	point.x = vector.x * a;
 	point.y = vector.y * a;
 	point.z = vector.z * a;
+	check_front(vector, &point);
 	return (point);
 }
 

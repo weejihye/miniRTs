@@ -52,7 +52,7 @@ t_point	hit_cylinder(t_cyl cyl, t_vec v);
 
 double	cyl_angle(t_cyl cyl, t_vec v, t_point p);
 
-int		check_ahead(t_vec v, t_vec *temp);
+t_point	check_ahead(t_vec v, t_point *temp);
 void	check_front(t_vec v, t_vec *temp);
 
 t_plane	new_plane(t_point center, t_rgb rgb, t_vec vec);
