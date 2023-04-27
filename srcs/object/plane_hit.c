@@ -19,11 +19,8 @@ t_vec	hit_plane(t_plane plane, t_vec vector)
 		point.x = NAN;
 		return (point);
 	}
-	a = v_dot(plane.vec, plane.c)
-		/ v_dot(plane.vec, vector);
-	point.x = vector.x * a;
-	point.y = vector.y * a;
-	point.z = vector.z * a;
+	point = v_mlt(v_dot(plane.vec, plane.c)
+		/ v_dot(plane.vec, vector), vector);
 	check_front(vector, &point);
 	return (point);
 }

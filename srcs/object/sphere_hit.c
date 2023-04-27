@@ -15,6 +15,8 @@ t_point	sphere_hit(t_sp s, t_vec v)
 	// 	temp[0] = get_contact_sphere_01(s, v);
 	// else
 	// 	temp[0] = get_contact_sphere_2(s, v);
+	if (point_len_origin(s.c) == s.r)
+		return ((t_vec){0, 0, 0});
 	temp[0] = v_mlt(v_dot(v, s.c) / v_dot(v, v), v);
 	len = point_len(s.c, temp[0]);
 	if (len < s.r)

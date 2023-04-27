@@ -1,5 +1,7 @@
 #include "objects.h"
 
+void	print_point(t_point p);//
+
 int		cyl_plane(t_point dot[2], t_cyl cyl, t_vec v);
 t_point	cyl_2(t_point dot[2], t_cyl cyl, t_vec v, t_vec qe);
 
@@ -20,16 +22,16 @@ t_point	hit_cylinder(t_cyl cyl, t_vec v)
 	qe.x = v_dot(v, v) - pow(v_dot(v, cyl.vec), 2);
 	qe.y = 2 * (v_dot(v, cyl.c) - v_dot(v, cyl.vec) * v_dot(cyl.c, cyl.vec));
 	qe.z = v_dot(cyl.c, cyl.c) - pow(v_dot(cyl.c, cyl.vec), 2) - pow(cyl.r, 2);
-	t = pow(qe.y, 2) - 4 * qe.x * qe.z;
-	if (t < 0)
+	qe.z = pow(qe.y, 2) - 4 * qe.x * qe.z;
+	if (qe.z < 0)
 		return ((t_point){NAN, NAN, NAN});
-	if (t == 0)
+	if (qe.z == 0)
 	{
 		dot[0] = v_mlt((-1) * qe.y / 2 / qe.x, v);
 		check_front(v, &(dot[0]));
 		return (dot[0]);
 	}
-	if (t > 0)
+	if (qe.z > 0)
 		return (cyl_2(dot, cyl, v, qe));
 	return ((t_point){NAN, NAN, NAN});
 }
