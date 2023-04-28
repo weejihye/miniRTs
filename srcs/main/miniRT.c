@@ -23,7 +23,7 @@ t_vec	monitor_dot(t_point point, t_monitor monitor, t_vec v)
 	return (v_nor(v_add(v_mlt(monitor.w / 2 / tan(get_radian((double)monitor.fov / 2)), v), v_add(v_mlt(monitor.w / 2 - 0.5 - point.x, w), v_mlt(monitor.h / 2 - 0.5 - point.y, h)))));
 }
 
-void			my_mlx_pixel_put(t_img *img, int x, int y, int color)
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
 	char	*dst;
 

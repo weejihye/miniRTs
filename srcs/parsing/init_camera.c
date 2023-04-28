@@ -51,7 +51,7 @@ static void	init_monitor(t_obj *obj)
 	cam->width = 16 * SIZE;
 	cam->height = 9 * SIZE;
 	cam->focal_length = (cam->width / 2) / tan(cam->fov);
-	view_center = v_mlt(cam->focal_length, cam->axis);
+	cam->view_center = v_mlt(cam->focal_length, cam->axis);
 	cam->corner = v_sub(v_sub(v_sub(vec(0, 0, 0), v_mlt(1/2 ,cam->horizon)), v_mlt(1/2, cam->vertical)), vec(0, 0, cam->focal_length));
 }
 
