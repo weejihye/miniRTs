@@ -20,6 +20,6 @@ int coloring(int t, int r, int g, int b)
 
 int color(int t, t_rgb rgb)
 {
-	return (coloring(t, rgb.r * 255, rgb.g * 255, rgb.b * 255));
+	return (t << 24 | rgb.r << 16 | rgb.g << 8 | rgb.b);
 }
 

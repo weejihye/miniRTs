@@ -25,9 +25,15 @@ t_vec	hit_plane(t_plane plane, t_vec vector)
 	return (point);
 }
 
-double	plane_angle(t_plane plane, t_vec vec)
+double	plane_angle(t_plane plane, t_light light, t_point point)
 {
-	return (M_PI_2 - v_angle(plane.vec, vec));
+	const t_vec	vec = v_sub(point, light.origin);
+	double		ang = acos(v_dot(plane.vec, vec) / point_len_origin(vec));
+
+	if (ang > M_PI_2)
+		return (ang - M_2_PI);
+	else
+		return (M_PI_2 - ang);
 }
 
 t_plane	new_plane(t_point center, t_rgb rgb, t_vec vec)

@@ -6,7 +6,7 @@
 static t_point	get_contact_sphere_01(t_sp s, t_vec v);
 static t_point	get_contact_sphere_2(t_sp s, t_vec v);
 
-t_point	sphere_hit(t_sp s, t_vec v)
+t_point	hit_sphere(t_sp s, t_vec v)
 {
 	double	len;
 	t_vec	temp[2];
@@ -69,7 +69,13 @@ static t_point	get_contact_sphere_2(t_sp s, t_vec v)
 	return (point);
 }
 
-double	sphere_angle(t_sp s, t_vec v, t_point point)
+double	sphere_angle(t_sp s, t_light light, t_point point)
 {
-	return (M_PI_2 - v_angle(v_nor(v_sub(point, s.c)), v));
+	const t_vec a = v_sub(s.c, point);
+	const t_vec b = v_sub(light.origin, point);
+	const t_vec c = v_sub(light.origin, s.c);
+
+	if (pow(s.r, 2) + pow(point_len_origin(b), 2) < pow(point_len_origin(c), 2))
+		return (NAN);
+	return (acos(v_dot(a, b) / point_len_origin(a) / point_len_origin(b)));
 }

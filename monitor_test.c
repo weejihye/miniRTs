@@ -22,14 +22,14 @@ t_vec	moniter_dot(t_point point, t_monitor monitor, t_vec v)
 	h = v_nor(v_cro(v, w));
 	// print_point(w); printf("\n");
 	// print_point(h); printf("\n");
-	return (v_nor(v_add(v_mlt(monitor.w / 2 / tan(get_radian((double)monitor.fov / 2)), v), v_add(v_mlt(monitor.w / 2 - 0.5 - point.x, w), v_mlt(monitor.h / 2 - 0.5 - point.y, h)))));
+	return (v_nor(v_add(v_mlt(monitor.w / 2 / tan(get_radian((double)monitor.fov / 2)), v), v_add(v_mlt(point.x - (monitor.w / 2 - 0.5), w), v_mlt(point.y - (monitor.h / 2 - 0.5), h)))));
 }
 
 int	main()
 {
 	t_plane	plane;
 	plane.c = (t_vec){0, 0, 1};
-	plane.vec = v_nor((t_vec){10, 18, 12});
+	plane.vec = v_nor((t_vec){0, 1, 0});
 
 	t_cyl	cyl;
 	cyl.c = vec(10, 0, 0);
@@ -37,9 +37,10 @@ int	main()
 	cyl.r = 3;
 	cyl.vec = v_nor(vec(0, 1, 0));
 
+
 	t_sp	sphere;
-	sphere.c = vec(10, 0, 0);
-	sphere.r = 3;
+	sphere.c = vec(10, 1, 0);
+	sphere.r = 5;
 
 	t_monitor	moniter;
 	moniter.w = 16 * SIZE;
@@ -48,6 +49,8 @@ int	main()
 
 	t_vec	v = v_nor(vec(1, 0, 0));
 	t_point	p;
+	t_point	hit;
+	double	ang;
 
 	p.y = 0;
 	while (p.y < moniter.h)
@@ -57,8 +60,18 @@ int	main()
 		{
 			if (0)
 				;
-			else if (!isnan(sphere_hit(sphere, moniter_dot(p, moniter, v)).x))
-				printf("■■■");
+			else if (!isnan(hit_sphere(sphere, moniter_dot(p, moniter, v)).x))
+			{
+				hit = hit_sphere(sphere, moniter_dot(p, moniter, v));
+				ang = sphere_angle(sphere, light, hit);
+				if (isnan(ang))
+					printf("   ");
+				else if (ang > M_PI_4)
+					printf("■■ ");
+				else
+					printf("■■■");
+			}
+			// 	printf("■■■");
 			// else if (!isnan(hit_cylinder(cyl, moniter_dot(p, moniter, v)).x))
 			// 	printf("■■ ");
 			// else if (!isnan(hit_plane(plane,  moniter_dot(p, moniter, v)).x))
