@@ -6,28 +6,33 @@
 #    By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/10 21:10:11 by jwee              #+#    #+#              #
-#    Updated: 2023/04/27 23:19:30 by jwee             ###   ########.fr        #
+#    Updated: 2023/04/28 11:44:34 by jwee             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME=miniRT
-NAME_BONUS=miniRT_bonus
+NAME=		miniRT
 
-CC=cc
-CFLAG= -g #-Wall -Werror -Wextra
-MLXFLAG=-lmlx -framework OpenGl -framework AppKit -Lmlx
-LIB=-Lincludes/libft -lft
-INC=-I./includes
+CC=			cc
+CFLAG=		-g #-Wall -Werror -Wextra
+MLXFLAG=	-lmlx -framework OpenGl -framework AppKit -Lmlx
+LIB=		-Lincludes/libft -lft
+INC=		-I./includes
 
-SRCS=	srcs/parsing/parsing.c srcs/parsing/init_camera.c \
-		srcs/parsing/parsing_utils.c srcs/parsing/read_file.c \
-		srcs/parsing/syntax_check.c srcs/parsing/init_objects.c \
-		srcs/parsing/list_utils.c srcs/vector/vector_cal.c srcs/vector/point_cal.c \
-		srcs/vector/vector_pro.c
-OBJS=$(SRCS:.c=.o)
+SRCS=		srcs/main/miniRT.c srcs/parsing/init_camera.c srcs/parsing/init_objects.c \
+			srcs/parsing/list_utils.c srcs/parsing/parsing_utils.c srcs/parsing/parsing.c \
+			srcs/parsing/read_file.c srcs/parsing/syntax_check.c \
+			\
+			srcs/object/cylinder_hit.c srcs/object/debag.c srcs/object/plane_hit.c \
+			srcs/object/sphere_hit.c srcs/object/util.c\
+			\
+			srcs/vector/point_cal.c srcs/vector/vector_cal.c srcs/vector/vector_pro.c \
+			\
+			srcs/color/color.c
+		
+OBJS=		$(SRCS:.c=.o)
 
-SRCS_BONUS=includes/libft/ft_split.c
-OBJS_BONUS=$(SRCS_BONUS:.c=.o)
+SRCS_BONUS=	includes/libft/ft_split.c
+OBJS_BONUS=	$(SRCS_BONUS:.c=.o)
 
 #
 

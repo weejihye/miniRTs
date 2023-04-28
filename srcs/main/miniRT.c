@@ -44,7 +44,11 @@ int	main(int argc, char *argv[])
 
 	t_vec v = v_nor(vec(1, 0 ,0));
 
-	parsing(&objs, argv[1]);
+	if (parsing(&objs, argv[1]))
+	{
+		system("leaks miniRT");
+		return (1);
+	}
 	mlx.mlx = mlx_init();
 	mlx.win = mlx_new_window(mlx.mlx, 600, 400, "miniRT");
 	mlx.img.img = mlx_new_image(mlx.mlx, 600, 400);
@@ -67,5 +71,6 @@ int	main(int argc, char *argv[])
 	}
 	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img.img, 0, 0);
 	mlx_loop(mlx.mlx);
+	system("leaks miniRT");
 	return (0);
 }
