@@ -2,19 +2,25 @@
 
 int	init_light(t_obj **objs, char **infos, int *count)
 {
+	t_obj	*obj;
 	t_light	*light;
 
 	if ((*count & 4) || !infos[1] || !infos[2] || !infos[3] || infos[4])
 		return (print_error("init_light : number of properties is invalid\n"));
 	if (double_syntax_check(infos[2]))
 		return (print_error("init_light : double check error\n"));
-	if (!ft_lstnew_obj(objs, malloc(sizeof(t_light)), OB_LGT))
-		return (print_error("init_light : camera object add fail\n"));
-	light = (t_light *)((*objs)->p_obj);
-	light->ratio = ft_stod(infos[2], 0.0, 1);
-	if (!ft_isdouble(light->ratio)
-		|| str_to_rgb(&light->rgb, infos[3])
-		|| str_to_vec(&light->origin, infos[1]))
+	obj = find_obj(*objs, OB_LGT);
+	if (!obj)
+	{
+		if (!ft_lstnew_obj(objs, malloc(sizeof(t_light)), OB_LGT))
+			return (print_error("init_light : camera object add fail\n"));
+		obj = *objs;
+	}
+	light = obj->p_obj;
+	light->lgt_ratio = ft_stod(infos[2], 0.0, 1);
+	if (!ft_isdouble(light->lgt_ratio)
+		|| str_to_rgb(&light->lgt_rgb, infos[3])
+		|| str_to_vec(&light->lgt_origin, infos[1]))
 		return (1);
 	*count += 4;
 	return (0);
@@ -22,18 +28,24 @@ int	init_light(t_obj **objs, char **infos, int *count)
 
 int	init_amb(t_obj **objs, char **infos, int *count)
 {
-	t_ambient	*amb;
+	t_obj	*obj;
+	t_light	*amb;
 
 	if ((*count & 2) || !infos[1] || !infos[2] || infos[3])
 		return (print_error("init_ambient : number of properties is invalid\n"));
 	if (double_syntax_check(infos[1]))
 		return (print_error("init_ambient : double check error\n"));
-	if (!ft_lstnew_obj(objs, malloc(sizeof(t_ambient)), OB_AMB))
-		return (print_error("init_ambient : camera object add fail\n"));
-	amb = (t_ambient *)((*objs)->p_obj);
-	amb->ratio = ft_stod(infos[1], 0.0, 1);
-	if (!ft_isdouble(amb->ratio)
-		|| str_to_rgb(&amb->rgb, infos[2]))
+	obj = find_obj(*objs, OB_LGT);
+	if (!obj)
+	{
+		if (!ft_lstnew_obj(objs, malloc(sizeof(t_light)), OB_LGT))
+			return (print_error("init_light : camera object add fail\n"));
+		obj = *objs;
+	}
+	amb = obj->p_obj;
+	amb->amb_ratio = ft_stod(infos[1], 0.0, 1);
+	if (!ft_isdouble(amb->amb_ratio)
+		|| str_to_rgb(&amb->amb_rgb, infos[2]))
 		return (1);
 	*count += 2;
 	return (0);
@@ -52,7 +64,8 @@ static void	init_monitor(t_obj *obj)
 	cam->height = 9 * SIZE;
 	cam->focal_length = (cam->width / 2) / tan(cam->fov);
 	cam->view_center = v_mlt(cam->focal_length, cam->axis);
-	cam->corner = v_sub(v_sub(v_sub(vec(0, 0, 0), v_mlt(1/2 ,cam->horizon)), v_mlt(1/2, cam->vertical)), vec(0, 0, cam->focal_length));
+	cam->corner = v_sub(v_sub(v_sub(vec(0, 0, 0), v_mlt(1/2 ,cam->horizon)),
+				v_mlt(1 / 2, cam->vertical)), vec(0, 0, cam->focal_length));
 }
 
 int	init_camera(t_obj **objs, char **infos, int *count)

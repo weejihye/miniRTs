@@ -25,19 +25,6 @@ typedef struct s_ray
 	t_vec	*dir;
 }	t_ray;
 
-typedef struct s_light
-{
-	t_point	origin;
-	double	ratio;
-	t_rgb	rgb;
-}	t_light;
-
-typedef struct s_ambient
-{
-	double	ratio;
-	t_rgb	rgb;
-}	t_ambient;
-
 t_vec	vec(double x, double y, double z);
 double	v_len(t_vec v);
 t_vec	v_nor(t_vec v);
