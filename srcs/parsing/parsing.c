@@ -75,7 +75,7 @@ static int	check_filename(char *file)
 	}
 }
 
-int	parsing(t_obj **objs, char *file)
+int	parsing(t_obj **objs, t_light **light, char *file)
 {
 	char	***infos;
 	int		fd;
@@ -88,6 +88,7 @@ int	parsing(t_obj **objs, char *file)
 		return (print_error("parsing error : open file fail"));
 	if (read_rt(fd, &infos) || init_info(objs, infos))
 		return (free_triple_ptr(infos));
+	(*light) = (t_light *)find_obj(*objs, OB_LGT);
 	move_point(objs);
 	free_triple_ptr(infos);
 	return (0);

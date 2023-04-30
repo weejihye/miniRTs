@@ -56,7 +56,7 @@ typedef struct s_mlx
 }	t_mlx;
 
 //[parsing] main
-int		parsing(t_obj **objs, char *file);
+int		parsing(t_obj **objs, t_light **light, char *file);
 int		read_rt(int fd, char ****infos);
 
 //[parsing] init_info

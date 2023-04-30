@@ -35,6 +35,7 @@ int	main(int argc, char *argv[])
 {
 	t_mlx		mlx;
 	t_obj		*objs;
+	t_light		*light;
 	t_point		p;
 	t_monitor	monitor;
 
@@ -44,7 +45,7 @@ int	main(int argc, char *argv[])
 
 	t_vec v = v_nor(vec(1, 0 ,0));
 
-	if (parsing(&objs, argv[1]))
+	if (parsing(&objs, &light, argv[1]))
 	{
 		system("leaks miniRT");
 		return (1);
