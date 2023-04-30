@@ -24,7 +24,7 @@
 # include "libft/libft.h"
 # include "objects.h"
 
-# define SIZE 50
+# define SIZE 100
 
 # define X_EVENT_KEY_PRESS	   2
 # define X_EVENT_KEY_RELEASE	 3
@@ -54,6 +54,10 @@ typedef struct s_mlx
 	void	*win;
 	t_img	img;
 }	t_mlx;
+
+//[main] mlx utils
+void	press_button_exit(t_obj **objs);
+void	press_key(t_obj **objs);
 
 //[parsing] main
 int		parsing(t_obj **objs, t_light **light, char *file);

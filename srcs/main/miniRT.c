@@ -8,8 +8,6 @@ typedef struct s_monitor
 	//etc
 }	t_monitor;
 
-
-
 t_vec	monitor_dot(t_point point, t_monitor monitor, t_vec v)
 {
 	t_vec		w;
@@ -18,8 +16,6 @@ t_vec	monitor_dot(t_point point, t_monitor monitor, t_vec v)
 
 	w = v_nor(v_cro(y, v));
 	h = v_nor(v_cro(v, w));
-	// print_point(w); printf("\n");
-	// print_point(h); printf("\n");
 	return (v_nor(v_add(v_mlt(monitor.w / 2 / tan(get_radian((double)monitor.fov / 2)), v), v_add(v_mlt(monitor.w / 2 - 0.5 - point.x, w),
 					v_mlt(monitor.h / 2 - 0.5 - point.y, h)))));
 }
@@ -80,6 +76,8 @@ int	main(int argc, char *argv[])
 			&mlx.img.line_length, &mlx.img.endian);
 	draw_shape(mlx, objs);
 	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img.img, 0, 0);
+	mlx_hook(mlx.win, X_EVENT_KEY_PRESS, 0, press_key, &objs);
+	mlx_hook(mlx.win, X_EVENT_KEY_EXIT, 0, press_button_exit, &objs);
 	mlx_loop(mlx.mlx);
 	system("leaks miniRT");
 	return (0);

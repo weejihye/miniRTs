@@ -6,7 +6,7 @@
 #    By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/10 21:10:11 by jwee              #+#    #+#              #
-#    Updated: 2023/04/30 23:14:09 by jwee             ###   ########.fr        #
+#    Updated: 2023/05/01 00:03:46 by jwee             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ MLXFLAG=	-lmlx -framework OpenGl -framework AppKit -Lmlx
 LIB=		-Lincludes/libft -lft
 INC=		-I./includes
 
-SRCS=		srcs/main/miniRT.c \
+SRCS=		srcs/main/miniRT.c srcs/main/mlx_utils.c \
 			srcs/parsing/init_camera.c srcs/parsing/init_objects.c \
 			srcs/parsing/list_utils.c srcs/parsing/parsing_utils.c srcs/parsing/parsing.c \
 			srcs/parsing/read_file.c srcs/parsing/syntax_check.c \
