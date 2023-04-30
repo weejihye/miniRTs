@@ -20,7 +20,8 @@ t_vec	monitor_dot(t_point point, t_monitor monitor, t_vec v)
 	h = v_nor(v_cro(v, w));
 	// print_point(w); printf("\n");
 	// print_point(h); printf("\n");
-	return (v_nor(v_add(v_mlt(monitor.w / 2 / tan(get_radian((double)monitor.fov / 2)), v), v_add(v_mlt(monitor.w / 2 - 0.5 - point.x, w), v_mlt(monitor.h / 2 - 0.5 - point.y, h)))));
+	return (v_nor(v_add(v_mlt(monitor.w / 2 / tan(get_radian((double)monitor.fov / 2)), v), v_add(v_mlt(monitor.w / 2 - 0.5 - point.x, w),
+					v_mlt(monitor.h / 2 - 0.5 - point.y, h)))));
 }
 
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
@@ -31,34 +32,22 @@ void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-int	main(int argc, char *argv[])
+int	draw_shape(t_mlx mlx, t_obj *objs)
 {
-	t_mlx		mlx;
-	t_obj		*objs;
-	t_light		*light;
-	t_point		p;
 	t_monitor	monitor;
+	t_vec		v;
+	t_point		p;
 
+	v = v_nor(vec(1, 0 ,0));
 	monitor.w = 16 * SIZE;
 	monitor.h = 9 * SIZE;
 	monitor.fov = 170;
-
-	t_vec v = v_nor(vec(1, 0 ,0));
-
-	if (parsing(&objs, &light, argv[1]))
-	{
-		system("leaks miniRT");
-		return (1);
-	}
-	mlx.mlx = mlx_init();
-	mlx.win = mlx_new_window(mlx.mlx, 600, 400, "miniRT");
-	mlx.img.img = mlx_new_image(mlx.mlx, 600, 400);
-	mlx.img.addr = mlx_get_data_addr(mlx.img.img, &mlx.img.bits_per_pixel,
-			&mlx.img.line_length, &mlx.img.endian);
 	p.y = 0;
-	while (p.y < monitor.h){
+	while (p.y < monitor.h)
+	{
 		p.x = 0;
-		while (p.x < monitor.w){
+		while (p.x < monitor.w)
+		{
 			if (0)
 				;
 			else if (!isnan(hit_cylinder(*((t_cyl *)(objs->p_obj)),
@@ -70,6 +59,26 @@ int	main(int argc, char *argv[])
 		}
 		++p.y;
 	}
+	return (0);
+}
+
+int	main(int argc, char *argv[])
+{
+	t_mlx		mlx;
+	t_obj		*objs;
+	t_light		*light;
+
+	if (parsing(&objs, &light, argv[1]))
+	{
+		system("leaks miniRT");
+		return (1);
+	}
+	mlx.mlx = mlx_init();
+	mlx.win = mlx_new_window(mlx.mlx, 600, 400, "miniRT");
+	mlx.img.img = mlx_new_image(mlx.mlx, 600, 400);
+	mlx.img.addr = mlx_get_data_addr(mlx.img.img, &mlx.img.bits_per_pixel,
+			&mlx.img.line_length, &mlx.img.endian);
+	draw_shape(mlx, objs);
 	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img.img, 0, 0);
 	mlx_loop(mlx.mlx);
 	system("leaks miniRT");
