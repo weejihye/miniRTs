@@ -9,7 +9,8 @@ int	init_light(t_objs *objs, char **infos, int *count)
 	objs->light.lgt_ratio = ft_stod(infos[2], 0.0, 1);
 	if (!ft_isdouble(objs->light.lgt_ratio)
 		|| str_to_rgb(&objs->light.lgt_rgb, infos[3])
-		|| str_to_vec(&objs->light.lgt_origin, infos[1]))
+		|| str_to_vec(&objs->light.lgt_origin, infos[1])
+		|| objs->light.lgt_ratio < 0 || objs->light.lgt_ratio > 1)
 		return (1);
 	*count += 4;
 	return (0);
