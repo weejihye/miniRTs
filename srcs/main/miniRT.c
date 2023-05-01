@@ -5,7 +5,7 @@ int	main(int argc, char *argv[])
 	t_mlx	mlx;
 	t_objs	objs;
 
-	argc = 0; //
+	(void)argc; //
 	if (parsing(&objs, argv[1]))
 	{
 		system("leaks miniRT");
