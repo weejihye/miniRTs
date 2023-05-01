@@ -43,9 +43,6 @@ double	sphere_angle(t_sp s, t_light light, t_point point)
 	const t_vec c = v_sub(light.lgt_origin, s.c);
 
 	if (pow(s.r, 2) + pow(point_len_origin(b), 2) < pow(point_len_origin(c), 2))
-	{
-		printf("1\n");
 		return (0);
-	}
 	return (M_PI_2 - acos(v_dot(a, b) / point_len_origin(a) / point_len_origin(b)));
 }
