@@ -9,9 +9,6 @@ static void	move_point(t_objs *objs)
 	cam = &objs->cam;
 	while (temp)
 	{	
-		if (temp->type == OB_LGT)
-			((t_light *)(temp->p_obj))->lgt_origin
-				= v_sub(((t_light *)(temp->p_obj))->lgt_origin, cam->origin);
 		if (temp->type == OB_SP)
 			((t_sp *)(temp->p_obj))->c
 				= v_sub(((t_sp *)(temp->p_obj))->c, cam->origin);
@@ -84,6 +81,7 @@ int	parsing(t_objs *objs, char *file)
 		return (print_error("invalid extention\n"));
 	infos = NULL;
 	fd = open(file, O_RDONLY);
+    objs->obj = NULL;
 	if (fd < 0)
 		return (print_error("parsing error : open file fail"));
 	if (read_rt(fd, &infos) || init_info(objs, infos))
