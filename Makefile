@@ -13,7 +13,7 @@
 NAME=		miniRT
 
 CC=			cc
-CFLAG=		-g -Wall -Werror -Wextra -fsanitize=address
+CFLAG=		-Wall -Werror -Wextra
 MLXFLAG=	-lmlx -framework OpenGl -framework AppKit -Lmlx
 LIB=		-Lincludes/libft -lft
 INC=		-I./includes

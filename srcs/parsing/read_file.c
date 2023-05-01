@@ -39,6 +39,8 @@ int	read_rt(int fd, char ****infos)
 			continue ;
 		}
 		temp[i++] = buff;
+		if (ft_strchr(buff, '\n') == 0)
+			break ;
 		temp[i - 1][ft_strchr(buff, '\n') - 1] = 0;
 	}
 	if (!temp[0])

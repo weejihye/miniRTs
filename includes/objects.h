@@ -52,10 +52,17 @@ typedef struct s_light
 	t_rgb	amb_rgb;
 }	t_light;
 
+typedef struct s_moniter_dot
+{
+	int	x;
+	int	y;
+}	t_dot;
+
+
 //아직 도형의 내부에 있을 경우나 카메라 뒤에 있는 경우가 완벽하게 처리 되지 않았음
 //들어오는 백터는 원점을 지나며 원점 백터이여하고 반환값은 성공시 해당 포인트 실패시 x에 nan
 t_point	hit_sphere(t_sp s, t_vec v);
-t_vec	hit_plane(t_plane plane, t_vec vector);
+t_point	hit_plane(t_plane plane, t_vec vector);
 t_point	hit_cylinder(t_cyl cyl, t_vec v);
 
 double	plane_angle(t_plane plane, t_light light, t_point point);

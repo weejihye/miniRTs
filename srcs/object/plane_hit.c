@@ -1,4 +1,5 @@
 #include "objects.h"
+#include <stdlib.h>
 
 int	hit_plane_check(t_plane plane, t_vec vector)
 {
@@ -7,12 +8,12 @@ int	hit_plane_check(t_plane plane, t_vec vector)
 	return (0);
 }
 
-t_vec	hit_plane(t_plane plane, t_vec vector)
+t_point	hit_plane(t_plane plane, t_vec vector)
 {
-	t_vec	point;
+	t_point	point;
 
-	if (v_dot(plane.vec, plane.c) == 0)
-		return ((t_point){0, 0, 0});
+	// if (v_dot(plane.vec, plane.c) == 0)
+	// 	return ((t_point){0, 0, 0});
 	if (!hit_plane_check(plane, vector))
 	{
 		point.x = NAN;
@@ -29,6 +30,11 @@ double	plane_angle(t_plane plane, t_light light, t_point point)
 	const t_vec	vec = v_sub(point, light.lgt_origin);
 	double		ang = acos(v_dot(plane.vec, vec) / point_len_origin(vec));
 
+	if (isnan(ang))
+	{
+		printf("%f %f %f\n", point.x, point.y, point.z);
+		exit(1);
+	}
 	if (ang > M_PI_2)
 		return (ang - M_2_PI);
 	else
