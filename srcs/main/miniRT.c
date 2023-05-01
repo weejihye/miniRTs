@@ -12,8 +12,8 @@ int	main(int argc, char *argv[])
 		return (1);
 	}
 	mlx.mlx = mlx_init();
-	mlx.win = mlx_new_window(mlx.mlx, 600, 400, "miniRT");
-	mlx.img.img = mlx_new_image(mlx.mlx, 600, 400);
+	mlx.win = mlx_new_window(mlx.mlx, objs.cam.width, objs.cam.height, "miniRT");
+	mlx.img.img = mlx_new_image(mlx.mlx, objs.cam.width, objs.cam.height);
 	mlx.img.addr = mlx_get_data_addr(mlx.img.img, &mlx.img.bits_per_pixel,
 			&mlx.img.line_length, &mlx.img.endian);
 	draw(mlx, &objs);

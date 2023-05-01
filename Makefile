@@ -18,7 +18,7 @@ MLXFLAG=	-lmlx -framework OpenGl -framework AppKit -Lmlx
 LIB=		-Lincludes/libft -lft
 INC=		-I./includes
 
-SRCS=		srcs/main/miniRT.c srcs/main/mlx_utils.c \
+SRCS=		srcs/main/minirt.c srcs/main/mlx_utils.c \
 			srcs/parsing/init_camera.c srcs/parsing/init_objects.c \
 			srcs/parsing/list_utils.c srcs/parsing/parsing_utils.c srcs/parsing/parsing.c \
 			srcs/parsing/read_file.c srcs/parsing/syntax_check.c \
