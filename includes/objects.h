@@ -66,6 +66,4 @@ t_point	check_ahead(t_vec v, t_point *temp);
 void	check_front(t_vec v, t_vec *temp);
 
 t_plane	new_plane(t_point center, t_rgb rgb, t_vec vec);
-
-void	draw(t_cam cam, t_mlx mlx, t_obj *obj, t_point point);
 #endif

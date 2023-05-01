@@ -3,18 +3,11 @@
 #include "point.h"
 #define TEST 0 //
 
-static t_point	get_contact_sphere_01(t_sp s, t_vec v);
-static t_point	get_contact_sphere_2(t_sp s, t_vec v);
-
 t_point	hit_sphere(t_sp s, t_vec v)
 {
 	double	len;
 	t_vec	temp[2];
 
-	// if ((v.x == 0) + (v.y == 0) + (v.z == 0) < 2)
-	// 	temp[0] = get_contact_sphere_01(s, v);
-	// else
-	// 	temp[0] = get_contact_sphere_2(s, v);
 	if (point_len_origin(s.c) == s.r)
 		return ((t_vec){0, 0, 0});
 	temp[0] = v_mlt(v_dot(v, s.c) / v_dot(v, v), v);
@@ -43,37 +36,11 @@ t_point	hit_sphere(t_sp s, t_vec v)
 	return (temp[0]);
 }
 
-static t_point	get_contact_sphere_01(t_sp s, t_vec v)
-{
-	t_point		point;
-	double		ratio;
-
-	ratio = v_dot(s.c, v) / point_len_origin(v);
-	point.x = v.x * ratio;
-	point.y = v.y * ratio;
-	point.z = v.z * ratio;
-	return (point);
-}
-
-static t_point	get_contact_sphere_2(t_sp s, t_vec v)
-{
-	t_point	point;
-
-	point = vec(0, 0, 0);
-	if (v.x == 0 && v.y == 0)
-		point.z = s.c.z;
-	if (v.x == 0 && v.z == 0)
-		point.y = s.c.y;
-	if (v.y == 0 && v.z == 0)
-		point.x = s.c.x;
-	return (point);
-}
-
 double	sphere_angle(t_sp s, t_light light, t_point point)
 {
 	const t_vec a = v_sub(s.c, point);
-	const t_vec b = v_sub(light.origin, point);
-	const t_vec c = v_sub(light.origin, s.c);
+	const t_vec b = v_sub(light.lgt_origin, point);
+	const t_vec c = v_sub(light.lgt_origin, s.c);
 
 	if (pow(s.r, 2) + pow(point_len_origin(b), 2) < pow(point_len_origin(c), 2))
 		return (NAN);

@@ -55,21 +55,29 @@ typedef struct s_mlx
 	t_img	img;
 }	t_mlx;
 
+typedef struct s_objs
+{
+	t_mlx	mlx;
+	t_cam	cam;
+	t_light	light;
+	t_obj	*obj;
+}	t_objs;
+
 //[main] mlx utils
-void	press_button_exit(t_obj **objs);
-void	press_key(t_obj **objs);
+int		press_button_exit(t_objs *objs);
+int		press_key(t_objs *objs);
 
 //[parsing] main
-int		parsing(t_obj **objs, t_light **light, char *file);
+int		parsing(t_objs *objs, char *file);
 int		read_rt(int fd, char ****infos);
 
 //[parsing] init_info
-int		init_camera(t_obj **objs, char **infos, int *count);
-int		init_amb(t_obj **objs, char **infos, int *count);
-int		init_light(t_obj **objs, char **infos, int *count);
-int		init_sphere(t_obj **objs, char **infos);
-int		init_plane(t_obj **objs, char **infos);
-int		init_cylinder(t_obj **objs, char **inf);
+int		init_camera(t_objs *objs, char **infos, int *count);
+int		init_amb(t_objs *objs, char **infos, int *count);
+int		init_light(t_objs *objs, char **infos, int *count);
+int		init_sphere(t_objs *objs, char **infos);
+int		init_plane(t_objs *objs, char **infos);
+int		init_cylinder(t_objs *objs, char **inf);
 
 //[parsing] syntax check
 int		double_syntax_check(char *str);
@@ -84,10 +92,11 @@ int		check_normalized_vec(t_vec vec);
 
 //[parsing] list_utils
 void	*ft_lstnew_obj(t_obj **objs, void *content, int type);
-void	*find_obj(t_obj *objs, int type);
+void	*find_obj(t_obj *objs, enum e_type type);
 int		remove_first_node(t_obj **objs);
 int		remove_list(t_obj **objs);
 
 int		coloring(int t, int r, int g, int b);
 
+void	draw(t_mlx mlx, t_objs *objs);
 #endif

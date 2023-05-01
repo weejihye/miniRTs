@@ -1,23 +1,24 @@
 #include "miniRT.h"
 
-void	draw_pixel(t_cam cam, t_mlx mlx, t_obj *obj, t_point point);
-void	draw_sphere(t_mlx mlx, t_sp sp, t_point point, t_point hit);
-void	draw_plane(t_mlx mlx, t_plane p, t_point point, t_point hit);
-void	draw_cylinder(t_mlx mlx, t_cyl cyl, t_point point, t_point hit);
+void	draw_pixel(t_objs *objs, t_point point);
+void	draw_sphere(t_objs *objs, t_sp *sp, t_point point, t_point hit);
+void	draw_plane(t_objs *objs, t_plane *p, t_point point, t_point hit);
+void	draw_cylinder(t_objs *objs, t_cyl *cyl, t_point point, t_point hit);
 t_vec	monitor_dot(t_point point, t_cam cam);
-void	my_mlx_pixel_put(t_img *img, t_point point, t_rgb rgb, int t);
+void	my_mlx_pixel_put(t_img *img, t_point point, t_rgb rgb);
 
-void	draw(t_cam cam, t_mlx mlx, t_obj *obj, t_point point)
+void	draw(t_mlx mlx, t_objs *objs)
 {
 	t_point p;
 
+	objs->mlx = mlx;
 	p.y = 0;
-	while (p.y < cam.height)
+	while (p.y < objs->cam.height)
 	{
 		p.x = 0;
-		while (p.x < cam.width)
+		while (p.x < objs->cam.width)
 		{
-			draw_pixel(cam, mlx, obj, point);
+			draw_pixel(objs, p);
 			++p.x;
 		}
 		++p.y;
@@ -25,53 +26,92 @@ void	draw(t_cam cam, t_mlx mlx, t_obj *obj, t_point point)
 
 }
 
-void	draw_pixel(t_cam cam, t_mlx mlx, t_obj *obj, t_point point)
+void	draw_pixel(t_objs *objs, t_point point)
 {
 	t_point	hit;
 	t_obj	*hit_obj;
-	t_point	p;
-	int		hit_flag;
 	t_vec	v;
+	t_obj	*temp;
+	t_point	p;
 
-	hit_flag = 1;
-	v = monitor_dot(point, cam);
-	while (obj)
+	hit_obj = NULL;
+	v = monitor_dot(point, objs->cam);
+	temp = objs->obj;
+	while (temp)
 	{
-		if (obj->type == OB_SP)
-			p = hit_sphere(*(t_sp *)(obj->p_obj), v);
-		if (obj->type == OB_CYL)
-			p = hit_cylinder(*(t_cyl *)(obj->p_obj), v);
-		if (obj->type == OB_PL)
-			p = hit_plane(*(t_plane *)(obj->p_obj), v);
-		if (hit_flag || point_len_origin(hit) > point_len_origin(p))
+		if (temp->type == OB_SP)
+			p = hit_sphere(*(t_sp *)(temp->p_obj), v);
+		if (temp->type == OB_CYL)
+			p = hit_cylinder(*(t_cyl *)(temp->p_obj), v);
+		if (temp->type == OB_PL)
+			p = hit_plane(*(t_plane *)(temp->p_obj), v);
+		if (hit_obj == NULL || point_len_origin(hit) > point_len_origin(p))
 		{
 			hit = p;
-			hit_obj = obj;
-			hit_flag = 0;
+			hit_obj = temp;
 		}
-		obj = obj->next;
+		temp = temp->next;
+	}
+	if (hit_obj)
+	{
+		if (hit_obj->type == OB_SP)
+			draw_sphere(objs, hit_obj->p_obj, p, hit);
+		if (hit_obj->type == OB_CYL)
+			draw_cylinder(objs, hit_obj->p_obj, p, hit);
+		if (hit_obj->type == OB_PL)
+			draw_plane(objs, hit_obj->p_obj, p, hit);
 	}
 }
 
-void	draw_sphere(t_mlx mlx, t_sp sp, t_point point, t_point hit)//, t_light light)
+void	draw_sphere(t_objs *objs, t_sp *sp, t_point point, t_point hit)
 {
-	double ang;
+	double	ang;
+	t_rgb	rgb;
 
-	my_mlx_pixel_put(&mlx.img, point, sp.rgb, 255);
-	// ang = sphere_angle(sp, light, point);
-	// if (ang >= 90 || ang < 0)
-	// 	return ;
-	// my_mlx_pixel_put(&mlx.img, point, light.rgb, (int)(255 / sin(ang)));
+	ang = sphere_angle(*sp, objs->light, hit);
+	if (ang >= M_PI_2 || ang < 0)
+		return ;
+	rgb.r = ((double)sp->rgb.r / 255) * (objs->light.lgt_rgb.r / sin(ang)
+			+ objs->light.amb_rgb.r);
+	rgb.g = ((double)sp->rgb.g / 255) * (objs->light.lgt_rgb.g / sin(ang)
+			+ objs->light.amb_rgb.g);
+	rgb.b = ((double)sp->rgb.b / 255) * (objs->light.lgt_rgb.b / sin(ang)
+			+ objs->light.amb_rgb.b);
+	my_mlx_pixel_put(&objs->mlx.img, point, rgb);
 }
 
-void	draw_plane(t_mlx mlx, t_plane p, t_point point, t_point hit)
+void	draw_plane(t_objs *objs, t_plane *p, t_point point, t_point hit)
 {
-	my_mlx_pixel_put(&mlx.img, point, p.rgb, 255);
+	double	ang;
+	t_rgb	rgb;
+
+	ang = plane_angle(*p, objs->light, hit);
+	if (ang >= M_PI_2 || ang < 0)
+		return ;
+	rgb.r = ((double)p->rgb.r / 255) * (objs->light.lgt_rgb.r / sin(ang)
+			+ objs->light.amb_rgb.r);
+	rgb.g = ((double)p->rgb.g / 255) * (objs->light.lgt_rgb.g / sin(ang)
+			+ objs->light.amb_rgb.g);
+	rgb.b = ((double)p->rgb.b / 255) * (objs->light.lgt_rgb.b / sin(ang)
+			+ objs->light.amb_rgb.b);
+	my_mlx_pixel_put(&objs->mlx.img, point, rgb);
 }
 
-void	draw_cylinder(t_mlx mlx, t_cyl cyl, t_point point, t_point hit)
+void	draw_cylinder(t_objs *objs, t_cyl *cyl, t_point point, t_point hit)
 {
-	my_mlx_pixel_put(&mlx.img, point, cyl.rgb, 255);
+	double	ang;
+	t_rgb	rgb;
+
+	ang = cyl_angle(*cyl, objs->light, hit);
+	if (ang >= M_PI_2 || ang < 0)
+		return ;
+	rgb.r = ((double)cyl->rgb.r / 255) * (objs->light.lgt_rgb.r / sin(ang)
+			+ objs->light.amb_rgb.r);
+	rgb.g = ((double)cyl->rgb.g / 255) * (objs->light.lgt_rgb.g / sin(ang)
+			+ objs->light.amb_rgb.g);
+	rgb.b = ((double)cyl->rgb.b / 255) * (objs->light.lgt_rgb.b / sin(ang)
+			+ objs->light.amb_rgb.b);
+	my_mlx_pixel_put(&objs->mlx.img, point, rgb);
 }
 
 t_vec	monitor_dot(t_point point, t_cam cam)
@@ -81,11 +121,11 @@ t_vec	monitor_dot(t_point point, t_cam cam)
 					v_mlt(cam.height / 2 - 0.5 - point.y, cam.vertical)))));
 }
 
-void	my_mlx_pixel_put(t_img *img, t_point point, t_rgb rgb, int t)
+void	my_mlx_pixel_put(t_img *img, t_point point, t_rgb rgb)
 {
 	char	*dst;
 
 	dst = img->addr + ((int)point.y * img->line_length
 			+ (int)point.x * (img->bits_per_pixel / 8));
-	*(unsigned int*)dst = color(t, rgb);
+	*(unsigned int*)dst = color(rgb);
 }

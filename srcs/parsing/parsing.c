@@ -1,12 +1,12 @@
 #include "miniRT.h"
 
-static void	move_point(t_obj **objs)
+static void	move_point(t_objs *objs)
 {
 	t_obj	*temp;
 	t_cam	*cam;
 
-	temp = *objs;
-	cam = ((t_cam *)(((t_obj *)find_obj(temp, OB_CAM))->p_obj));
+	temp = objs->obj;
+	cam = &objs->cam;
 	while (temp)
 	{	
 		if (temp->type == OB_LGT)
@@ -23,14 +23,14 @@ static void	move_point(t_obj **objs)
 				= v_sub(((t_plane *)(temp->p_obj))->c, cam->origin);
 		temp = temp->next;
 	}
+	objs->light.lgt_origin = v_sub(objs->light.lgt_origin, cam->origin);
 }
 
-static int	init_info(t_obj **objs, char ***infos)
+static int	init_info(t_objs *objs, char ***infos)
 {
 	int	count;
 
 	count = 0;
-	*objs = NULL;
 	infos--;
 	while (*(++infos))
 	{
@@ -75,7 +75,7 @@ static int	check_filename(char *file)
 	}
 }
 
-int	parsing(t_obj **objs, t_light **light, char *file)
+int	parsing(t_objs *objs, char *file)
 {
 	char	***infos;
 	int		fd;
@@ -88,7 +88,6 @@ int	parsing(t_obj **objs, t_light **light, char *file)
 		return (print_error("parsing error : open file fail"));
 	if (read_rt(fd, &infos) || init_info(objs, infos))
 		return (free_triple_ptr(infos));
-	(*light) = (t_light *)find_obj(*objs, OB_LGT);
 	move_point(objs);
 	free_triple_ptr(infos);
 	return (0);

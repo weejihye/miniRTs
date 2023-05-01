@@ -39,7 +39,8 @@ int		v_cmp(t_vec v1, t_vec v2);
 double	v_angle(t_vec v1, t_vec v2);
 
 int		coloring(int t, int r, int g, int b);
-int		color(int t, t_rgb rgb);
+int		color(t_rgb rgb);
+t_rgb	 color_sum(t_rgb color1, t_rgb color2);
 
 double	point_len(t_vec point1, t_vec point2);
 double	point_len_origin(t_vec point);

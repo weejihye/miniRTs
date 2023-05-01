@@ -26,7 +26,7 @@ int	remove_first_node(t_obj **objs)
 	return (1);
 }
 
-void	*find_obj(t_obj *objs, int type)
+void	*find_obj(t_obj *objs, enum e_type type)
 {
 	while (objs && objs->type != type)
 		objs = objs->next;

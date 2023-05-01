@@ -9,8 +9,6 @@ t_point	hit_cylinder(t_cyl cyl, t_vec v)
 {
 	t_vec	qe;
 	t_point	dot[2];
-	int		n;
-	double	t;
 
 	if (v_cmp(cyl.vec, v) == 1)
 	{
@@ -58,6 +56,7 @@ t_point	cyl_2(t_point dot[2], t_cyl cyl, t_vec v, t_vec qe)
 {
 	double	t;
 	int		n;
+
 	n = cyl_plane(dot, cyl, v);
 	if (n != 2)
 	{

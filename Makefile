@@ -13,7 +13,7 @@
 NAME=		miniRT
 
 CC=			cc
-CFLAG=		-g #-Wall -Werror -Wextra
+CFLAG=		-g -Wall -Werror -Wextra -fsanitize=address
 MLXFLAG=	-lmlx -framework OpenGl -framework AppKit -Lmlx
 LIB=		-Lincludes/libft -lft
 INC=		-I./includes
@@ -28,7 +28,7 @@ SRCS=		srcs/main/miniRT.c srcs/main/mlx_utils.c \
 			\
 			srcs/vector/point_cal.c srcs/vector/vector_cal.c srcs/vector/vector_pro.c \
 			\
-			srcs/color/color.c
+			srcs/color/color.c srcs/object/draw.c
 		
 OBJS=		$(SRCS:.c=.o)
 
@@ -46,7 +46,7 @@ bonus : $(NAME_BONUS)
 $(NAME) : $(OBJS)
 	@make -C includes/libft
 	@make -C mlx
-	@$(CC) -g -o $(NAME) $(OBJS) $(LIB) $(INC) $(MLXFLAG) $(INC)
+	@$(CC) $(CFLAG) -o $(NAME) $(OBJS) $(LIB) $(INC) $(MLXFLAG) $(INC)
 	@echo "\033[37m****** Making miniRT is done ****"	
 
 
@@ -56,7 +56,7 @@ $(NAME_BONUS) : $(OBJS_BONUS)
 	@$(CC) -o $(NAME_BONUS) $(OBJS_BONUS) $(LIB) $(INC) $(MLXFLAG) $(INC)
 
 .c.o :
-	@$(CC) $(CFLAG) $(INC) -o $@ -c $?
+	@$(CC) $(CFLAG) $(INC) -o $@ -c $? 
 
 #
 

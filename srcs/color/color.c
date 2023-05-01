@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/vector.h"
+#include "vector.h"
 
 int coloring(int t, int r, int g, int b)
 {
@@ -18,8 +18,15 @@ int coloring(int t, int r, int g, int b)
 	return (color);
 }
 
-int color(int t, t_rgb rgb)
+int color(t_rgb rgb)
 {
-	return (t << 24 | rgb.r << 16 | rgb.g << 8 | rgb.b);
+	return (rgb.r << 16 | rgb.g << 8 | rgb.b);
 }
 
+t_rgb color_sum(t_rgb color1, t_rgb color2)
+{
+	color1.b += color2.b;
+	color1.g += color2.g;
+	color1.r += color2.r;
+	return (color1);
+}

@@ -9,7 +9,6 @@ int	hit_plane_check(t_plane plane, t_vec vector)
 
 t_vec	hit_plane(t_plane plane, t_vec vector)
 {
-	double	a;
 	t_vec	point;
 
 	if (v_dot(plane.vec, plane.c) == 0)
@@ -27,7 +26,7 @@ t_vec	hit_plane(t_plane plane, t_vec vector)
 
 double	plane_angle(t_plane plane, t_light light, t_point point)
 {
-	const t_vec	vec = v_sub(point, light.origin);
+	const t_vec	vec = v_sub(point, light.lgt_origin);
 	double		ang = acos(v_dot(plane.vec, vec) / point_len_origin(vec));
 
 	if (ang > M_PI_2)
