@@ -3,6 +3,6 @@ a.out
 test.c
 miniRT
 *.o
- a.out.dSYM
- includes/libft/libft.a
- mlx/libmlx.a
+a.out.dSYM
+includes/libft/libft.a
+mlx/libmlx.a
