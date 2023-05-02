@@ -13,6 +13,13 @@ enum e_type
 	OB_LGT,
 };
 
+enum e_syl_hit
+{
+	TOP,
+	BOT,
+	MID
+};
+
 typedef struct s_object
 {
 	enum e_type			type;
@@ -36,11 +43,12 @@ typedef struct s_plane
 
 typedef struct s_cylinder
 {
-	t_point	c;
-	t_vec	vec;
-	t_rgb	rgb;
-	double	r;
-	double	h;
+	t_point			c;
+	t_vec			vec;
+	t_rgb			rgb;
+	double			r;
+	double			h;
+	enum e_syl_hit	hit;
 }	t_cyl;
 
 typedef struct s_light
@@ -67,7 +75,7 @@ t_point	hit_cylinder(t_cyl cyl, t_vec v);
 
 double	plane_ratio(t_plane plane, t_light light, t_point point);
 double	sphere_ratio(t_sp s, t_light light, t_point point);
-double	cyl_angle(t_cyl cyl, t_light light, t_point p);
+double	cyl_ratio(t_cyl cyl, t_light light, t_point p);
 
 t_point	check_ahead(t_vec v, t_point *temp);
 void	check_front(t_vec v, t_vec *temp);

@@ -27,7 +27,7 @@ t_point	hit_plane(t_plane plane, t_vec vector)
 
 double	plane_ratio(t_plane plane, t_light light, t_point point)
 {
-	const t_vec	vec = v_sub(point, light.lgt_origin);
+	const t_vec	vec = v_sub(light.lgt_origin, point);
 	double		ratio = v_dot(plane.vec, vec) / point_len_origin(vec);
 
 	if (isnan(ratio))

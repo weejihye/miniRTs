@@ -83,19 +83,7 @@ void	draw_plane(t_objs *objs, t_plane *p, t_dot dot, t_point hit)
 
 void	draw_cylinder(t_objs *objs, t_cyl *cyl, t_dot dot, t_point hit)
 {
-	double	ang;
-
-	t_rgb	rgb;
-
-	ang = cyl_angle(*cyl, objs->light, hit);
-	if (ang >= M_PI_2 || ang < 0)
-		return ;
-	rgb.r = (double)cyl->rgb.r * ((double)(objs->light.lgt_rgb.r) * objs->light.lgt_ratio / sin(ang) + (double)(objs->light.amb_rgb.r) * objs->light.amb_ratio);
-	rgb.g= ((double)cyl->rgb.g / 255) * ((double)(objs->light.lgt_rgb.g)
-			/ sin(ang) + (double)(objs->light.amb_rgb.g));
-	rgb.b = ((double)cyl->rgb.b / 255) * ((double)(objs->light.lgt_rgb.b)
-			/ sin(ang) + (double)(objs->light.amb_rgb.b));
-	my_mlx_pixel_put(&objs->mlx.img, dot, rgb);
+	draw_pixel(cyl_ratio(*cyl, objs->light, hit), cyl->rgb, objs, dot);
 }
 
 void	draw_pixel(double	ratio, t_rgb rgb, t_objs *objs, t_dot dot)
