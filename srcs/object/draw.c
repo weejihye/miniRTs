@@ -64,6 +64,8 @@ void	draw_get_point(t_objs *objs, t_dot dot)
 		if (hit_obj->type == OB_PL)
 			draw_plane(objs, hit_obj->p_obj, dot, hit);
 	}
+	else
+		draw_background(objs, dot);
 }
 
 void	draw_sphere(t_objs *objs, t_sp *sp, t_dot dot, t_point hit)
@@ -123,5 +125,4 @@ void	my_mlx_pixel_put(t_img *img, t_dot dot, t_rgb rgb)
 	dst = img->addr + (dot.y * img->line_length
 			+ dot.x * (img->bits_per_pixel / 8));
 	*(unsigned int *)dst = color(rgb);
-	rgb.b = 1;
 }

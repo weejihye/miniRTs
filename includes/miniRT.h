@@ -103,4 +103,6 @@ int		remove_list(t_obj **objs);
 int		coloring(int t, int r, int g, int b);
 
 void	draw(t_mlx mlx, t_objs *objs);
+void	draw_background(t_objs *objs, t_dot dot);
+void	my_mlx_pixel_put(t_img *img, t_dot dot, t_rgb rgb);
 #endif

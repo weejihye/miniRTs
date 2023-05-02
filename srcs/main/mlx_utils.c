@@ -15,6 +15,23 @@ int	press_key(int key, t_objs *objs)
 	return (0);
 }
 
+void	draw_background(t_objs *objs, t_dot dot)
+{
+	double r, g;
+	t_rgb rgb;
+
+	r = ((double)(objs->cam.width - dot.x + 500) / (objs->cam.width - 1));
+	if (r > 1)
+		r = 1;
+	g = ((double)(dot.y + 600) / (objs->cam.height - 1));
+	if (g > 1)
+		g = 1;
+	rgb.b = 1 * 255;
+	rgb.r = r * 255;
+	rgb.g = g * 255;
+	my_mlx_pixel_put(&(objs->mlx.img), dot, rgb);
+}
+
 void	my_mlx_init(t_objs objs, t_mlx *mlx)
 {
 	mlx->mlx = mlx_init();
