@@ -25,20 +25,17 @@ t_point	hit_plane(t_plane plane, t_vec vector)
 	return (point);
 }
 
-double	plane_angle(t_plane plane, t_light light, t_point point)
+double	plane_ratio(t_plane plane, t_light light, t_point point)
 {
 	const t_vec	vec = v_sub(point, light.lgt_origin);
-	double		ang = acos(v_dot(plane.vec, vec) / point_len_origin(vec));
+	double		ratio = v_dot(plane.vec, vec) / point_len_origin(vec);
 
-	if (isnan(ang))
-	{
-		printf("%f %f %f\n", point.x, point.y, point.z);
-		exit(1);
-	}
-	if (ang > M_PI_2)
-		return (ang - M_2_PI);
+	if (isnan(ratio))
+		return (1);
+	if (ratio > 0)
+		return (ratio);
 	else
-		return (M_PI_2 - ang);
+		return (cos(acos(ratio) - M_PI_2));
 }
 
 t_plane	new_plane(t_point center, t_rgb rgb, t_vec vec)

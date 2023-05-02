@@ -65,8 +65,8 @@ t_point	hit_sphere(t_sp s, t_vec v);
 t_point	hit_plane(t_plane plane, t_vec vector);
 t_point	hit_cylinder(t_cyl cyl, t_vec v);
 
-double	plane_angle(t_plane plane, t_light light, t_point point);
-double	sphere_angle(t_sp s, t_light light, t_point point);
+double	plane_ratio(t_plane plane, t_light light, t_point point);
+double	sphere_ratio(t_sp s, t_light light, t_point point);
 double	cyl_angle(t_cyl cyl, t_light light, t_point p);
 
 t_point	check_ahead(t_vec v, t_point *temp);

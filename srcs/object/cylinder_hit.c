@@ -99,17 +99,17 @@ double	cyl_angle(t_cyl cyl, t_light light, t_point p)
 	{
 		plane.c = w;
 		plane.vec = cyl.vec;
-		return (plane_angle(plane, light, p));
+		return (plane_ratio(plane, light, p));
 	}
 	w = v_sub(cyl.c, v_mlt(cyl.h / 2, cyl.vec));
 	if (!v_dot(cyl.vec, v_sub(p, w)))
 	{
 		plane.c = w;
 		plane.vec = cyl.vec;
-		return (plane_angle(plane, light, p));
+		return (plane_ratio(plane, light, p));
 	}
 	t = v_dot(cyl.vec, v_sub(cyl.c, p)) / v_dot(cyl.vec, cyl.vec);
 	plane.vec = v_sub(p, v_add(cyl.c, v_mlt(t, cyl.vec)));
 	plane.c = p;
-	return (plane_angle(plane, light, p));
+	return (plane_ratio(plane, light, p));
 }

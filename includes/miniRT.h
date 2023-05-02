@@ -24,7 +24,7 @@
 # include "libft/libft.h"
 # include "objects.h"
 
-# define SIZE 1 
+# define SIZE 100
 
 # define X_EVENT_KEY_PRESS	   2
 # define X_EVENT_KEY_RELEASE	 3

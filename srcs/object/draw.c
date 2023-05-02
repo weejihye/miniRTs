@@ -1,9 +1,10 @@
 #include "miniRT.h"
 
-void	draw_pixel(t_objs *objs, t_dot dot);
+void	draw_get_point(t_objs *objs, t_dot dot);
 void	draw_sphere(t_objs *objs, t_sp *sp, t_dot dot, t_point hit);
 void	draw_plane(t_objs *objs, t_plane *p, t_dot dot, t_point hit);
 void	draw_cylinder(t_objs *objs, t_cyl *cyl, t_dot dot, t_point hit);
+void	draw_pixel(double	ratio, t_rgb rgb, t_objs *objs, t_dot dot);
 t_vec	monitor_dot(t_dot dot, t_cam cam);
 void	my_mlx_pixel_put(t_img *img, t_dot dot, t_rgb rgb);
 
@@ -21,7 +22,7 @@ void	draw(t_mlx mlx, t_objs *objs)
 		dot.x = 0;
 		while (dot.x < objs->cam.width)
 		{
-			draw_pixel(objs, dot);
+			draw_get_point(objs, dot);
 			++dot.x;
 		}
 		++dot.y;
@@ -30,7 +31,7 @@ void	draw(t_mlx mlx, t_objs *objs)
 
 }
 
-void	draw_pixel(t_objs *objs, t_dot dot)
+void	draw_get_point(t_objs *objs, t_dot dot)
 {
 	t_point	hit;
 	t_obj	*hit_obj;
@@ -72,47 +73,12 @@ void	draw_pixel(t_objs *objs, t_dot dot)
 
 void	draw_sphere(t_objs *objs, t_sp *sp, t_dot dot, t_point hit)
 {
-	double	ang;
-	t_rgb	rgb;
-	double	t;
-
-	ang = sphere_angle(*sp, objs->light, hit);
-	t = ((double)sp->rgb.r / 255) * ((double)objs->light.lgt_rgb.r / 255 * ang * objs->light.lgt_ratio
-			+ (double)objs->light.amb_rgb.r / 255 * objs->light.amb_ratio);
-	if (t >= 1)
-		rgb.r = 255;
-	else
-		rgb.r = t * 255;
-	t = ((double)sp->rgb.g / 255) * ((double)objs->light.lgt_rgb.g / 255 * ang * objs->light.lgt_ratio
-			+ (double)objs->light.amb_rgb.g / 255 * objs->light.amb_ratio);
-	if (t >= 1)
-		rgb.g = 255;
-	else
-		rgb.g = t * 255;
-	t = ((double)sp->rgb.b / 255) * ((double)objs->light.lgt_rgb.b / 255 * ang * objs->light.lgt_ratio
-			+ (double)objs->light.amb_rgb.b / 255 * objs->light.amb_ratio);
-	if (t >= 1)
-		rgb.b = 255;
-	else
-		rgb.b = t * 255;
-	my_mlx_pixel_put(&objs->mlx.img, dot, rgb);
+	draw_pixel(sphere_ratio(*sp, objs->light, hit), sp->rgb, objs, dot);
 }
 
 void	draw_plane(t_objs *objs, t_plane *p, t_dot dot, t_point hit)
 {
-	double	ang;
-	t_rgb	rgb;
-
-	ang = plane_angle(*p, objs->light, hit);
-	if (ang >= M_PI_2 || ang < 0)
-		return ;
-	rgb.r = ((double)p->rgb.r / 255) * (objs->light.lgt_rgb.r / sin(ang)
-			+ objs->light.amb_rgb.r);
-	rgb.g = ((double)p->rgb.g / 255) * (objs->light.lgt_rgb.g / sin(ang)
-			+ objs->light.amb_rgb.g);
-	rgb.b = ((double)p->rgb.b / 255) * (objs->light.lgt_rgb.b / sin(ang)
-			+ objs->light.amb_rgb.b);
-	my_mlx_pixel_put(&objs->mlx.img, dot, rgb);
+	draw_pixel(plane_ratio(*p, objs->light, hit), p->rgb, objs, dot);
 }
 
 void	draw_cylinder(t_objs *objs, t_cyl *cyl, t_dot dot, t_point hit)
@@ -130,6 +96,32 @@ void	draw_cylinder(t_objs *objs, t_cyl *cyl, t_dot dot, t_point hit)
 	rgb.b = ((double)cyl->rgb.b / 255) * ((double)(objs->light.lgt_rgb.b)
 			/ sin(ang) + (double)(objs->light.amb_rgb.b));
 	my_mlx_pixel_put(&objs->mlx.img, dot, rgb);
+}
+
+void	draw_pixel(double	ratio, t_rgb rgb, t_objs *objs, t_dot dot)
+{
+	double	t;
+
+	t = ((double)rgb.r / 255) * ((double)objs->light.lgt_rgb.r / 255 * ratio * objs->light.lgt_ratio
+			+ (double)objs->light.amb_rgb.r / 255 * objs->light.amb_ratio);
+	if (t >= 1)
+		rgb.r = 255;
+	else
+		rgb.r = t * 255;
+	t = ((double)rgb.g / 255) * ((double)objs->light.lgt_rgb.g / 255 * ratio * objs->light.lgt_ratio
+			+ (double)objs->light.amb_rgb.g / 255 * objs->light.amb_ratio);
+	if (t >= 1)
+		rgb.g = 255;
+	else
+		rgb.g = t * 255;
+	t = ((double)rgb.b / 255) * ((double)objs->light.lgt_rgb.b / 255 * ratio * objs->light.lgt_ratio
+			+ (double)objs->light.amb_rgb.b / 255 * objs->light.amb_ratio);
+	if (t >= 1)
+		rgb.b = 255;
+	else
+		rgb.b = t * 255;
+	my_mlx_pixel_put(&objs->mlx.img, dot, rgb);
+
 }
 
 t_vec	monitor_dot(t_dot dot, t_cam cam)
