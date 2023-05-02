@@ -1,6 +1,6 @@
 #ifndef OBJECTS_H
 # define OBJECTS_H
-
+# define ERR_R 0.000000001
 # include "vector.h"
 # include <stdio.h> //
 

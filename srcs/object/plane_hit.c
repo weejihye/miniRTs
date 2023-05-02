@@ -12,8 +12,6 @@ t_point	hit_plane(t_plane plane, t_vec vector)
 {
 	t_point	point;
 
-	// if (v_dot(plane.vec, plane.c) == 0)
-	// 	return ((t_point){0, 0, 0});
 	if (!hit_plane_check(plane, vector))
 	{
 		point.x = NAN;
@@ -27,10 +25,11 @@ t_point	hit_plane(t_plane plane, t_vec vector)
 
 double	plane_ratio(t_plane plane, t_light light, t_point point)
 {
-	const t_vec	vec = v_sub(light.lgt_origin, point);
-	double		ratio = v_dot(plane.vec, vec) / point_len_origin(vec);
+	const t_vec		vec = v_sub(light.lgt_origin, point);
+	const double	ratio = v_dot(plane.vec, vec)
+		/ point_len_origin(vec) / point_len_origin(plane.vec);
 
-	if (isnan(ratio))
+	if (ratio < ERR_R && ratio > -ERR_R)
 		return (1);
 	if (ratio > 0)
 		return (ratio);

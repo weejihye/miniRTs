@@ -1,7 +1,5 @@
 #include "objects.h"
 
-void	print_point(t_point p);//
-
 int		cyl_plane(t_point dot[2], t_cyl cyl, t_vec v);
 t_point	cyl_2(t_point dot[2], t_cyl cyl, t_vec v, t_vec qe);
 
@@ -36,7 +34,7 @@ t_point	hit_cylinder(t_cyl cyl, t_vec v)
 
 int	cyl_plane(t_point dot[2], t_cyl cyl, t_vec v)
 {
-	t_plane plane;
+	t_plane	plane;
 	int		n;
 
 	n = 0;
@@ -87,24 +85,25 @@ t_point	cyl_2(t_point dot[2], t_cyl cyl, t_vec v, t_vec qe)
 	}
 }
 
-
 double	cyl_ratio(t_cyl cyl, t_light light, t_point p)
 {
 	const t_vec	vec = v_sub(light.lgt_origin, p);
-	t_plane	plane;
-	t_vec	vec_plane;
-	t_point	w;
-	double	t;
+	t_plane		plane;
+	t_vec		vec_plane;
+	t_point		w;
+	double		t;
 
 	w = v_add(cyl.c, v_mlt(cyl.h / 2, cyl.vec));
-	if (v_dot(cyl.vec, v_sub(p, w)) < 0.000000001 && v_dot(cyl.vec, v_sub(p, w)) > -0.000000001)
+	if (v_dot(cyl.vec, v_sub(p, w)) < ERR_R
+		&& v_dot(cyl.vec, v_sub(p, w)) > -ERR_R)
 	{
 		plane.c = w;
 		plane.vec = cyl.vec;
 		return (plane_ratio(plane, light, p));
 	}
 	w = v_sub(cyl.c, v_mlt(cyl.h / 2, cyl.vec));
-	if (v_dot(cyl.vec, v_sub(p, w)) < 0.000000001 && v_dot(cyl.vec, v_sub(p, w)) > -0.000000001)
+	if (v_dot(cyl.vec, v_sub(p, w)) < ERR_R
+		&& v_dot(cyl.vec, v_sub(p, w)) > -ERR_R)
 	{
 		plane.c = w;
 		plane.vec = cyl.vec;

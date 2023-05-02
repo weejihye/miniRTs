@@ -1,7 +1,5 @@
 #include "vector.h"
-#include <stdio.h> //
 
-void	print_point(t_point p);
 t_point	check_ahead(t_vec v, t_point *temp)
 {
 	if (v_dot(temp[0], v) < 0 && v_dot(temp[1], v) < 0)

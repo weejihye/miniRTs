@@ -1,4 +1,4 @@
-#include "objects.h"
+#include "objects.h" // 디버그 파일
 
 void	print_point(t_point p)
 {

@@ -24,6 +24,7 @@
 # include "libft/libft.h"
 # include "objects.h"
 
+# define _USE_MATH_DEFINES
 # define SIZE 100
 
 # define X_EVENT_KEY_PRESS	   2

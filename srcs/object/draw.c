@@ -4,12 +4,9 @@ void	draw_get_point(t_objs *objs, t_dot dot);
 void	draw_sphere(t_objs *objs, t_sp *sp, t_dot dot, t_point hit);
 void	draw_plane(t_objs *objs, t_plane *p, t_dot dot, t_point hit);
 void	draw_cylinder(t_objs *objs, t_cyl *cyl, t_dot dot, t_point hit);
-void	draw_pixel(double	ratio, t_rgb rgb, t_objs *objs, t_dot dot);
+void	draw_pixel(double ratio, t_rgb rgb, t_objs *objs, t_dot dot);
 t_vec	monitor_dot(t_dot dot, t_cam cam);
 void	my_mlx_pixel_put(t_img *img, t_dot dot, t_rgb rgb);
-
-
-void	print_point(t_point p);/////
 
 void	draw(t_mlx mlx, t_objs *objs)
 {
@@ -26,7 +23,6 @@ void	draw(t_mlx mlx, t_objs *objs)
 			++dot.x;
 		}
 		++dot.y;
-		// printf("\n");
 	}
 	mlx_put_image_to_window(objs->mlx.mlx, objs->mlx.win,
 		objs->mlx.img.img, 0, 0);
@@ -51,7 +47,8 @@ void	draw_get_point(t_objs *objs, t_dot dot)
 			p = hit_cylinder(*(t_cyl *)(temp->p_obj), v);
 		if (temp->type == OB_PL)
 			p = hit_plane(*(t_plane *)(temp->p_obj), v);
-		if (!isnan(p.x) && (hit_obj == NULL || point_len_origin(hit) > point_len_origin(p)))
+		if (!isnan(p.x)
+			&& (hit_obj == NULL || point_len_origin(hit) > point_len_origin(p)))
 		{
 			hit = p;
 			hit_obj = temp;
@@ -60,7 +57,6 @@ void	draw_get_point(t_objs *objs, t_dot dot)
 	}
 	if (hit_obj)
 	{
-		// printf("* ");
 		if (hit_obj->type == OB_SP)
 			draw_sphere(objs, hit_obj->p_obj, dot, hit);
 		if (hit_obj->type == OB_CYL)
@@ -68,8 +64,6 @@ void	draw_get_point(t_objs *objs, t_dot dot)
 		if (hit_obj->type == OB_PL)
 			draw_plane(objs, hit_obj->p_obj, dot, hit);
 	}
-	// else
-	// 	printf("  ");
 }
 
 void	draw_sphere(t_objs *objs, t_sp *sp, t_dot dot, t_point hit)
@@ -87,30 +81,32 @@ void	draw_cylinder(t_objs *objs, t_cyl *cyl, t_dot dot, t_point hit)
 	draw_pixel(cyl_ratio(*cyl, objs->light, hit), cyl->rgb, objs, dot);
 }
 
-void	draw_pixel(double	ratio, t_rgb rgb, t_objs *objs, t_dot dot)
+void	draw_pixel(double ratio, t_rgb rgb, t_objs *objs, t_dot dot)
 {
 	double	t;
 
-	t = ((double)rgb.r / 255) * ((double)objs->light.lgt_rgb.r / 255 * ratio * objs->light.lgt_ratio
+	t = ((double)rgb.r / 255)
+		* ((double)objs->light.lgt_rgb.r / 255 * ratio * objs->light.lgt_ratio
 			+ (double)objs->light.amb_rgb.r / 255 * objs->light.amb_ratio);
 	if (t >= 1)
 		rgb.r = 255;
 	else
 		rgb.r = t * 255;
-	t = ((double)rgb.g / 255) * ((double)objs->light.lgt_rgb.g / 255 * ratio * objs->light.lgt_ratio
+	t = ((double)rgb.g / 255)
+		* ((double)objs->light.lgt_rgb.g / 255 * ratio * objs->light.lgt_ratio
 			+ (double)objs->light.amb_rgb.g / 255 * objs->light.amb_ratio);
 	if (t >= 1)
 		rgb.g = 255;
 	else
 		rgb.g = t * 255;
-	t = ((double)rgb.b / 255) * ((double)objs->light.lgt_rgb.b / 255 * ratio * objs->light.lgt_ratio
+	t = ((double)rgb.b / 255)
+		* ((double)objs->light.lgt_rgb.b / 255 * ratio * objs->light.lgt_ratio
 			+ (double)objs->light.amb_rgb.b / 255 * objs->light.amb_ratio);
 	if (t >= 1)
 		rgb.b = 255;
 	else
 		rgb.b = t * 255;
 	my_mlx_pixel_put(&objs->mlx.img, dot, rgb);
-
 }
 
 t_vec	monitor_dot(t_dot dot, t_cam cam)
@@ -126,6 +122,6 @@ void	my_mlx_pixel_put(t_img *img, t_dot dot, t_rgb rgb)
 
 	dst = img->addr + (dot.y * img->line_length
 			+ dot.x * (img->bits_per_pixel / 8));
-	*(unsigned int*)dst = color(rgb);
+	*(unsigned int *)dst = color(rgb);
 	rgb.b = 1;
 }
