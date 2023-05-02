@@ -2,7 +2,12 @@
 
 int	check_normalized_vec(t_vec vec)
 {
-	if ((pow(vec.x, 2) + pow(vec.y, 2) + pow(vec.z, 2)) != 1)
+	double			result;
+	const double	fac = 100.0;
+
+	result = round((pow(vec.x, 2) + pow(vec.y, 2) + pow(vec.z, 2)) * fac) / fac;
+	printf("result : %f\n", result);
+	if (result != 1.00000)
 		return (1);
 	return (0);
 }
