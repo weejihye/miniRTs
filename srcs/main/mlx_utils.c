@@ -29,4 +29,5 @@ void	my_mlx_handle(t_objs *objs)
 {
 	mlx_hook(objs->mlx.win, X_EVENT_KEY_PRESS, 0, press_key, objs);
 	mlx_hook(objs->mlx.win, X_EVENT_KEY_EXIT, 0, press_button_exit, objs);
+	mlx_loop(objs->mlx.mlx);
 }

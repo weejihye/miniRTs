@@ -13,7 +13,7 @@ void	print_point(t_point p);/////
 
 void	draw(t_mlx mlx, t_objs *objs)
 {
-	t_dot dot;
+	t_dot	dot;
 
 	objs->mlx = mlx;
 	dot.y = 0;
@@ -28,7 +28,8 @@ void	draw(t_mlx mlx, t_objs *objs)
 		++dot.y;
 		// printf("\n");
 	}
-
+	mlx_put_image_to_window(objs->mlx.mlx, objs->mlx.win,
+		objs->mlx.img.img, 0, 0);
 }
 
 void	draw_get_point(t_objs *objs, t_dot dot)
