@@ -66,6 +66,9 @@ typedef struct s_objs
 //[main] mlx utils
 int		press_button_exit(t_objs *objs);
 int		press_key(int key, t_objs *objs);
+void	my_mlx_handle(t_objs *objs);
+void	my_mlx_init(t_objs objs, t_mlx *mlx);
+
 
 //[parsing] main
 int		parsing(t_objs *objs, char *file);
