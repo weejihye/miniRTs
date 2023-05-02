@@ -77,21 +77,19 @@ void	draw_sphere(t_objs *objs, t_sp *sp, t_dot dot, t_point hit)
 	double	t;
 
 	ang = sphere_angle(*sp, objs->light, hit);
-	if (ang > M_PI_2 || ang < 0 || isnan(ang))
-		return ;
-	t = ((double)sp->rgb.r / 255) * ((double)objs->light.lgt_rgb.r / 255 * sin(ang) * objs->light.lgt_ratio
+	t = ((double)sp->rgb.r / 255) * ((double)objs->light.lgt_rgb.r / 255 * ang * objs->light.lgt_ratio
 			+ (double)objs->light.amb_rgb.r / 255 * objs->light.amb_ratio);
 	if (t >= 1)
 		rgb.r = 255;
 	else
 		rgb.r = t * 255;
-	t = ((double)sp->rgb.g / 255) * ((double)objs->light.lgt_rgb.g / 255 * sin(ang) * objs->light.lgt_ratio
+	t = ((double)sp->rgb.g / 255) * ((double)objs->light.lgt_rgb.g / 255 * ang * objs->light.lgt_ratio
 			+ (double)objs->light.amb_rgb.g / 255 * objs->light.amb_ratio);
 	if (t >= 1)
 		rgb.g = 255;
 	else
 		rgb.g = t * 255;
-	t = ((double)sp->rgb.b / 255) * ((double)objs->light.lgt_rgb.b / 255 * sin(ang) * objs->light.lgt_ratio
+	t = ((double)sp->rgb.b / 255) * ((double)objs->light.lgt_rgb.b / 255 * ang * objs->light.lgt_ratio
 			+ (double)objs->light.amb_rgb.b / 255 * objs->light.amb_ratio);
 	if (t >= 1)
 		rgb.b = 255;
