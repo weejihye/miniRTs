@@ -33,7 +33,7 @@ int	init_amb(t_objs *objs, char **infos, int *count)
 	if (!ft_isdouble(ratio)
 		|| str_to_rgb(&rgb, infos[2]))
 		return (1);
-	objs->light.lgt_rgb_ratio = get_light_ratio(rgb, ratio);
+	objs->light.amb_rgb_ratio = get_light_ratio(rgb, ratio);
 	*count += 2;
 	return (0);
 }
