@@ -10,8 +10,6 @@ void	draw(t_mlx mlx, t_objs *objs)
 	t_dot	dot;
 	t_hit	hit;
 
-	objs->light.lgt_rgb_ratio = get_light_ratio(objs->light);
-	objs->light.amb_rgb_ratio = get_ambient_ratio(objs->light);
 	objs->mlx = mlx;
 	dot.y = 0;
 	while (dot.y < objs->cam.height)

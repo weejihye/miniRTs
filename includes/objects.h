@@ -54,10 +54,6 @@ typedef struct s_cylinder
 typedef struct s_light
 {
 	t_point	lgt_origin;
-	double	lgt_ratio;
-	t_rgb	lgt_rgb;
-	double	amb_ratio;
-	t_rgb	amb_rgb;
 	t_rgb_r	lgt_rgb_ratio;
 	t_rgb_r	amb_rgb_ratio;
 }	t_light;
@@ -92,7 +88,6 @@ t_point	check_ahead(t_vec v, t_point *temp);
 void	check_front(t_vec v, t_vec *temp);
 
 int		color(t_rgb rgb);
-t_rgb_r	get_light_ratio(t_light	light);
-t_rgb_r	get_ambient_ratio(t_light	light);
+t_rgb_r	get_light_ratio(t_rgb rgb, double ratio);
 t_rgb	get_color(double ratio, double ref, t_rgb rgb, t_light light);
 #endif

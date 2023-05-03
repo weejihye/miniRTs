@@ -6,7 +6,7 @@
 /*   By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 23:17:46 by jwee              #+#    #+#             */
-/*   Updated: 2023/04/27 21:49:51 by jwee             ###   ########.fr       */
+/*   Updated: 2023/05/03 15:24:15 by jwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,13 @@ int	color(t_rgb rgb)
 	return (rgb.r << 16 | rgb.g << 8 | rgb.b);
 }
 
-t_rgb_r	get_light_ratio(t_light	light)
+t_rgb_r	get_light_ratio(t_rgb rgb, double ratio)
 {
 	t_rgb_r	r;
 
-	r.r = (double)light.lgt_rgb.r / 255 * light.lgt_ratio;
-	r.g = (double)light.lgt_rgb.g / 255 * light.lgt_ratio;
-	r.b = (double)light.lgt_rgb.b / 255 * light.lgt_ratio;
-	return (r);
-}
-
-t_rgb_r	get_ambient_ratio(t_light	light)
-{
-	t_rgb_r	r;
-
-	r.r = (double)light.amb_rgb.r / 255 * light.amb_ratio;
-	r.g = (double)light.amb_rgb.g / 255 * light.amb_ratio;
-	r.b = (double)light.amb_rgb.b / 255 * light.amb_ratio;
+	r.r = (double)rgb.r / 255 * ratio;
+	r.g = (double)rgb.g / 255 * ratio;
+	r.b = (double)rgb.b / 255 * ratio;
 	return (r);
 }
 
