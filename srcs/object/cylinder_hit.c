@@ -6,7 +6,7 @@
 /*   By: pji <pji@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:39:44 by pji               #+#    #+#             */
-/*   Updated: 2023/05/03 16:42:42 by pji              ###   ########.fr       */
+/*   Updated: 2023/05/03 16:44:11 by pji              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,6 @@ double	cyl_ratio(t_cyl cyl, t_light light, t_point p)
 			plane.vec = v_mlt(pow(-1, count), cyl.vec);
 			t = v_dot(plane.vec, vec)
 				/ point_len_origin(vec) / point_len_origin(plane.vec);
-			if (t < ERR_R && t > -ERR_R)
-				return (0);
 			if (t > 0)
 				return (t);
 			return (0);
