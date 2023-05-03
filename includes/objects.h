@@ -74,7 +74,6 @@ typedef struct s_hit_info
 	t_point		p;
 }	t_hit;
 
-
 //아직 도형의 내부에 있을 경우나 카메라 뒤에 있는 경우가 완벽하게 처리 되지 않았음
 //들어오는 백터는 원점을 지나며 원점 백터이여하고 반환값은 성공시 해당 포인트 실패시 x에 nan
 t_point	hit_sphere(t_sp s, t_vec v);
