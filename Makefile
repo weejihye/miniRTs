@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+         #
+#    By: pji <pji@student.42seoul.kr>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/10 21:10:11 by jwee              #+#    #+#              #
-#    Updated: 2023/05/02 17:21:09 by jwee             ###   ########.fr        #
+#    Updated: 2023/05/03 15:40:32 by pji              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRCS=		srcs/main/minirt.c srcs/main/mlx_utils.c \
 			srcs/parsing/list_utils.c srcs/parsing/parsing_utils.c srcs/parsing/parsing.c \
 			srcs/parsing/read_file.c srcs/parsing/syntax_check.c \
 			\
-			srcs/object/cylinder_hit.c srcs/object/debag.c srcs/object/plane_hit.c \
+			srcs/object/cylinder_hit.c srcs/object/plane_hit.c \
 			srcs/object/sphere_hit.c srcs/object/util.c\
 			\
 			srcs/vector/point_cal.c srcs/vector/vector_cal.c srcs/vector/vector_pro.c \
