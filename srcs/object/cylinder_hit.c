@@ -6,7 +6,7 @@
 /*   By: pji <pji@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:39:44 by pji               #+#    #+#             */
-/*   Updated: 2023/05/03 15:40:45 by pji              ###   ########.fr       */
+/*   Updated: 2023/05/03 16:42:42 by pji              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,15 +106,19 @@ double	cyl_ratio(t_cyl cyl, t_light light, t_point p)
 		if (v_dot(cyl.vec, v_sub(p, plane.c)) < ERR_R
 			&& v_dot(cyl.vec, v_sub(p, plane.c)) > -ERR_R)
 		{
-			plane.vec = cyl.vec;
-			return (plane_ratio(plane, light, p));
+			plane.vec = v_mlt(pow(-1, count), cyl.vec);
+			t = v_dot(plane.vec, vec)
+				/ point_len_origin(vec) / point_len_origin(plane.vec);
+			if (t < ERR_R && t > -ERR_R)
+				return (0);
+			if (t > 0)
+				return (t);
+			return (0);
 		}
 	}
 	t = v_dot(cyl.vec, v_sub(p, cyl.c)) / v_dot(cyl.vec, cyl.vec);
 	vec_plane = v_sub(p, v_add(cyl.c, v_mlt(t, cyl.vec)));
 	t = v_dot(vec_plane, vec) / point_len_origin(vec);
-	if (isnan(t))
-		return (1);
 	if (t > 0)
 		return (t);
 	return (0);
@@ -141,7 +145,7 @@ double	cyl_reflect(t_cyl cyl, t_light light, t_point p)
 		return (plane_reflect(plane, light, p));
 	}
 	t = v_dot(cyl.vec, v_sub(p, cyl.c)) / v_dot(cyl.vec, cyl.vec);
-	plane.vec = v_sub(p, v_add(cyl.c, v_mlt(t, cyl.vec)));
+	plane.vec = v_nor(v_sub(p, v_add(cyl.c, v_mlt(t, cyl.vec))));
 	t = v_dot(plane.vec, vec) / point_len_origin(vec);
 	if (t <= 0)
 		return (0);
