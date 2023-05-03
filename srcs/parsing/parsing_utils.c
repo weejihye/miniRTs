@@ -57,7 +57,7 @@ int	free_double_ptr(char **str)
 
 int	print_error(char *str)
 {
+	write(1, "Error: ", 7);
 	write(1, str, ft_strlen(str));
-	write(1, "Error\n", 6);
 	return (1);
 }

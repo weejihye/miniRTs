@@ -13,7 +13,7 @@
 NAME=		miniRT
 
 CC=			cc
-CFLAG=		-Wall -Werror -Wextra
+CFLAG=		-g #-Wall -Werror -Wextra
 MLXFLAG=	-lmlx -framework OpenGl -framework AppKit -Lmlx
 LIB=		-Lincludes/libft -lft
 INC=		-I./includes

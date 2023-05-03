@@ -4,7 +4,7 @@ static void	get_infos(char **temp, char ****infos, int i)
 {
 	(*infos) = malloc(sizeof(char **) * (i + 1));
 	if (!*infos)
-		exit(print_error("infos malloc fail"));
+		exit(print_error("parsing: infos malloc fail\n"));
 	(*infos)[i] = NULL;
 	i = -1;
 	while (temp[++i])
@@ -20,20 +20,19 @@ static void	free_temp(char **temp)
 		free(temp[i++]);
 }
 
-int	read_rt(int fd, char ****infos)
+static int	get_buffer(char ****infos, int fd)
 {
 	char	*buff;
 	char	*temp[100];
 	int		i;
 
 	i = 0;
+	buff = (char *)1;
 	ft_memset(temp, 0, sizeof(char *) * 100);
-	while (1)
+	while (buff)
 	{
 		buff = get_next_line(fd);
-		if (!buff)
-			break ;
-		if (*buff == '\n')
+		if (!buff || *buff == '\n' || *buff == 0)
 		{
 			free(buff);
 			continue ;
@@ -47,6 +46,19 @@ int	read_rt(int fd, char ****infos)
 		return (1);
 	get_infos(temp, infos, i);
 	free_temp(temp);
+	return (0);
+}
+
+int	read_rt(char *file, char ****infos)
+{
+	int		fd;
+
+	fd = open(file, O_RDONLY);
+	if (fd < 0)
+		return (print_error("parsing: open file fail\n"));
+	get_buffer(infos, fd);
 	close(fd);
+	if (!(*infos))
+		return (print_error("parsing: get infos error\n"));
 	return (0);
 }

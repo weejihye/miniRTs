@@ -41,7 +41,7 @@ int	init_amb(t_objs *objs, char **infos, int *count)
 static void	init_monitor(t_cam *cam)
 {
 	const t_vec	y = {0, 1, 0};
-	double	focal_length;
+	double		focal_length;
 
 	cam->horizon = v_nor(v_cro(y, cam->axis));
 	cam->vertical = v_nor(v_cro(cam->axis, cam->horizon));

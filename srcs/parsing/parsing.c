@@ -28,7 +28,7 @@ static int	init_info(t_objs *objs, char ***infos)
 	int	count;
 
 	count = 0;
-	infos--;
+	--infos;
 	while (*(++infos))
 	{
 		if (!ft_strcmp(**infos, "C") && !init_camera(objs, *infos, &count))
@@ -75,16 +75,12 @@ static int	check_filename(char *file)
 int	parsing(t_objs *objs, char *file)
 {
 	char	***infos;
-	int		fd;
 
 	if (!file || check_filename(file))
-		return (print_error("invalid extention\n"));
+		return (print_error("filename: invalid extention\n"));
 	infos = NULL;
-	fd = open(file, O_RDONLY);
-    objs->obj = NULL;
-	if (fd < 0)
-		return (print_error("parsing error : open file fail"));
-	if (read_rt(fd, &infos) || init_info(objs, infos))
+	objs->obj = NULL;
+	if (read_rt(file, &infos) || init_info(objs, infos))
 		return (free_triple_ptr(infos));
 	move_point(objs);
 	free_triple_ptr(infos);

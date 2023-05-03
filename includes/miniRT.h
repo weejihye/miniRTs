@@ -73,7 +73,7 @@ void	my_mlx_init(t_objs objs, t_mlx *mlx);
 
 //[parsing] main
 int		parsing(t_objs *objs, char *file);
-int		read_rt(int fd, char ****infos);
+int		read_rt(char *file, char ****infos);
 
 //[parsing] init_info
 int		init_camera(t_objs *objs, char **infos, int *count);

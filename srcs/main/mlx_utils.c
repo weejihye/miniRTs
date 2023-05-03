@@ -17,8 +17,9 @@ int	press_key(int key, t_objs *objs)
 
 void	draw_background(t_objs *objs, t_dot dot)
 {
-	double r, g;
-	t_rgb rgb;
+	double	r;
+	double	g;
+	t_rgb	rgb;
 
 	r = ((double)(objs->cam.width - dot.x + 500) / (objs->cam.width - 1));
 	if (r > 1)
