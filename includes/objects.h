@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objects.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pji <pji@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:41:04 by pji               #+#    #+#             */
-/*   Updated: 2023/05/03 15:41:05 by pji              ###   ########.fr       */
+/*   Updated: 2023/05/03 19:32:08 by jwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,5 @@ void	check_front(t_vec v, t_vec *temp);
 
 int		color(t_rgb rgb);
 t_rgb_r	get_light_ratio(t_rgb rgb, double ratio);
-t_rgb	get_color(double ratio, double ref, t_rgb rgb, t_light light);
+t_rgb	get_color(double ratio, double ref, t_rgb rgb, t_light light, t_rgb_r dif);
 #endif

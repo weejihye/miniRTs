@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pji <pji@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:40:48 by pji               #+#    #+#             */
-/*   Updated: 2023/05/03 15:40:53 by pji              ###   ########.fr       */
+/*   Updated: 2023/05/03 19:45:34 by jwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,40 @@ t_hit	get_hit_info(t_objs *objs, t_dot dot);
 t_vec	monitor_dot(t_dot dot, t_cam cam);
 void	my_mlx_pixel_put(t_img *img, t_dot dot, t_rgb rgb);
 void	draw_point(t_hit hit, t_objs *objs, t_dot dot);
+
+//
+t_vec get_normal_vector(t_vec hit, t_sp s)
+{
+	t_vec normal;
+
+	normal = v_nor(v_cro(hit, v_sub(hit, s.c)));
+	return normal;
+}
+
+t_rgb_r get_rgb(t_rgb_r rgb, double kd)
+{
+	rgb.r = kd * rgb.r;
+	rgb.g = kd * rgb.g;
+	rgb.b = kd * rgb.b;
+	return (rgb);
+}
+
+#include <stdio.h>
+t_rgb_r diffuse(t_sp s, t_light light, t_point hit)
+{
+	double	kd;
+	t_rgb_r	rgb;
+	t_vec	light_dir;
+
+	
+	light_dir = v_nor(v_sub(light.lgt_origin, hit));
+	kd = fmax(v_dot(get_normal_vector(hit, s), light_dir), 0.0);
+	rgb = get_rgb(light.lgt_rgb_ratio, kd);
+	return (rgb);
+}
+//
+
+
 
 void	draw(t_mlx mlx, t_objs *objs)
 {
@@ -75,17 +109,20 @@ void	draw_point(t_hit hit, t_objs *objs, t_dot dot)
 		my_mlx_pixel_put(&objs->mlx.img, dot, get_color(
 				sphere_ratio(*(t_sp *)hit.obj->p_obj, objs->light, hit.p),
 				sphere_reflect(*(t_sp *)hit.obj->p_obj, objs->light, hit.p),
-				((t_sp *)hit.obj->p_obj)->rgb, objs->light));
+				((t_sp *)hit.obj->p_obj)->rgb, objs->light,
+				get_rgb(diffuse(*(t_sp *)hit.obj->p_obj, objs->light, hit.p), 3)));
 	if (hit.obj->type == OB_CYL)
 		my_mlx_pixel_put(&objs->mlx.img, dot, get_color(
 				cyl_ratio(*(t_cyl *)hit.obj->p_obj, objs->light, hit.p),
 				cyl_reflect(*(t_cyl *)hit.obj->p_obj, objs->light, hit.p),
-				((t_cyl *)hit.obj->p_obj)->rgb, objs->light));
+				((t_cyl *)hit.obj->p_obj)->rgb, objs->light,
+				diffuse(*(t_sp *)hit.obj->p_obj, objs->light, hit.p)));
 	if (hit.obj->type == OB_PL)
 		my_mlx_pixel_put(&objs->mlx.img, dot, get_color(
 				plane_ratio(*(t_plane *)hit.obj->p_obj, objs->light, hit.p),
 				plane_reflect(*(t_plane *)hit.obj->p_obj, objs->light, hit.p),
-				((t_plane *)hit.obj->p_obj)->rgb, objs->light));
+				((t_plane *)hit.obj->p_obj)->rgb, objs->light,
+				diffuse(*(t_sp *)hit.obj->p_obj, objs->light, hit.p)));
 }
 
 t_vec	monitor_dot(t_dot dot, t_cam cam)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pji <pji@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:41:06 by pji               #+#    #+#             */
-/*   Updated: 2023/05/03 15:41:07 by pji              ###   ########.fr       */
+/*   Updated: 2023/05/03 18:59:01 by jwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,6 @@ typedef struct s_rgb_ratio
 }	t_rgb_r;
 
 typedef t_vec	t_point;
-
-typedef struct s_ray
-{
-	t_point	*ori;
-	t_vec	*dir;
-}	t_ray;
 
 t_vec	vec(double x, double y, double z);
 double	v_len(t_vec v);
