@@ -17,6 +17,13 @@ typedef struct s_rgb
 	unsigned char	b;
 }	t_rgb;
 
+typedef struct s_rgb_ratio
+{
+	double	r;
+	double	g;
+	double	b;
+}	t_rgb_r;
+
 typedef t_vec	t_point;
 
 typedef struct s_ray
@@ -37,10 +44,6 @@ double	v_dot(t_vec v1, t_vec v2);
 t_vec	v_cro(t_vec v1, t_vec v2);
 int		v_cmp(t_vec v1, t_vec v2);
 double	v_angle(t_vec v1, t_vec v2);
-
-int		coloring(int t, int r, int g, int b);
-int		color(t_rgb rgb);
-t_rgb	color_sum(t_rgb color1, t_rgb color2);
 
 double	point_len(t_vec point1, t_vec point2);
 double	point_len_origin(t_vec point);

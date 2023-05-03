@@ -1,5 +1,5 @@
 #include "objects.h"
-#include <stdlib.h>
+#include "miniRT.h"
 
 int	hit_plane_check(t_plane plane, t_vec vector)
 {
@@ -37,12 +37,15 @@ double	plane_ratio(t_plane plane, t_light light, t_point point)
 		return (cos(acos(ratio) - M_PI_2));
 }
 
-t_plane	new_plane(t_point center, t_rgb rgb, t_vec vec)
+double	plane_reflect(t_plane plane, t_light light, t_point point)
 {
-	t_plane	p;
+	const t_vec		vec1 = v_sub(light.lgt_origin, point);
+	const t_vec		ref_vec = v_add(v_mlt(-1, point),
+			v_mlt(v_dot(point, plane.vec) * 2, plane.vec));
+	const double	t = v_dot(ref_vec, vec1)
+		/ point_len_origin(ref_vec) / point_len_origin(vec1);
 
-	p.c = center;
-	p.rgb = rgb;
-	p.vec = vec;
-	return (p);
+	if (t < -0.95)
+		return (pow((-t - 0.95) * 20, 2) * 2.1);
+	return (0);
 }

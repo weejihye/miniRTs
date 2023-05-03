@@ -90,22 +90,19 @@ double	cyl_ratio(t_cyl cyl, t_light light, t_point p)
 	const t_vec	vec = v_sub(light.lgt_origin, p);
 	t_plane		plane;
 	t_vec		vec_plane;
-	t_point		w;
 	double		t;
 
-	w = v_add(cyl.c, v_mlt(cyl.h / 2, cyl.vec));
-	if (v_dot(cyl.vec, v_sub(p, w)) < ERR_R
-		&& v_dot(cyl.vec, v_sub(p, w)) > -ERR_R)
+	plane.c = v_add(cyl.c, v_mlt(cyl.h / 2, cyl.vec));
+	if (v_dot(cyl.vec, v_sub(p, plane.c)) < ERR_R
+		&& v_dot(cyl.vec, v_sub(p, plane.c)) > -ERR_R)
 	{
-		plane.c = w;
 		plane.vec = cyl.vec;
 		return (plane_ratio(plane, light, p));
 	}
-	w = v_sub(cyl.c, v_mlt(cyl.h / 2, cyl.vec));
-	if (v_dot(cyl.vec, v_sub(p, w)) < ERR_R
-		&& v_dot(cyl.vec, v_sub(p, w)) > -ERR_R)
+	plane.c = v_sub(cyl.c, v_mlt(cyl.h / 2, cyl.vec));
+	if (v_dot(cyl.vec, v_sub(p, plane.c)) < ERR_R
+		&& v_dot(cyl.vec, v_sub(p, plane.c)) > -ERR_R)
 	{
-		plane.c = w;
 		plane.vec = cyl.vec;
 		return (plane_ratio(plane, light, p));
 	}
@@ -118,4 +115,32 @@ double	cyl_ratio(t_cyl cyl, t_light light, t_point p)
 		return (t);
 	else
 		return (0);
+}
+
+double	cyl_reflect(t_cyl cyl, t_light light, t_point p)
+{
+	const t_vec	vec = v_sub(light.lgt_origin, p);
+	t_plane		plane;
+	double		t;
+
+	plane.c = v_add(cyl.c, v_mlt(cyl.h / 2, cyl.vec));
+	if (v_dot(cyl.vec, v_sub(p, plane.c)) < ERR_R
+		&& v_dot(cyl.vec, v_sub(p, plane.c)) > -ERR_R)
+	{
+		plane.vec = cyl.vec;
+		return (plane_reflect(plane, light, p));
+	}
+	plane.c = v_sub(cyl.c, v_mlt(cyl.h / 2, cyl.vec));
+	if (v_dot(cyl.vec, v_sub(p, plane.c)) < ERR_R
+		&& v_dot(cyl.vec, v_sub(p, plane.c)) > -ERR_R)
+	{
+		plane.vec = cyl.vec;
+		return (plane_reflect(plane, light, p));
+	}
+	t = v_dot(cyl.vec, v_sub(p, cyl.c)) / v_dot(cyl.vec, cyl.vec);
+	plane.vec = v_sub(p, v_add(cyl.c, v_mlt(t, cyl.vec)));
+	t = v_dot(plane.vec, vec) / point_len_origin(vec);
+	if (t <= 0)
+		return (0);
+	return (plane_reflect(plane, light, p));
 }

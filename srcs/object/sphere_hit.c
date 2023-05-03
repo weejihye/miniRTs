@@ -36,3 +36,17 @@ double	sphere_ratio(t_sp s, t_light light, t_point point)
 		return (0);
 	return (v_dot(a, b) / point_len_origin(a) / point_len_origin(b) * -1);
 }
+
+double	sphere_reflect(t_sp s, t_light light, t_point point)
+{
+	const t_vec		a = v_sub(s.c, point);
+	const t_vec		b = v_sub(light.lgt_origin, point);
+	const t_vec		c = v_sub(light.lgt_origin, s.c);
+	// const double	t = v_dot(v_cro(b, a), point);
+	t_plane			plane;
+
+	if (pow(s.r, 2) + pow(point_len_origin(b), 2) > pow(point_len_origin(c), 2))
+		return (0);
+	plane.vec = a;
+	return (plane_reflect(plane, light, point));
+}

@@ -58,6 +58,8 @@ typedef struct s_light
 	t_rgb	lgt_rgb;
 	double	amb_ratio;
 	t_rgb	amb_rgb;
+	t_rgb_r	lgt_rgb_ratio;
+	t_rgb_r	amb_rgb_ratio;
 }	t_light;
 
 typedef struct s_moniter_dot
@@ -65,6 +67,13 @@ typedef struct s_moniter_dot
 	int	x;
 	int	y;
 }	t_dot;
+
+typedef struct s_hit_info
+{
+	t_obj		*obj;
+	t_point		p;
+}	t_hit;
+
 
 //아직 도형의 내부에 있을 경우나 카메라 뒤에 있는 경우가 완벽하게 처리 되지 않았음
 //들어오는 백터는 원점을 지나며 원점 백터이여하고 반환값은 성공시 해당 포인트 실패시 x에 nan
@@ -76,8 +85,15 @@ double	plane_ratio(t_plane plane, t_light light, t_point point);
 double	sphere_ratio(t_sp s, t_light light, t_point point);
 double	cyl_ratio(t_cyl cyl, t_light light, t_point p);
 
+double	plane_reflect(t_plane plane, t_light light, t_point point);
+double	sphere_reflect(t_sp s, t_light light, t_point point);
+double	cyl_reflect(t_cyl cyl, t_light light, t_point p);
+
 t_point	check_ahead(t_vec v, t_point *temp);
 void	check_front(t_vec v, t_vec *temp);
 
-t_plane	new_plane(t_point center, t_rgb rgb, t_vec vec);
+int		color(t_rgb rgb);
+t_rgb_r	get_light_ratio(t_light	light);
+t_rgb_r	get_ambient_ratio(t_light	light);
+t_rgb	get_color(double ratio, double ref, t_rgb rgb, t_light light);
 #endif
