@@ -6,7 +6,7 @@
 /*   By: pji <pji@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:40:55 by pji               #+#    #+#             */
-/*   Updated: 2023/05/03 15:40:55 by pji              ###   ########.fr       */
+/*   Updated: 2023/05/03 17:11:53 by pji              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ double	sphere_ratio(t_sp s, t_light light, t_point point)
 
 double	sphere_reflect(t_sp s, t_light light, t_point point)
 {
-	const t_vec		a = v_sub(s.c, point);
+	const t_vec		a = v_sub(point, s.c);
 	const t_vec		b = v_sub(light.lgt_origin, point);
 	const t_vec		c = v_sub(light.lgt_origin, s.c);
 	t_plane			plane;

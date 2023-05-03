@@ -6,7 +6,7 @@
 /*   By: pji <pji@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:40:51 by pji               #+#    #+#             */
-/*   Updated: 2023/05/03 15:40:52 by pji              ###   ########.fr       */
+/*   Updated: 2023/05/03 17:09:43 by pji              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ double	plane_reflect(t_plane plane, t_light light, t_point point)
 	const double	t = v_dot(ref_vec, vec1)
 		/ point_len_origin(ref_vec) / point_len_origin(vec1);
 
-	if (t < -0.95)
-		return (pow((-t - 0.95) * 20, 2) * 2.1);
+	if (v_dot(vec1, plane.vec) > 0 && t < 0)
+		return (-t);
 	return (0);
 }
