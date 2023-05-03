@@ -54,35 +54,29 @@ t_point	cyl_2(t_point dot[2], t_cyl cyl, t_vec v, t_vec qe)
 {
 	double	t;
 	int		n;
+	int		count;
 
 	n = cyl_plane(dot, cyl, v);
-	if (n != 2)
+	count = -1;
+	while (++count < 2)
 	{
-		dot[n] = v_mlt((-1 * qe.y + sqrt(qe.z)) / (2 * qe.x) * (-1), v);
-		if (!isnan(dot[n].x))
+		if (n != 2)
 		{
-			t = v_dot(v_sub(dot[n], cyl.c), cyl.vec);
-			n += (t >= cyl.h / 2 * -1 && t <= cyl.h / 2);
-		}
-	}
-	if (n != 2)
-	{
-		dot[n] = v_mlt((-1 * qe.y - sqrt(qe.z)) / (2 * qe.x) * (-1), v);
-		if (!isnan(dot[n].x))
-		{
-			t = v_dot(v_sub(dot[n], cyl.c), cyl.vec);
-			n += (t >= cyl.h / 2 * -1 && t <= cyl.h / 2);
+			dot[n] = v_mlt((-1 * qe.y + sqrt(qe.z)
+						* pow(-1, count)) / (2 * qe.x) * (-1), v);
+			if (!isnan(dot[n].x))
+			{
+				t = v_dot(v_sub(dot[n], cyl.c), cyl.vec);
+				n += (t >= cyl.h / 2 * -1 && t <= cyl.h / 2);
+			}
 		}
 	}
 	if (n == 0)
 		return ((t_point){NAN, NAN, NAN});
-	else if (n == 2)
+	if (n == 2)
 		return (check_ahead(v, dot));
-	else
-	{
-		check_front(v, &(dot[0]));
-		return (dot[0]);
-	}
+	check_front(v, &(dot[0]));
+	return (dot[0]);
 }
 
 double	cyl_ratio(t_cyl cyl, t_light light, t_point p)
@@ -91,20 +85,18 @@ double	cyl_ratio(t_cyl cyl, t_light light, t_point p)
 	t_plane		plane;
 	t_vec		vec_plane;
 	double		t;
+	int			count;
 
-	plane.c = v_add(cyl.c, v_mlt(cyl.h / 2, cyl.vec));
-	if (v_dot(cyl.vec, v_sub(p, plane.c)) < ERR_R
-		&& v_dot(cyl.vec, v_sub(p, plane.c)) > -ERR_R)
+	count = -1;
+	while (++count < 2)
 	{
-		plane.vec = cyl.vec;
-		return (plane_ratio(plane, light, p));
-	}
-	plane.c = v_sub(cyl.c, v_mlt(cyl.h / 2, cyl.vec));
-	if (v_dot(cyl.vec, v_sub(p, plane.c)) < ERR_R
-		&& v_dot(cyl.vec, v_sub(p, plane.c)) > -ERR_R)
-	{
-		plane.vec = cyl.vec;
-		return (plane_ratio(plane, light, p));
+		plane.c = v_add(cyl.c, v_mlt(cyl.h / 2 * pow(-1, count), cyl.vec));
+		if (v_dot(cyl.vec, v_sub(p, plane.c)) < ERR_R
+			&& v_dot(cyl.vec, v_sub(p, plane.c)) > -ERR_R)
+		{
+			plane.vec = cyl.vec;
+			return (plane_ratio(plane, light, p));
+		}
 	}
 	t = v_dot(cyl.vec, v_sub(p, cyl.c)) / v_dot(cyl.vec, cyl.vec);
 	vec_plane = v_sub(p, v_add(cyl.c, v_mlt(t, cyl.vec)));
@@ -113,8 +105,7 @@ double	cyl_ratio(t_cyl cyl, t_light light, t_point p)
 		return (1);
 	if (t > 0)
 		return (t);
-	else
-		return (0);
+	return (0);
 }
 
 double	cyl_reflect(t_cyl cyl, t_light light, t_point p)

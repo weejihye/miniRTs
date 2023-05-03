@@ -42,7 +42,6 @@ double	sphere_reflect(t_sp s, t_light light, t_point point)
 	const t_vec		a = v_sub(s.c, point);
 	const t_vec		b = v_sub(light.lgt_origin, point);
 	const t_vec		c = v_sub(light.lgt_origin, s.c);
-	// const double	t = v_dot(v_cro(b, a), point);
 	t_plane			plane;
 
 	if (pow(s.r, 2) + pow(point_len_origin(b), 2) > pow(point_len_origin(c), 2))

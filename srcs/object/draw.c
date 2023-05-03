@@ -56,35 +56,26 @@ t_hit	get_hit_info(t_objs *objs, t_dot dot)
 
 void	draw_point(t_hit hit, t_objs *objs, t_dot dot)
 {
-	double	ratio;
-	double	ref;
-	t_rgb	rgb;
-
 	if (!hit.obj)
 	{
 		draw_background(objs, dot);
 		return ;
 	}
 	if (hit.obj->type == OB_SP)
-	{
-		ratio = sphere_ratio(*(t_sp *)hit.obj->p_obj, objs->light, hit.p);
-		rgb = ((t_sp *)hit.obj->p_obj)->rgb;
-		ref = sphere_reflect(*(t_sp *)hit.obj->p_obj, objs->light, hit.p);
-	}
+		my_mlx_pixel_put(&objs->mlx.img, dot, get_color(
+				sphere_ratio(*(t_sp *)hit.obj->p_obj, objs->light, hit.p),
+				sphere_reflect(*(t_sp *)hit.obj->p_obj, objs->light, hit.p),
+				((t_sp *)hit.obj->p_obj)->rgb, objs->light));
 	if (hit.obj->type == OB_CYL)
-	{
-		ratio = cyl_ratio(*(t_cyl *)hit.obj->p_obj, objs->light, hit.p);
-		rgb = ((t_cyl *)hit.obj->p_obj)->rgb;
-		ref = cyl_reflect(*(t_cyl *)hit.obj->p_obj, objs->light, hit.p);
-	}
+		my_mlx_pixel_put(&objs->mlx.img, dot, get_color(
+				cyl_ratio(*(t_cyl *)hit.obj->p_obj, objs->light, hit.p),
+				cyl_reflect(*(t_cyl *)hit.obj->p_obj, objs->light, hit.p),
+				((t_cyl *)hit.obj->p_obj)->rgb, objs->light));
 	if (hit.obj->type == OB_PL)
-	{
-		ratio = plane_ratio(*(t_plane *)hit.obj->p_obj, objs->light, hit.p);
-		rgb = ((t_plane *)hit.obj->p_obj)->rgb;
-		ref = plane_reflect(*(t_plane *)hit.obj->p_obj, objs->light, hit.p);
-	}
-	my_mlx_pixel_put(&objs->mlx.img, dot,
-		get_color(ratio, ref, rgb, objs->light));
+		my_mlx_pixel_put(&objs->mlx.img, dot, get_color(
+				plane_ratio(*(t_plane *)hit.obj->p_obj, objs->light, hit.p),
+				plane_reflect(*(t_plane *)hit.obj->p_obj, objs->light, hit.p),
+				((t_plane *)hit.obj->p_obj)->rgb, objs->light));
 }
 
 t_vec	monitor_dot(t_dot dot, t_cam cam)

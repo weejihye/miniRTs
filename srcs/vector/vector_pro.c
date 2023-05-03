@@ -10,7 +10,7 @@ double	v_len(t_vec v)
 
 t_vec	v_nor(t_vec v)
 {
-	double	len = v_len(v);
+	const double	len = v_len(v);
 
 	v.x /= len;
 	v.y /= len;
@@ -39,10 +39,4 @@ t_vec	v_cro(t_vec v1, t_vec v2)
 int	v_cmp(t_vec v1, t_vec v2)
 {
 	return (v1.x == v2.x && v1.y == v2.y && v1.z == v2.z);
-}
-
-double	v_angle(t_vec v1, t_vec v2)
-{
-	return (acos((point_len_origin(v1) * point_len_origin(v2))
-			/ v_dot(v1, v2)));
 }
