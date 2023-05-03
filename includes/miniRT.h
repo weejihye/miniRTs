@@ -70,7 +70,6 @@ int		press_key(int key, t_objs *objs);
 void	my_mlx_handle(t_objs *objs);
 void	my_mlx_init(t_objs objs, t_mlx *mlx);
 
-
 //[parsing] main
 int		parsing(t_objs *objs, char *file);
 int		read_rt(char *file, char ****infos);
