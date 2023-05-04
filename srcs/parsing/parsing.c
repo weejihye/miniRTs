@@ -6,33 +6,31 @@
 /*   By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:14:34 by jwee              #+#    #+#             */
-/*   Updated: 2023/05/03 16:14:35 by jwee             ###   ########.fr       */
+/*   Updated: 2023/05/04 13:56:23 by jwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-static void	move_point(t_objs *objs)
+void	move_point(t_objs *objs, t_vec direction)
 {
 	t_obj	*temp;
-	t_cam	*cam;
 
 	temp = objs->obj;
-	cam = &objs->cam;
 	while (temp)
 	{	
 		if (temp->type == OB_SP)
 			((t_sp *)(temp->p_obj))->c
-				= v_sub(((t_sp *)(temp->p_obj))->c, cam->origin);
+				= v_sub(((t_sp *)(temp->p_obj))->c, direction);
 		if (temp->type == OB_CYL)
 			((t_cyl *)(temp->p_obj))->c
-				= v_sub(((t_cyl *)(temp->p_obj))->c, cam->origin);
+				= v_sub(((t_cyl *)(temp->p_obj))->c, direction);
 		if (temp->type == OB_PL)
 			((t_plane *)(temp->p_obj))->c
-				= v_sub(((t_plane *)(temp->p_obj))->c, cam->origin);
+				= v_sub(((t_plane *)(temp->p_obj))->c, direction);
 		temp = temp->next;
 	}
-	objs->light.lgt_origin = v_sub(objs->light.lgt_origin, cam->origin);
+	objs->light.lgt_origin = v_sub(objs->light.lgt_origin, direction);
 }
 
 static int	init_info(t_objs *objs, char ***infos)
@@ -94,7 +92,7 @@ int	parsing(t_objs *objs, char *file)
 	objs->obj = NULL;
 	if (read_rt(file, &infos) || init_info(objs, infos))
 		return (free_triple_ptr(infos));
-	move_point(objs);
+	move_point(objs, objs->cam.origin);
 	free_triple_ptr(infos);
 	return (0);
 }

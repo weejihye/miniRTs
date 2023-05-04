@@ -32,17 +32,17 @@
 # define X_EVENT_KEY_EXIT		17
 
 # define KEY_ESC	53
+# define KEY_Z		6
+# define KEY_A		0
+# define KEY_X		7
+# define KEY_S		1
+# define KEY_C		8
+# define KEY_D		2
+
 # define KEY_Q		12
 # define KEY_W		13
 # define KEY_E		14
 # define KEY_R		15
-# define KEY_A		0
-# define KEY_S		1
-# define KEY_D		2
-# define KEY_LEFT 	123
-# define KEY_RIGHT	124
-# define KEY_DOWN	125
-# define KEY_UP		126
 
 typedef struct s_img
 {
@@ -73,10 +73,12 @@ int		press_button_exit(t_objs *objs);
 int		press_key(int key, t_objs *objs);
 void	my_mlx_handle(t_objs *objs);
 void	my_mlx_init(t_objs objs, t_mlx *mlx);
+void	move_camera(int key, t_objs *objs);
 
 //[parsing] main
 int		parsing(t_objs *objs, char *file);
 int		read_rt(char *file, char ****infos);
+void	move_point(t_objs *objs, t_vec direction);
 
 //[parsing] init_info
 int		init_camera(t_objs *objs, char **infos, int *count);
