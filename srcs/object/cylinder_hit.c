@@ -6,7 +6,7 @@
 /*   By: pji <pji@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:39:44 by pji               #+#    #+#             */
-/*   Updated: 2023/05/04 15:28:44 by pji              ###   ########.fr       */
+/*   Updated: 2023/05/04 16:02:09 by pji              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,10 +108,9 @@ double	cyl_ratio(t_cyl cyl, t_light light, t_point p)
 			&& v_dot(cyl.vec, v_sub(p, plane.c)) > -ERR_R)
 		{
 			plane.vec = v_mlt(pow(-1, count), cyl.vec);
-			t = v_dot(plane.vec, vec)
-				/ point_len_origin(vec) / point_len_origin(plane.vec);
+			t = plane_ratio(plane, light, p);
 			if (is_cam_in_cyl(cyl))
-				return (-t);
+				return (t);
 			if (t > 0)
 				return (t);
 			return (0);
@@ -119,7 +118,8 @@ double	cyl_ratio(t_cyl cyl, t_light light, t_point p)
 	}
 	temp = v_sub(p, v_add(cyl.c, v_mlt(v_dot(cyl.vec, v_sub(p, cyl.c))
 					/ v_dot(cyl.vec, cyl.vec), cyl.vec)));
-	t = v_dot(temp, vec) / point_len_origin(vec);
+	t = v_dot(temp, vec)
+		/ point_len_origin(vec);
 	if (is_cam_in_cyl(cyl))
 		return (-t);
 	if (t > 0)
