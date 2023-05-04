@@ -6,7 +6,7 @@
 /*   By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:14:19 by jwee              #+#    #+#             */
-/*   Updated: 2023/05/03 16:14:20 by jwee             ###   ########.fr       */
+/*   Updated: 2023/05/04 13:44:36 by jwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	init_sphere(t_objs *objs, char **infos)
 	if (!ft_lstnew_obj(&objs->obj, malloc(sizeof(t_sp)), OB_SP))
 		return (1);
 	sp = (t_sp *)(objs->obj->p_obj);
-	sp->r = ft_stod(infos[2], 0.0, 1);
+	sp->r = ft_stod(infos[2], 0.0, 1) * 0.5;
 	if (!ft_isdouble(sp->r)
 		|| str_to_rgb(&sp->rgb, infos[3])
 		|| str_to_vec(&sp->c, infos[1]))
@@ -59,7 +59,7 @@ int	init_cylinder(t_objs *objs, char **inf)
 	if (!ft_lstnew_obj(&objs->obj, malloc(sizeof(t_cyl)), OB_CYL))
 		return (1);
 	cyl = (t_cyl *)(objs->obj->p_obj);
-	cyl->r = ft_stod(inf[3], 0.0, 1);
+	cyl->r = ft_stod(inf[3], 0.0, 1) * 0.5;
 	cyl->h = ft_stod(inf[4], 0.0, 1);
 	if (!ft_isdouble(cyl->r) || !ft_isdouble(cyl->h)
 		|| str_to_rgb(&cyl->rgb, inf[5])
