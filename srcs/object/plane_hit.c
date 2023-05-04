@@ -6,7 +6,7 @@
 /*   By: pji <pji@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:40:51 by pji               #+#    #+#             */
-/*   Updated: 2023/05/03 17:09:43 by pji              ###   ########.fr       */
+/*   Updated: 2023/05/04 13:58:26 by pji              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_point	hit_plane(t_plane plane, t_vec vector)
 
 double	plane_ratio(t_plane plane, t_light light, t_point point)
 {
-	const t_vec		vec = v_sub(light.lgt_origin, point);
+	const t_vec		vec = v_sub(point, light.lgt_origin);
 	const double	ratio = v_dot(plane.vec, vec)
 		/ point_len_origin(vec) / point_len_origin(plane.vec);
 
@@ -46,18 +46,18 @@ double	plane_ratio(t_plane plane, t_light light, t_point point)
 	if (ratio > 0)
 		return (ratio);
 	else
-		return (cos(acos(ratio) - M_PI_2));
+		return (cos(acos(ratio) - M_PI));
 }
 
 double	plane_reflect(t_plane plane, t_light light, t_point point)
 {
 	const t_vec		vec1 = v_sub(light.lgt_origin, point);
-	const t_vec		ref_vec = v_add(v_mlt(-1, point),
-			v_mlt(v_dot(point, plane.vec) * 2, plane.vec));
+	const t_vec		ref_vec = v_add(point,
+			v_mlt(v_dot(point, plane.vec) * -2, plane.vec));
 	const double	t = v_dot(ref_vec, vec1)
 		/ point_len_origin(ref_vec) / point_len_origin(vec1);
 
-	if (v_dot(vec1, plane.vec) > 0 && t < 0)
-		return (-t);
+	if (t > 0.9)
+		return (pow((t - 0.9) * 10, 2));
 	return (0);
 }
