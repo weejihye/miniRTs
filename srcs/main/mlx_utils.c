@@ -6,7 +6,7 @@
 /*   By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:14:52 by jwee              #+#    #+#             */
-/*   Updated: 2023/05/04 15:48:13 by jwee             ###   ########.fr       */
+/*   Updated: 2023/05/04 16:02:58 by jwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 int	press_button_exit(t_objs *objs)
 {
 	remove_list(&objs->obj);
-	write(1, "x button was pressed\n", 21);
-	system("leaks miniRT");
+	write(1, "exit success\n", 21);
 	exit(0);
 	return (0);
 }
