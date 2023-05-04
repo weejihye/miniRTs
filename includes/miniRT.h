@@ -25,20 +25,24 @@
 # include "objects.h"
 
 # define _USE_MATH_DEFINES
-# define SIZE 100
+# define SIZE	100
 
-# define X_EVENT_KEY_PRESS	   2
-# define X_EVENT_KEY_RELEASE	 3
+# define X_EVENT_KEY_PRESS		2
+# define X_EVENT_KEY_RELEASE	3
 # define X_EVENT_KEY_EXIT		17
 
-# define KEY_ESC		 53
-# define KEY_Q		  12
-# define KEY_W		  13
-# define KEY_E		  14
-# define KEY_R		  15
-# define KEY_A		  0
-# define KEY_S		  1
-# define KEY_D		  2
+# define KEY_ESC	53
+# define KEY_Q		12
+# define KEY_W		13
+# define KEY_E		14
+# define KEY_R		15
+# define KEY_A		0
+# define KEY_S		1
+# define KEY_D		2
+# define KEY_LEFT 	123
+# define KEY_RIGHT	124
+# define KEY_DOWN	125
+# define KEY_UP		126
 
 typedef struct s_img
 {
@@ -99,6 +103,7 @@ void	*find_obj(t_obj *objs, enum e_type type);
 int		remove_first_node(t_obj **objs);
 int		remove_list(t_obj **objs);
 
+//[object] draw
 void	draw(t_mlx mlx, t_objs *objs);
 void	draw_background(t_objs *objs, t_dot dot);
 void	my_mlx_pixel_put(t_img *img, t_dot dot, t_rgb rgb);
