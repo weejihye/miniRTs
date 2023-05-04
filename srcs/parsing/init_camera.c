@@ -6,7 +6,7 @@
 /*   By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:14:12 by jwee              #+#    #+#             */
-/*   Updated: 2023/05/04 15:22:59 by jwee             ###   ########.fr       */
+/*   Updated: 2023/05/04 15:52:39 by jwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	init_monitor(t_cam *cam)
 	{
 		cam->horizon = v_nor(v_cro(y, cam->axis));
 		cam->vertical = v_nor(v_cro(cam->axis, cam->horizon));
-	};
+	}
 	cam->width = 16 * SIZE;
 	cam->height = 9 * SIZE;
 	focal_length = (cam->width / 2) / tan(cam->fov / 2);
