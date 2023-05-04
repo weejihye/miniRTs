@@ -6,7 +6,7 @@
 /*   By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 17:18:56 by jwee              #+#    #+#             */
-/*   Updated: 2023/04/24 21:50:42 by jwee             ###   ########.fr       */
+/*   Updated: 2023/05/04 19:23:25 by jwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_list
 }					t_list;
 
 char	*get_next_line(int fd);
-char	*ft_strjoin(char *save, char *buff);
+char	*ft_strjoin(char *save, char *buff, int flag);
 int		ft_strrcmp(const char *s1, const char *s2);
 int		ft_strcmp(const char *s1, const char *s2);
 int		ft_atoi(const char *str);
@@ -80,4 +80,5 @@ char	**ft_split_spaces(const char *src);
 int		ft_atoi_valid(const char *s);
 int		ft_isdouble(double n);
 double	ft_stod(const char *str, double res, int sign);
+char	*ft_dtos(double number);
 #endif

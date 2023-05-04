@@ -6,7 +6,7 @@
 /*   By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:14:52 by jwee              #+#    #+#             */
-/*   Updated: 2023/05/04 16:02:58 by jwee             ###   ########.fr       */
+/*   Updated: 2023/05/04 19:29:22 by jwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	press_button_exit(t_objs *objs)
 {
 	remove_list(&objs->obj);
-	write(1, "exit success\n", 21);
+	write(1, "exit success\n", 13);
 	exit(0);
 	return (0);
 }
@@ -57,9 +57,28 @@ void	my_mlx_init(t_objs objs, t_mlx *mlx)
 			&mlx->img.line_length, &mlx->img.endian);
 }
 
+
+
+void	my_mlx_print(t_objs *objs, t_mlx mlx)
+{
+	char *str;
+	char *temp;
+
+	mlx_string_put(mlx.mlx, mlx.win, 30, 30, 0, " ----------------------------------- ");
+	temp = ft_strjoin("| camera axis : ", ft_dtos(objs->cam.axis.x), 2);
+	temp = ft_strjoin(temp, ", ", 1);
+	temp = ft_strjoin(temp, ft_dtos(objs->cam.axis.y), 3);
+	temp = ft_strjoin(temp, ", ", 1);
+	temp = ft_strjoin(temp, ft_dtos(objs->cam.axis.z), 3);
+	temp = ft_strjoin(temp, " |", 1);
+	mlx_string_put(mlx.mlx, mlx.win, 30, 40, 0, temp);
+	free(temp);
+}
+
 void	my_mlx_handle(t_objs *objs)
 {
 	mlx_hook(objs->mlx.win, X_EVENT_KEY_PRESS, 0, press_key, objs);
 	mlx_hook(objs->mlx.win, X_EVENT_KEY_EXIT, 0, press_button_exit, objs);
+	my_mlx_print(objs, objs->mlx);
 	mlx_loop(objs->mlx.mlx);
 }

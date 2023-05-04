@@ -6,7 +6,7 @@
 /*   By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:34:40 by jwee              #+#    #+#             */
-/*   Updated: 2023/05/04 15:44:07 by jwee             ###   ########.fr       */
+/*   Updated: 2023/05/04 19:32:41 by jwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	rotate_camera_yz(t_cam *cam, int key)
 	else
 		cam->axis = vec(cam->axis.x,
 				cam->axis.y * cos(seta2) - cam->axis.z * sin(seta2),
-				cam->axis.y * sin(seta2) + cam->axis.z * cos(seta2));		
+				cam->axis.y * sin(seta2) + cam->axis.z * cos(seta2));
 	cam->horizon = v_nor(v_cro(vec(0, 1, 0), cam->axis));
 	cam->vertical = v_nor(v_cro(cam->axis, cam->horizon));
 	cam->view_center = v_mlt((cam->width / 2) / tan(cam->fov / 2), cam->axis);

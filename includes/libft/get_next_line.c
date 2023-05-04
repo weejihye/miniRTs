@@ -6,7 +6,7 @@
 /*   By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 21:18:58 by jwee              #+#    #+#             */
-/*   Updated: 2023/04/20 16:29:51 by jwee             ###   ########.fr       */
+/*   Updated: 2023/05/04 19:26:59 by jwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static char	*ft_get_line(int fd, char *save)
 			return (NULL);
 		}
 		buff[rsize] = '\0';
-		save = ft_strjoin(save, buff);
+		save = ft_strjoin(save, buff, 1);
 		free(buff);
 	}
 	return (save);
