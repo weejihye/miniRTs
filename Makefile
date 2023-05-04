@@ -3,22 +3,22 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pji <pji@student.42seoul.kr>               +#+  +:+       +#+         #
+#    By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/10 21:10:11 by jwee              #+#    #+#              #
-#    Updated: 2023/05/03 15:40:32 by pji              ###   ########.fr        #
+#    Updated: 2023/05/04 15:48:24 by jwee             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME=		miniRT
 
 CC=			cc
-CFLAG=		-g #-Wall -Werror -Wextra
+CFLAG=		-Wall -Werror -Wextra
 MLXFLAG=	-lmlx -framework OpenGl -framework AppKit -Lmlx
 LIB=		-Lincludes/libft -lft
 INC=		-I./includes
 #
-SRCS=		srcs/main/minirt.c srcs/main/mlx_utils.c \
+SRCS=		srcs/main/minirt.c srcs/main/mlx_utils.c srcs/main/mlx_move_rotate.c\
 			srcs/parsing/init_camera.c srcs/parsing/init_objects.c \
 			srcs/parsing/list_utils.c srcs/parsing/parsing_utils.c srcs/parsing/parsing.c \
 			srcs/parsing/read_file.c srcs/parsing/syntax_check.c \
