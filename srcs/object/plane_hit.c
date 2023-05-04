@@ -6,7 +6,7 @@
 /*   By: pji <pji@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:40:51 by pji               #+#    #+#             */
-/*   Updated: 2023/05/04 13:58:26 by pji              ###   ########.fr       */
+/*   Updated: 2023/05/04 14:13:56 by pji              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ double	plane_ratio(t_plane plane, t_light light, t_point point)
 		/ point_len_origin(vec) / point_len_origin(plane.vec);
 
 	if (ratio < ERR_R && ratio > -ERR_R)
-		return (1);
+		return (0);
 	if (ratio > 0)
 		return (ratio);
 	else
-		return (cos(acos(ratio) - M_PI));
+		return (cos(M_PI - acos(ratio)));
 }
 
 double	plane_reflect(t_plane plane, t_light light, t_point point)
