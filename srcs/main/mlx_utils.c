@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pji <pji@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:14:52 by jwee              #+#    #+#             */
-/*   Updated: 2023/05/08 10:27:33 by pji              ###   ########.fr       */
+/*   Updated: 2023/05/08 15:03:34 by jwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,22 +55,6 @@ void	my_mlx_init(t_objs objs, t_mlx *mlx)
 	mlx->img.img = mlx_new_image(mlx->mlx, objs.cam.width, objs.cam.height);
 	mlx->img.addr = mlx_get_data_addr(mlx->img.img, &mlx->img.bits_per_pixel,
 			&mlx->img.line_length, &mlx->img.endian);
-}
-
-void	my_mlx_print(t_objs *objs, t_mlx mlx)
-{
-	char	*temp;
-
-	mlx_string_put(mlx.mlx, mlx.win,
-		30, 30, 0, " ----------------------------------- ");
-	temp = ft_strjoin("| camera axis : ", ft_dtos(objs->cam.axis.x), 2);
-	temp = ft_strjoin(temp, ", ", 1);
-	temp = ft_strjoin(temp, ft_dtos(objs->cam.axis.y), 3);
-	temp = ft_strjoin(temp, ", ", 1);
-	temp = ft_strjoin(temp, ft_dtos(objs->cam.axis.z), 3);
-	temp = ft_strjoin(temp, " |", 1);
-	mlx_string_put(mlx.mlx, mlx.win, 30, 40, 0, temp);
-	free(temp);
 }
 
 void	my_mlx_handle(t_objs *objs)
