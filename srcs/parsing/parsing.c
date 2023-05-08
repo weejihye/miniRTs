@@ -6,11 +6,11 @@
 /*   By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:14:34 by jwee              #+#    #+#             */
-/*   Updated: 2023/05/04 13:56:23 by jwee             ###   ########.fr       */
+/*   Updated: 2023/05/08 15:46:01 by jwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "minirt.h"
 
 void	move_point(t_objs *objs, t_vec direction)
 {

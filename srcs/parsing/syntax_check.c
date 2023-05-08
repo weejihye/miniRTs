@@ -6,11 +6,11 @@
 /*   By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:14:40 by jwee              #+#    #+#             */
-/*   Updated: 2023/05/03 16:14:41 by jwee             ###   ########.fr       */
+/*   Updated: 2023/05/08 15:46:05 by jwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "minirt.h"
 
 int	double_syntax_check(char *str)
 {

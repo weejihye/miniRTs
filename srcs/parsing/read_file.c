@@ -6,11 +6,11 @@
 /*   By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:14:38 by jwee              #+#    #+#             */
-/*   Updated: 2023/05/03 16:14:38 by jwee             ###   ########.fr       */
+/*   Updated: 2023/05/08 15:46:03 by jwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "minirt.h"
 
 static void	get_infos(char **temp, char ****infos, int i)
 {

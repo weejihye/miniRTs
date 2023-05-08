@@ -6,11 +6,11 @@
 /*   By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:14:19 by jwee              #+#    #+#             */
-/*   Updated: 2023/05/04 13:44:36 by jwee             ###   ########.fr       */
+/*   Updated: 2023/05/08 15:45:49 by jwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "minirt.h"
 
 int	init_plane(t_objs *objs, char **infos)
 {

@@ -6,11 +6,11 @@
 /*   By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:14:49 by jwee              #+#    #+#             */
-/*   Updated: 2023/05/08 15:10:48 by jwee             ###   ########.fr       */
+/*   Updated: 2023/05/08 15:44:50 by jwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "minirt.h"
 
 int	main(int argc, char *argv[])
 {

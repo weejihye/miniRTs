@@ -6,11 +6,11 @@
 /*   By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:14:32 by jwee              #+#    #+#             */
-/*   Updated: 2023/05/03 16:14:32 by jwee             ###   ########.fr       */
+/*   Updated: 2023/05/08 15:45:58 by jwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "minirt.h"
 
 int	check_normalized_vec(t_vec vec)
 {

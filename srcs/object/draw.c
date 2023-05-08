@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pji <pji@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:40:48 by pji               #+#    #+#             */
-/*   Updated: 2023/05/04 15:16:19 by pji              ###   ########.fr       */
+/*   Updated: 2023/05/08 15:45:28 by jwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "minirt.h"
 
 t_hit	get_hit_info(t_objs *objs, t_dot dot);
 t_vec	monitor_dot(t_dot dot, t_cam cam);

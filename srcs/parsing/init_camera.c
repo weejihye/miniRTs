@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init_camera.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pji <pji@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:14:12 by jwee              #+#    #+#             */
-/*   Updated: 2023/05/08 10:28:03 by pji              ###   ########.fr       */
+/*   Updated: 2023/05/08 15:45:47 by jwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "minirt.h"
 
 int	init_light(t_objs *objs, char **infos, int *count)
 {

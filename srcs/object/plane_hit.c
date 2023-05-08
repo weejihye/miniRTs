@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   plane_hit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pji <pji@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:40:51 by pji               #+#    #+#             */
-/*   Updated: 2023/05/08 15:04:03 by pji              ###   ########.fr       */
+/*   Updated: 2023/05/08 15:45:31 by jwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "objects.h"
-#include "miniRT.h"
+#include "minirt.h"
 
 int	hit_plane_check(t_plane plane, t_vec vector)
 {

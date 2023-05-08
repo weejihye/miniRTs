@@ -6,11 +6,11 @@
 /*   By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:14:25 by jwee              #+#    #+#             */
-/*   Updated: 2023/05/03 16:14:27 by jwee             ###   ########.fr       */
+/*   Updated: 2023/05/08 15:45:55 by jwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "minirt.h"
 
 int	remove_list(t_obj **objs)
 {

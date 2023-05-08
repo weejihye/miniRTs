@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_move_rotate.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pji <pji@student.42seoul.kr>               +#+  +:+       +#+        */
+/*   By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:34:40 by jwee              #+#    #+#             */
-/*   Updated: 2023/05/08 15:01:46 by pji              ###   ########.fr       */
+/*   Updated: 2023/05/08 15:44:54 by jwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "minirt.h"
 
 static void	rotate_camera_xz(t_cam *cam, int key)
 {
