@@ -6,7 +6,7 @@
 /*   By: pji <pji@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:40:51 by pji               #+#    #+#             */
-/*   Updated: 2023/05/08 12:37:56 by pji              ###   ########.fr       */
+/*   Updated: 2023/05/08 13:41:23 by pji              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ double	plane_ratio(t_plane plane, t_light light, t_point point)
 	const double	ratio = v_dot(plane.vec, vec)
 		/ point_len_origin(vec) / point_len_origin(plane.vec);
 
-	if (v_dot(plane.vec, point) * v_dot(plane.vec, light.lgt_origin) < 0)
+	if (v_dot(plane.vec, point) * v_dot(plane.vec, v_sub(light.lgt_origin, point)) > 0)
 		return (0);
 	if (ratio < ERR_R && ratio > -ERR_R)
 		return (0);
@@ -59,7 +59,7 @@ double	plane_reflect(t_plane plane, t_light light, t_point point)
 	const double	t = v_dot(ref_vec, vec)
 		/ point_len_origin(ref_vec) / point_len_origin(vec);
 
-	if (v_dot(plane.vec, point) * v_dot(plane.vec, light.lgt_origin) < 0)
+	if (v_dot(plane.vec, point) * v_dot(plane.vec, v_sub(light.lgt_origin, point)) > 0)
 		return (0);
 	if (t > 0.9)
 		return (pow((t - 0.9) * 10, 2));

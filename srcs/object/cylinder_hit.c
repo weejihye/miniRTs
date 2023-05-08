@@ -6,7 +6,7 @@
 /*   By: pji <pji@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:39:44 by pji               #+#    #+#             */
-/*   Updated: 2023/05/08 10:48:59 by pji              ###   ########.fr       */
+/*   Updated: 2023/05/08 13:46:00 by pji              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int		cyl_plane(t_point dot[2], t_cyl cyl, t_vec v);
 t_point	cyl_2(t_point dot[2], t_cyl cyl, t_vec v, t_vec qe);
-int		is_cam_in_cyl(t_cyl cyl);
 
 t_point	hit_cylinder(t_cyl cyl, t_vec v)
 {
@@ -90,11 +89,4 @@ t_point	cyl_2(t_point dot[2], t_cyl cyl, t_vec v, t_vec qe)
 		return (check_ahead(v, dot));
 	check_front(v, &(dot[0]));
 	return (dot[0]);
-}
-
-int	is_cam_in_cyl(t_cyl cyl)
-{
-	return (point_len((t_vec){0, 0, 0},
-		v_add(cyl.c, v_mlt(v_dot(cyl.vec, cyl.c)
-				/ v_dot(cyl.vec, cyl.vec), cyl.vec))) < cyl.r);
 }
