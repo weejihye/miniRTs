@@ -6,7 +6,7 @@
 /*   By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:14:52 by jwee              #+#    #+#             */
-/*   Updated: 2023/05/08 15:03:34 by jwee             ###   ########.fr       */
+/*   Updated: 2023/05/08 15:08:21 by jwee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,5 @@ void	my_mlx_handle(t_objs *objs)
 {
 	mlx_hook(objs->mlx.win, X_EVENT_KEY_PRESS, 0, press_key, objs);
 	mlx_hook(objs->mlx.win, X_EVENT_KEY_EXIT, 0, press_button_exit, objs);
-	my_mlx_print(objs, objs->mlx);
 	mlx_loop(objs->mlx.mlx);
 }
