@@ -6,7 +6,7 @@
 #    By: pji <pji@student.42seoul.kr>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/10 21:10:11 by jwee              #+#    #+#              #
-#    Updated: 2023/05/08 11:02:24 by pji              ###   ########.fr        #
+#    Updated: 2023/05/08 15:51:39 by pji              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRCS=		srcs/main/minirt.c srcs/main/mlx_utils.c srcs/main/mlx_move_rotate.c\
 			srcs/color/color.c srcs/object/draw.c
 		
 OBJS=		$(SRCS:.c=.o)
+HEAD=		includes/minirt.h includes/point.h
 
 SRCS_BONUS=	includes/libft/ft_split.c
 OBJS_BONUS=	$(SRCS_BONUS:.c=.o)
@@ -43,11 +44,11 @@ bonus : $(NAME_BONUS)
 
 #
 
-$(NAME) : $(OBJS)
+$(NAME) : $(OBJS) $(HEAD)
 	@make -C includes/libft
 	@make -C mlx
 	@$(CC) $(CFLAG) -o $(NAME) $(OBJS) $(LIB) $(INC) $(MLXFLAG) $(INC)
-	@echo "\033[37m****** Making miniRT is done ****"	
+	@echo "\033[37m****** Making miniRT is done ****"
 
 
 $(NAME_BONUS) : $(OBJS_BONUS)
@@ -55,8 +56,8 @@ $(NAME_BONUS) : $(OBJS_BONUS)
 	@make -C mlx
 	@$(CC) -o $(NAME_BONUS) $(OBJS_BONUS) $(LIB) $(INC) $(MLXFLAG) $(INC)
 
-.c.o :
-	@$(CC) $(CFLAG) $(INC) -o $@ -c $? 
+%.o : %.c $(HEAD)
+	$(CC) $(CFLAG) $(INC) -o $@ -c $<
 
 #
 
@@ -77,4 +78,4 @@ fclean : clean
 
 re : fclean all
 
-.PHONY : all clean fclean re libft mlx bonus
+`.PHONY : all clean fclean re libft mlx bonus
