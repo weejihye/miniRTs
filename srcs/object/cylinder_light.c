@@ -6,15 +6,15 @@
 /*   By: pji <pji@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 10:48:25 by pji               #+#    #+#             */
-/*   Updated: 2023/05/08 13:55:56 by pji              ###   ########.fr       */
+/*   Updated: 2023/05/08 15:04:13 by pji              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "objects.h"
 
 double	cyl_ratio_plane(t_cyl cyl, t_light light, t_point p);
-int	is_cam_in_cyl(t_cyl cyl);
-int	is_light_in_cyl(t_cyl cyl, t_light light);
+int		is_cam_in_cyl(t_cyl cyl);
+int		is_light_in_cyl(t_cyl cyl, t_light light);
 
 double	cyl_ratio(t_cyl cyl, t_light light, t_point p)
 {
