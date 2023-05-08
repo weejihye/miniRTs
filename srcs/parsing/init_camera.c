@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_camera.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: pji <pji@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:14:12 by jwee              #+#    #+#             */
-/*   Updated: 2023/05/04 15:52:39 by jwee             ###   ########.fr       */
+/*   Updated: 2023/05/08 10:28:03 by pji              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	init_monitor(t_cam *cam)
 	if (cam->axis.x == 0 && cam->axis.z == 0)
 	{
 		cam->horizon = vec(1, 0, 0);
-		cam->vertical = vec(0, 0 ,1);
+		cam->vertical = vec(0, 0, 1);
 	}
 	else
 	{

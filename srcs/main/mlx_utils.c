@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: pji <pji@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 16:14:52 by jwee              #+#    #+#             */
-/*   Updated: 2023/05/04 19:29:22 by jwee             ###   ########.fr       */
+/*   Updated: 2023/05/08 10:27:33 by pji              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,12 @@ void	my_mlx_init(t_objs objs, t_mlx *mlx)
 			&mlx->img.line_length, &mlx->img.endian);
 }
 
-
-
 void	my_mlx_print(t_objs *objs, t_mlx mlx)
 {
-	char *str;
-	char *temp;
+	char	*temp;
 
-	mlx_string_put(mlx.mlx, mlx.win, 30, 30, 0, " ----------------------------------- ");
+	mlx_string_put(mlx.mlx, mlx.win,
+		30, 30, 0, " ----------------------------------- ");
 	temp = ft_strjoin("| camera axis : ", ft_dtos(objs->cam.axis.x), 2);
 	temp = ft_strjoin(temp, ", ", 1);
 	temp = ft_strjoin(temp, ft_dtos(objs->cam.axis.y), 3);

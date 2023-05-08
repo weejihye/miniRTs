@@ -6,7 +6,7 @@
 /*   By: pji <pji@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:40:55 by pji               #+#    #+#             */
-/*   Updated: 2023/05/04 14:16:10 by pji              ###   ########.fr       */
+/*   Updated: 2023/05/08 10:28:16 by pji              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ double	sphere_ratio(t_sp s, t_light light, t_point point)
 
 	p.c = point;
 	p.vec = v_nor(a);
-
 	if (point_len_origin(s.c) < s.r && point_len_origin(c) < s.r)
 	{
 		p.vec = v_mlt(-1, p.vec);
@@ -56,10 +55,6 @@ double	sphere_ratio(t_sp s, t_light light, t_point point)
 	if (pow(s.r, 2) + pow(point_len_origin(b), 2) > pow(point_len_origin(c), 2))
 		return (0);
 	return (plane_ratio(p, light, point));
-	// if (pow(s.r, 2) + pow(point_len_origin(b), 2) > pow(point_len_origin(c), 2)
-	// 	|| point_len_origin(b) > s.r)
-	// 	return (0);
-	// return (v_dot(a, b) / point_len_origin(a) / point_len_origin(b) * -1);
 }
 
 double	sphere_reflect(t_sp s, t_light light, t_point point)
