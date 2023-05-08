@@ -6,7 +6,7 @@
 #    By: pji <pji@student.42seoul.kr>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/10 21:10:11 by jwee              #+#    #+#              #
-#    Updated: 2023/05/08 15:51:39 by pji              ###   ########.fr        #
+#    Updated: 2023/05/08 15:58:17 by pji              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,14 +33,9 @@ SRCS=		srcs/main/minirt.c srcs/main/mlx_utils.c srcs/main/mlx_move_rotate.c\
 OBJS=		$(SRCS:.c=.o)
 HEAD=		includes/minirt.h includes/point.h
 
-SRCS_BONUS=	includes/libft/ft_split.c
-OBJS_BONUS=	$(SRCS_BONUS:.c=.o)
-
 #
 
 all : $(NAME)
-
-bonus : $(NAME_BONUS)
 
 #
 

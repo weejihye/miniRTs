@@ -6,14 +6,13 @@
 /*   By: pji <pji@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 15:51:01 by pji               #+#    #+#             */
-/*   Updated: 2023/05/08 15:51:54 by pji              ###   ########.fr       */
+/*   Updated: 2023/05/08 15:59:09 by pji              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# include <stdio.h>
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdlib.h>
