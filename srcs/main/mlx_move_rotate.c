@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_move_rotate.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwee <jwee@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: pji <pji@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:34:40 by jwee              #+#    #+#             */
-/*   Updated: 2023/05/04 19:32:41 by jwee             ###   ########.fr       */
+/*   Updated: 2023/05/08 15:01:46 by pji              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,10 @@ static void	rotate_camera_xz(t_cam *cam, int key)
 
 static void	rotate_camera_yz(t_cam *cam, int key)
 {
-	const double	seta1 = get_radian(15);
-	const double	seta2 = get_radian(-15);
-
 	if (key == KEY_E)
-		cam->axis = vec(cam->axis.x,
-				cam->axis.y * cos(seta1) - cam->axis.z * sin(seta1),
-				cam->axis.y * sin(seta1) + cam->axis.z * cos(seta1));
+		cam->axis = v_nor(vec(cam->axis.x, cam->axis.y + 0.15, cam->axis.z));
 	else
-		cam->axis = vec(cam->axis.x,
-				cam->axis.y * cos(seta2) - cam->axis.z * sin(seta2),
-				cam->axis.y * sin(seta2) + cam->axis.z * cos(seta2));
+		cam->axis = v_nor(vec(cam->axis.x, cam->axis.y - 0.15, cam->axis.z));
 	cam->horizon = v_nor(v_cro(vec(0, 1, 0), cam->axis));
 	cam->vertical = v_nor(v_cro(cam->axis, cam->horizon));
 	cam->view_center = v_mlt((cam->width / 2) / tan(cam->fov / 2), cam->axis);
